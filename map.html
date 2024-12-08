@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harta e Tetovës</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+  
+    <!-- fonts style -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+  
+    <!--owl slider stylesheet -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+  
+    <!-- font awesome style -->
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+  
+    <!-- Custom styles for this template -->
+    <link href="css/style.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="css/responsive.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            height: 100vh;
+        }
+        #header {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        #menu {
+            width: auto;
+            background-color: #fff;
+            padding: 10px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            text-align: center;
+        }
+        h3 {
+            text-align: left;
+        }
+        #map {
+            height: 200px; 
+            width: auto; /* Zvogëlon lartësinë e hartës për headerin */
+            flex: 1;
+        }
+
+
+
+        .restaurant-icon {
+            font-size: 20px; /* Madhësia e ikonës */
+            color: red; /* Ngjyra e ikonës */
+        }
+        .drink-icon {
+            font-size: 20px;
+            color: blue;
+        }
+        .bus-icon {
+            font-size: 20px;
+            color: green;
+        }
+        .taxi-icon {
+            font-size: 20px;
+            color: yellow;
+        }
+        .hookah-icon {
+            font-size: 20px;
+            color: purple;
+        }
+        .fast-food-icon {
+            font-size: 20px;
+            color: orange;
+        }
+        .beauty-salon-icon {
+            font-size: 20px;
+            color: pink;
+        }
+        .barber-icon {
+            font-size: 20px;
+            color: gray;
+        }
+
+
+
+        .red-dot, .blu-dot, .green-dot, .orange-dot, .pink-dot{
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 5px;
+            vertical-align: middle;
+        }
+        .red-dot {
+            background-color: red;
+        }
+        .blu-dot {
+            background-color: blue;
+        }
+        .green-dot{
+            background-color: green;
+        }
+        .orange-dot{
+            background-color: orange;
+
+        }
+        .pink-dot{
+            background-color: pink;
+        }
+        span {
+            margin-left: 15px;
+        }
+        a:hover {
+            font-size: 20px;
+        }
+        body {
+            font-family: sans-serif, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa; /* Ngjyrë e lehtë sfondi */
+        }
+
+        .menu_page {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .menu_header {
+            background-color: #007BFF; /* Ngjyra e header-it */
+            color: white;
+            padding: 20px 0;
+        }
+
+        .menu_logo {
+            max-width: 200px; /* Madhësia maksimale për logon */
+        }
+
+        .menu_container {
+            margin-top: 20px;
+        }
+
+        .main_menu {
+            list-style: none; /* Hiq pikat nga lista */
+            padding: 0;
+        }
+
+        .main_menu > li {
+            position: relative; /* Nevojitet për pozicionimin e nëntëmenusë */
+            display: inline-block; /* Shfaq menunë në rresht */
+            margin: 0 15px; /* Hapësira midis menuve */
+        }
+
+        .main_menu a {
+            text-decoration: none;
+            color: #f3f3f3; /* Ngjyra e lidhjeve të menuve */
+            padding: 10px 15px;
+        }
+
+        .submenu {
+            display: none; /* Fshi nëntëmenunë fillimisht */
+            position: absolute; /* Pozitio nën menunë kryesore */
+            top: 100%; /* Rendi poshtë menuve kryesore */
+            left: 0;
+            background-color: white;
+            border: 1px solid #ddd; /* Kufiri i lehtë */
+            z-index: 1; /* Siguro që nëntëmenuja të jetë mbi përmbajtjen */
+        }
+
+        .main_menu li:hover .submenu {
+            display: block; /* Shfaq nëntëmenunë kur kalon me maus mbi menunë kryesore */
+        }
+
+        .submenu li {
+            white-space: nowrap; /* Hiq shtrirjen e rreshtit */
+        }
+
+        .submenu a {
+            padding: 10px 15px; /* Hapësira për lidhjet e nëntëmenusë */
+            display: block; /* Bëj lidhjet të mbushin hapësirën e nëntëmenusë */
+            color: #333; /* Ngjyra e lidhjeve të nëntëmenusë */
+        }
+
+        .submenu a:hover {
+            background-color: #f1f1f1; /* Ngjyra e sfondit kur kalon me maus */
+        }
+        .menu_logo {
+    max-width: 50px; /* Adjust width as necessary */
+    height: auto; /* Maintain aspect ratio */
+    display: inline-block; /* Align with text */
+    vertical-align: middle; /* Align vertically with text */
+}
+
+.main_menu li {
+    display: inline-block; /* Keep menu items in a row */
+    margin: 0 15px; /* Spacing between items */
+}
+hr {
+    border: none; /* Remove default border */
+            height: 2px; /* Set the thickness */
+            background-color: #ffffff; /* Set the color */
+            width: 28%; /* Set the width to 50% of the container */
+            margin: 20px auto; 
+        }
+
+
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header */
+  
+
+
+        .menu-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1; /* Ky rregull bën që menunë të shfaqet në qendër vertikalisht */
+        }
+
+        .menu {
+            list-style-type: none;
+         
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
+            margin: 0;
+            flex-wrap: wrap; /* Do të ndihmojë që kategoria të shfaqen në mënyrë vertikale në ekranet e vogla */
+        }
+
+        .menu li {
+            position: relative;
+            padding: 15px 20px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            margin: 5px;
+        }
+
+        .menu li:hover  a:hover {
+            background-color: #555;
+        }
+
+        /* Shtimi i ikonave brenda menuve */
+        .menu li i {
+            margin-right: 10px;
+        }
+
+        /* Submenu (nënkategoria) */
+        .submenu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #444;
+            padding: 10px 0;
+            list-style-type: none;
+            min-width: 200px;
+        }
+
+        .submenu li {
+            padding: 10px;
+            color: white;
+        }
+
+        .submenu li:hover {
+            background-color: #666;
+        }
+
+        /* Kategori që ka nënkategoria */
+        .menu li:hover .submenu {
+            display: block;
+        }
+
+        /* Animimi i nënkategorive */
+        .submenu {
+            transition: opacity 0.3s ease;
+        }
+
+        .submenu li {
+            opacity: 0;
+            animation: fadeIn 0.3s forwards;
+        }
+
+        .submenu li:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .submenu li:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .submenu li:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .submenu li:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .submenu li:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+
+        /* Efekti i animimit */
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Media queries për ekranet e vogla */
+        @media (max-width: 500px) {
+            .menu {
+                display: block;
+                width: 100%;
+            }
+
+            .menu li {
+                width: 98%;
+                text-align: left;
+            }
+
+            .submenu {
+                position: relative;
+                min-width: 80%;
+            }
+          }
+
+
+          #map {
+    height: 100%;  /* Lartësia e plotë për mbushjen e ekranit */
+    width: 100%;   /* Gjerësia e plotë */
+}
+
+.hero_area {
+    display: flex;
+    flex-direction: column;
+    height: 100%;  /* Sigurohuni që zona hero të mbushë tërë ekranin */
+}
+
+
+@media (max-width: 768px) {
+    #map {
+        height: 300px; /* Shtoni një lartësi më të madhe për celularët */
+    }
+}
+
+    </style>
+</head>
+<body>
+    <body>
+
+        <div class="hero_area">
+      
+          <div class="hero_bg_box">
+            <div class="bg_img_box">
+              <img src="images/hero-bg.png" alt="">
+            </div>
+          </div>
+      
+          <!-- header section strats -->
+          <header class="header_section">
+            <div class="container-fluid">
+              <nav class="navbar navbar-expand-lg custom_nav-container ">
+                <a class="navbar-brand" href="index.html">
+                  
+                  <span>
+                    ALL in One
+                  </span>
+                </a>
+      
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class=""> </span>
+                </button>
+      
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav  ">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Ballina<span class="sr-only">(current)</span></a>
+                      </li>
+                    <li class="nav-item active">
+                      <a class="nav-link" href="Meny.html">VENDI I KERKIMEVE</a>
+                    </li>
+                    
+       
+                    <form class="form-inline">
+                      <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                      </button>
+                    </form>
+                  </ul>
+                </div>
+              </nav>
+            </div>
+          </header>
+          <h1 style="color: white; text-align: center; margin-top: 20px;">Harta e Tetoves</h1>
+
+    <div id="menu">
+        <h2>Ndrysho Mapin</h2>
+        <hr>
+        <ul>
+            <h3>
+                <span class="red-dot"></span>
+                <a href="map_restorantet.html" style="text-decoration: none; color: inherit;">Restorante</a>
+                <br>
+                <span class="blu-dot"></span>
+                <a href="map_kafeterit.html" style="text-decoration: none; color: inherit;">Kafeterit</a>
+                <br>
+                <span class="green-dot"></span>
+                <a href="buss_station_map.html" style="text-decoration: none; color: inherit;">Stacioni i Autobuseve</a>
+                <br>
+                <span class="orange-dot"></span>
+                <a href="fast_food_map.html" style="text-decoration: none; color: inherit;">Fast Food</a>
+            </h3>
+        </ul>
+    </div>
+    <div id="map"></div>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    
+    <script>
+        // Krijo hartën
+        var map = L.map('map').setView([42.010011817089, 20.97175839871173], 13);
+    
+        // Shto një shtresë të hartës
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 20,
+            attribution: '© HARTA E TETOVES'
+        }).addTo(map);
+    
+        // Koordinatat për vendet e specifikuara
+        var locations = [
+            { name: 'BOCATA', coords: [42.00759277210253, 20.97551234848854], type: 'restaurant'},
+            { name: 'SACH', coords: [42.00768639208142, 20.975009970412252], type: 'restaurant' },
+            { name: 'NAPOLI', coords: [42.00859272848502, 20.97405684896505], type: 'restaurant' },
+            { name: 'BOSS', coords: [41.99766919207347, 20.96114286842349] , type: 'restaurant'},
+            { name: 'PARAJSA E SHARRIT', coords: [42.01121316854506, 20.91926478240804], type: 'restaurant' },
+            { name: 'BAKAL', coords: [41.968780373300554, 20.979388893557253] , type: 'restaurant'},
+            { name: 'DANTE', coords: [42.009010022559565, 20.978164095409976] , type: 'restaurant'},
+            { name: 'DELFIN', coords: [42.008757779072496, 20.973679866574148] , type: 'restaurant'},
+            { name: 'DRIADA', coords: [42.01851522040784, 20.936161402810747] , type: 'restaurant'},
+            { name: 'EMA', coords: [41.99722899306636, 21.011965466573447] , type: 'restaurant'},
+            { name: 'FRATELLI', coords: [42.009618140286044, 20.97617105308138], type: 'restaurant' },
+            { name: 'GRAND', coords: [42.008032952103996, 20.97444857085589] , type: 'restaurant'},
+            { name: 'KURTISHI', coords: [41.99859695273534, 20.95246071466739] , type: 'restaurant'},
+            { name: 'KURTISHI 2', coords: [42.01715280421246, 20.979021010147108] , type: 'restaurant'},
+            { name: 'LA GONDOLA', coords: [42.02060909385453, 20.977714093316933] , type: 'restaurant'},
+            { name: 'MOLINO', coords: [41.99171447364698, 20.959723837737343], type: 'restaurant' },
+            { name: 'PEPPERONI', coords: [42.00833466509659, 20.969363128408297] , type: 'restaurant'},
+            { name: 'PUNTO VERDE', coords: [42.00962276511089, 20.97590939540998] , type: 'restaurant'},
+            { name: 'SALT', coords: [42.01101733858573, 20.970330332753587] , type: 'restaurant'},
+            { name: 'SEDRA', coords: [42.00760496468002, 20.977079551231203] , type: 'restaurant'},
+            { name: 'M HOUSE 1', coords: [42.0105597129863, 20.97153698306282], type: 'drink'},
+            { name: 'M HOUSE 2', coords: [41.99149955152144, 20.959717771128673], type: 'drink' },
+            { name: 'GARDEN', coords: [42.00757788715745, 20.971320011810416], type: 'drink' },
+            { name: 'MARO', coords: [41.98903805065451, 20.95967210798338] , type: 'drink'},
+            { name: 'ULTRA', coords: [41.99098137693165, 20.96017549227912], type: 'drink' },
+            { name: 'GRISH', coords: [41.99023309166355, 20.959281421707733] , type: 'drink'},
+            { name: 'ALI BABA', coords: [41.9995717547072, 20.96303969897796] , type: 'drink'},
+            { name: 'UEJL', coords: [41.98960842574497, 20.959757605654964], type: 'bus' },
+            { name: 'ULTRA', coords: [41.9908223840506, 20.960022922350817], type: 'bus' },
+            { name: 'KORNERI', coords: [41.99587860572437, 20.961041305463226], type: 'bus' },
+            { name: 'GULF', coords: [41.998272665772305, 20.961513574376298], type: 'bus' },
+            { name: 'SHIPADI', coords: [42.00134033327396, 20.962248657153015], type: 'bus' },
+            { name: 'ROTRING MOSTAR', coords: [42.00356413471077, 20.96460730691938], type: 'bus' },
+            { name: 'XHAMIA E LARME', coords: [42.00578780144904, 20.967345519040116], type: 'bus' },
+            { name: 'COMODITA GJYQI', coords: [42.007725244900364, 20.969173697937073], type: 'bus' },
+            { name: 'SHPARKASE BANK', coords: [42.00921724849695, 20.97056649677201], type: 'bus' },
+            { name: 'PALLATI I KULTURES', coords: [42.00896311773342, 20.972475089184883], type: 'bus' },
+            { name: 'VERO JUMBO', coords: [42.006304627238, 20.97959940325705], type: 'bus' },
+            { name: 'PALLMA MALL', coords: [41.98960842574497, 20.959757605654964], type: 'bus' },
+            { name: 'MOLINO', coords: [41.99182638977359, 20.960002189280665], type: 'bus' },
+            { name: 'ANTILLOP MOBILJE', coords: [41.99576718911483, 20.960787724152187], type: 'bus' },
+            { name: 'MAK PETROL', coords: [41.99862705078445, 20.961409909070426], type: 'bus' },
+            { name: 'SHIPADI', coords: [42.001513369362, 20.962095551459722], type: 'bus' },
+            { name: 'ROTRING MOSTAR', coords: [42.00377153367594, 20.9646455833427], type: 'bus' },
+
+            { name: 'XHAMIA E LARME', coords: [42.00587905388994, 20.967245043429088], type: 'bus' },
+            { name: 'COMODITA GJYQI', coords: [42.00763893445438, 20.968847783985236], type: 'bus' },
+            { name: 'MATRIX', coords: [42.009039621433544, 20.970671023341808], type: 'bus' },
+            { name: 'PALLATI I KULTURES', coords: [42.00909551348088, 20.972620566345704], type: 'bus' },
+            { name: 'VERO JUMBO', coords: [42.006266079978204, 20.979722325822355], type: 'bus' },
+
+            { name: 'TAXI STATION', coords: [42.008000, 20.974000], type: 'taxi' },
+            { name: 'HOOKAH LOUNGE', coords: [42.009600, 20.972400], type: 'hookah' },
+            { name: 'TIME OUT', coords: [42.00721519774631, 20.972493715429398], type: 'fast-food' },
+            { name: 'TUCI', coords: [41.99663803886034, 20.96201833117388], type: 'fast-food' },
+            { name: 'SNAP FOOD', coords: [42.01961388886909, 20.981986072995873], type: 'fast-food' },
+            { name: 'STUDIO ANIDA', coords: [41.99991245634147, 20.96331176960377], type: 'beauty-salon' },
+            { name: 'STUDIO CHANEL', coords: [42.01630147111103, 20.975267620026433], type: 'beauty-salon' },
+            { name: 'BARBER SHOP', coords: [42.010500, 20.973000], type: 'barber' },
+            // ... (Lista e vendeve vazhdon)
+        ];
+    
+        // Shto ikona e restorantit në hartë me tooltip
+        var markers = locations.map(function(location) {
+            var iconClass;
+            var iconHtml;
+    
+            // Cakto klasën dhe HTML për ikona të ndryshme
+            switch (location.type) {
+                case 'restaurant':
+                    iconClass = 'restaurant-icon';
+                    iconHtml = '<i class="fas fa-utensils"></i>';
+                    break;
+                case 'drink':
+                    iconClass = 'drink-icon';
+                    iconHtml = '<i class="fas fa-glass-martini"></i>';
+                    break;
+                case 'bus':
+                    iconClass = 'bus-icon';
+                    iconHtml = '<i class="fas fa-bus"></i>';
+                    break;
+                case 'taxi':
+                    iconClass = 'taxi-icon';
+                    iconHtml = '<i class="fas fa-taxi"></i>';
+                    break;
+                case 'hookah':
+                    iconClass = 'hookah-icon';
+                    iconHtml = '<i class="fas fa-smoking"></i>';
+                    break;
+                case 'fast-food':
+                    iconClass = 'fast-food-icon';
+                    iconHtml = '<i class="fas fa-hamburger"></i>';
+                    break;
+                case 'beauty-salon':
+                    iconClass = 'beauty-salon-icon';
+                    iconHtml = '<i class="fas fa-scissors"></i>';
+                    break;
+                case 'barber':
+                    iconClass = 'barber-icon';
+                    iconHtml = '<i class="fas fa-cut"></i>';
+                    break;
+            }
+    
+            // Krijo dhe shto ikona
+            return L.marker(location.coords, {
+                icon: L.divIcon({
+                    className: iconClass,
+                    html: iconHtml,
+                    iconSize: [20, 20]
+                })
+            }).addTo(map);
+        });
+    
+        // Funksioni për të kontrolluar zoom-in dhe shfaqjen e emrave
+        function updateMarkersVisibility() {
+    var currentZoom = map.getZoom();
+
+    markers.forEach(function(marker, index) {
+        // Vetëm nëse zoom është më i madh se 15, shfaq emrin (tooltip)
+        if (currentZoom >= 17) {
+            marker.bindTooltip(locations[index].name, { permanent: true, direction: 'right', offset: L.point(10, 0) }).addTo(map);
+        } else {
+            marker.unbindTooltip(); // Fshi emrin kur zoom është më i vogël se 15
+        }
+    });
+}
+
+// Ngjarja e zoom-it
+map.on('zoomend', updateMarkersVisibility);
+
+// Thirret fillimisht për të vendosur gjendjen e duhur
+updateMarkersVisibility();
+    </script>
+    
+</body>
+</html>

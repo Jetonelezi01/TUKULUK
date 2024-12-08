@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shpallje Punesh</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        h2 {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+        }
+        form {
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        label, input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .job-listing {
+            background-color: #fff;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+        .job-listing h3 {
+            margin: 0;
+        }
+        .job-listing p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Shpall Vendin e Punes</h2>
+    <div class="container">
+        <form id="jobForm">
+            <label for="emri_biznesit">Emri i Biznesit:</label>
+            <input type="text" id="emri_biznesit" name="emri_biznesit" required><br>
+
+            <label for="kategoria">Kategoria:</label>
+            <select id="kategoria" name="kategoria" required>
+                <option value="gaming">Gaming</option>
+                <option value="restorant">Restorant</option>
+                <option value="fastfood">Fastfood</option>
+                <option value="kuzhina_popullore">Kuzhina Popullore</option>
+                <option value="kafeteri">Kafeteri</option>
+                <option value="shisha_bar">Shisha Bar</option>
+                <option value="uje_instalues">Uje Instalues</option>
+                <option value="elektricist">Elektricist</option>
+                <option value="moler">Moler</option>
+                <option value="gipser">Gipser</option>
+                <option value="arkitekt">Arkitekt</option>
+                <option value="inxhinjer">Inxhinjer</option>
+                <option value="kirurg">Kirurg</option>
+                <option value="dentist">Dentist</option>
+                <option value="kardilog">Kardilog</option>
+                <option value="fizoterapist">Fizoterapist</option>
+                <option value="taksist">Taksist</option>
+                <option value="shofer">Shofer</option>
+            </select><br>
+
+            <label for="pozita">Pozita:</label>
+            <input type="text" id="pozita" name="pozita" required><br>
+
+            <label for="puntore">Numri i Punoresh:</label>
+            <input type="number" id="puntore" name="puntore" required><br>
+
+            <label for="pagese">Pagese (ne ore ose mujore):</label>
+            <input type="number" id="pagese" name="pagese" required><br>
+
+            <label for="ore_pune_dite">Ore pune ne dite:</label>
+            <input type="number" id="ore_pune_dite" name="ore_pune_dite" required><br>
+
+            <label for="koment">Koment:</label>
+            <textarea id="koment" name="koment"></textarea><br>
+
+            <button type="submit">Shpalle Lajmërimin</button>
+        </form>
+
+        <h2>Shpalljet e Punes</h2>
+        <div id="jobListings"></div>
+    </div>
+
+    <script>
+        document.getElementById('jobForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const emriBiznesit = document.getElementById('emri_biznesit').value;
+            const kategoria = document.getElementById('kategoria').value;
+            const pozita = document.getElementById('pozita').value;
+            const puntore = document.getElementById('puntore').value;
+            const pagese = document.getElementById('pagese').value;
+            const orePuneDite = document.getElementById('ore_pune_dite').value;
+            const koment = document.getElementById('koment').value;
+
+            const jobListing = {
+                emri_biznesit: emriBiznesit,
+                kategoria: kategoria,
+                pozita: pozita,
+                puntore: puntore,
+                pagese: pagese,
+                ore_pune_dite: orePuneDite,
+                koment: koment
+            };
+
+            const jobListings = JSON.parse(localStorage.getItem('jobListings')) || [];
+            jobListings.push(jobListing);
+            localStorage.setItem('jobListings', JSON.stringify(jobListings));
+
+            displayJobListings();
+            document.getElementById('jobForm').reset();
+        });
+
+        function displayJobListings() {
+            const jobListings = JSON.parse(localStorage.getItem('jobListings')) || [];
+            const jobListingsContainer = document.getElementById('jobListings');
+            jobListingsContainer.innerHTML = '';
+
+            jobListings.forEach(function(jobListing) {
+                const jobElement = document.createElement('div');
+                jobElement.classList.add('job-listing');
+
+                jobElement.innerHTML = `
+                    <h3>${jobListing.emri_biznesit}</h3>
+                    <p><strong>Kategoria:</strong> ${jobListing.kategoria}</p>
+                    <p><strong>Pozita:</strong> ${jobListing.pozita}</p>
+                    <p><strong>Numri i Punoresh:</strong> ${jobListing.puntore}</p>
+                    <p><strong>Pagese:</strong> ${jobListing.pagese}</p>
+                    <p><strong>Ore pune ne dite:</strong> ${jobListing.ore_pune_dite}</p>
+                    <p><strong>Koment:</strong> ${jobListing.koment}</p>
+                `;
+
+                jobListingsContainer.appendChild(jobElement);
+            });
+        }
+
+        window.onload = function() {
+            displayJobListings();
+        };
+    </script>
+</body>
+</html>

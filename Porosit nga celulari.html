@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Restoranti</title>
+    <style>
+        /* Stilizimi i faqes */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 36px;
+        }
+
+        main {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #menu {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            width: 70%;
+        }
+
+        .item {
+            background-color: white;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .item img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .price {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        #cart {
+            background-color: white;
+            border-radius: 10px;
+            padding: 15px;
+            width: 25%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #cart ul {
+            list-style-type: none;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 14px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Menu Restoranti</h1>
+        <p>Porositni ushqimin dhe pijet tuaj direkt nga celulari</p>
+    </header>
+
+    <main>
+        <section id="menu">
+            <div class="item">
+                <img src="https://via.placeholder.com/150" alt="Burger">
+                <h3>Burger</h3>
+                <p>Shije e shijshme me patate të skuqura</p>
+                <p class="price">€5.00</p>
+                <button onclick="addToCart('Burger', 5.00)">Shto në Karrocë</button>
+            </div>
+
+            <div class="item">
+                <img src="https://via.placeholder.com/150" alt="Pizza">
+                <h3>Pizza Margherita</h3>
+                <p>Pizza me djathë dhe domate të freskëta</p>
+                <p class="price">€7.00</p>
+                <button onclick="addToCart('Pizza Margherita', 7.00)">Shto në Karrocë</button>
+            </div>
+
+            <div class="item">
+                <img src="https://via.placeholder.com/150" alt="Pije">
+                <h3>Pije Freskuese</h3>
+                <p>Një pije e ftohtë për verëra të nxehta</p>
+                <p class="price">€2.50</p>
+                <button onclick="addToCart('Pije Freskuese', 2.50)">Shto në Karrocë</button>
+            </div>
+        </section>
+
+        <section id="cart">
+            <h2>Karroca Juaj</h2>
+            <ul id="cart-items">
+                <li>Karroca është bosh</li>
+            </ul>
+            <button onclick="checkout()">Paguaj</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Restoranti</p>
+    </footer>
+
+    <script>
+        // Funksioni për të shtuar artikuj në karrocë
+        let cart = [];
+
+        function addToCart(item, price) {
+            cart.push({ item, price });
+            updateCartDisplay();
+        }
+
+        // Funksioni për të përditësuar karrocën
+        function updateCartDisplay() {
+            const cartItems = document.getElementById("cart-items");
+            cartItems.innerHTML = ""; // Fshijmë çdo përmbajtje të mëparshme
+
+            if (cart.length === 0) {
+                cartItems.innerHTML = "<li>Karroca është bosh</li>";
+            } else {
+                cart.forEach((cartItem) => {
+                    const li = document.createElement("li");
+                    li.textContent = `${cartItem.item} - €${cartItem.price.toFixed(2)}`;
+                    cartItems.appendChild(li);
+                });
+            }
+        }
+
+        // Funksioni për të realizuar pagesën
+        function checkout() {
+            if (cart.length === 0) {
+                alert("Karroca është bosh! Shtoni diçka për të porositur.");
+            } else {
+                let total = cart.reduce((sum, item) => sum + item.price, 0);
+                alert(`Pagesa juaj është €${total.toFixed(2)}. Faleminderit për porositjen!`);
+                cart = []; // Pasi klienti ka paguar, karroca zbrazet
+                updateCartDisplay();
+            }
+        }
+    </script>
+</body>
+</html>

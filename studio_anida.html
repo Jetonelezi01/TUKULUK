@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <link rel="shortcut icon" href="images/favicon.png" type="">
+
+  <title> ALLinONE </title>
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+  <!--owl slider stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+
+  <!-- font awesome style -->
+  <link href="css/font-awesome.min.css" rel="stylesheet" />
+
+  <!-- Custom styles for this template -->
+  <link href="css/style.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="css/responsive.css" rel="stylesheet" />
+
+
+  <link rel="icon" href="images/Bocata-logo.jpg" sizes="16x16"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="css/stili.css">
+<style>
+    body {
+            font-family: sans-serif, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa; /* Ngjyrë e lehtë sfondi */
+        }
+
+        .menu_page {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .menu_header {
+            background-color: #007BFF; /* Ngjyra e header-it */
+            color: white;
+            padding: 20px 0;
+        }
+
+        .menu_logo {
+            max-width: 200px; /* Madhësia maksimale për logon */
+        }
+
+        .menu_container {
+            margin-top: 20px;
+        }
+
+        .main_menu {
+            list-style: none; /* Hiq pikat nga lista */
+            padding: 0;
+        }
+
+        .main_menu > li {
+            position: relative; /* Nevojitet për pozicionimin e nëntëmenusë */
+            display: inline-block; /* Shfaq menunë në rresht */
+            margin: 0 15px; /* Hapësira midis menuve */
+        }
+
+        .main_menu a {
+            text-decoration: none;
+            color: #f3f3f3; /* Ngjyra e lidhjeve të menuve */
+            padding: 10px 15px;
+        }
+
+        .submenu {
+            display: none; /* Fshi nëntëmenunë fillimisht */
+            position: absolute; /* Pozitio nën menunë kryesore */
+            top: 100%; /* Rendi poshtë menuve kryesore */
+            left: 0;
+            background-color: white;
+            border: 1px solid #ddd; /* Kufiri i lehtë */
+            z-index: 1; /* Siguro që nëntëmenuja të jetë mbi përmbajtjen */
+        }
+
+        .main_menu li:hover .submenu {
+            display: block; /* Shfaq nëntëmenunë kur kalon me maus mbi menunë kryesore */
+        }
+
+        .submenu li {
+            white-space: nowrap; /* Hiq shtrirjen e rreshtit */
+        }
+
+        .submenu a {
+            padding: 10px 15px; /* Hapësira për lidhjet e nëntëmenusë */
+            display: block; /* Bëj lidhjet të mbushin hapësirën e nëntëmenusë */
+            color: #333; /* Ngjyra e lidhjeve të nëntëmenusë */
+        }
+
+        .submenu a:hover {
+            background-color: #f1f1f1; /* Ngjyra e sfondit kur kalon me maus */
+        }
+        .menu_logo {
+    max-width: 50px; /* Adjust width as necessary */
+    height: auto; /* Maintain aspect ratio */
+    display: inline-block; /* Align with text */
+    vertical-align: middle; /* Align vertically with text */
+}
+
+.main_menu li {
+    display: inline-block; /* Keep menu items in a row */
+    margin: 0 15px; /* Spacing between items */
+}
+hr {
+    border: none; /* Remove default border */
+            height: 2px; /* Set the thickness */
+            background-color: #ffffff; /* Set the color */
+            width: 28%; /* Set the width to 50% of the container */
+            margin: 20px auto; 
+        }
+    
+        .containerr1 {
+            display: grid; /* Aktivizo Grid */
+      
+            grid-template-columns: 1fr 1fr; /* Dy kolona të barabarta */
+            gap: 20px; /* Hapësira midis kontajnerëve */
+        }
+        .boxx1 {
+            background-color: transparent; /* Ngjyra e sfondit */
+            color: white; /* Ngjyra e tekstit */
+            padding: 20px; /* Hapësira brenda kontajnerëve */
+            box-sizing: border-box; /* Përfshij hapësirën e brendshme në gjerësi */
+        }
+
+
+
+        @media (max-width:440px){
+       
+  .containerr1 {
+ grid-template-columns:1fr; /* Dy kolona të barabarta */
+           /* Ndryshoni në kolona për celularë */
+
+  }
+  .boxx1 {
+        flex-direction: column; /* Qëndron vertikalisht */
+
+    }
+    section{
+      padding-top: 115px;  
+    }
+
+
+
+
+
+}
+    
+
+/* Stilet për desktop */
+body {
+    font-size: 16px;
+
+}
+
+.boxx1 a {
+    margin: 0 10px; /* Hapësira mes ikonave */
+}
+
+
+
+
+
+/* Kontejneri kryesor për produktet */
+.product-container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Karta e produktit */
+.product-card {
+    filter: drop-shadow(0px 0px 12px grey);
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 250px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+/* Efekti hover për kartat */
+.product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Fotoja e produktit */
+.product-image {
+    filter: drop-shadow(0px 0px 12px grey);
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+/* Zmadho foto kur përdoruesi kalon mbi të */
+.product-card:hover .product-image {
+    transform: scale(1.1);
+}
+
+/* Kjo pjesë është për informacionin e produktit */
+.product-info {
+    padding: 15px;
+    text-align: center;
+    
+}
+
+/* Titulli i produktit */
+.product-title {
+    font-size: 18px;
+    filter: drop-shadow(5px 0px 5px grey);
+    font-weight: bold;
+    color: #333;
+    margin: 10px 0;
+}
+
+/* Përshkrimi i produktit */
+.product-description {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 15px;
+}
+
+/* Butoni për të marrë më shumë informacion */
+.product-button {
+    background-color: #00b894;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Efekti hover për butonin */
+.product-button:hover {
+    background-color: #098b7f;
+}
+
+/* Përshkrimi i mëtejshëm është i fshehur fillimisht */
+.more-info {
+    font-size: 14px;
+    color: #444;
+    display: none;
+    margin-top: 15px;
+    line-height: 1.5;
+}
+
+
+
+
+
+
+
+
+
+.our-team {
+  padding: 30px 0 40px;
+  margin-bottom: 30px;
+  background-color: #f7f5ec;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+  filter: drop-shadow(0px 0px 12px grey);
+  border-radius: 15px;
+}
+
+.our-team .picture {
+    
+  display: inline-block;
+  padding-top: 10px;
+  height: 130px;
+  width: 130px;
+  margin-bottom: 50px;
+  z-index: 1;
+  position: relative;
+}
+
+.our-team .picture::before {
+  content: "";
+  width: 100%;
+  height: 0;
+  border-radius: 50%;
+  background-color: #1369ce;
+  position: absolute;
+  bottom: 135%;
+  right: 0;
+  left: 0;
+  opacity: 0.9;
+  transform: scale(3);
+  transition: all 0.3s linear 0s;
+
+}
+
+.our-team:hover .picture::before {
+  height: 100%;
+}
+
+.our-team .picture::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #1369ce;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.our-team .picture img {
+    
+  width: 100%;
+  height: auto;
+  border-radius: 15%;
+  transform: scale(1.5);
+  transition: all 0.9s ease 0s;
+}
+
+.our-team:hover .picture img {
+  box-shadow: 0 0 0 14px #f7f5ec;
+  transform: scale(1.6);
+}
+
+.our-team .title {
+    margin-top: 8px;
+  display: block;
+  font-size: 15px;
+  color: #4e5052;
+  text-transform: capitalize;
+  filter: drop-shadow(0px 0px 12px grey);
+  
+}
+
+.our-team .social {
+    
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  background-color: #1369ce;
+  position: absolute;
+  bottom: -100px;
+  left: 0;
+  transition: all 0.5s ease 0s;
+  
+}
+
+
+
+.our-team .social li a {
+    
+  display: block;
+  padding: 10px;
+  font-size: 17px;
+  color: white;
+  transition: all 0.3s ease 0s;
+  text-decoration: none;
+  
+}
+
+
+
+
+
+    </style>
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+</head>
+
+<body>
+
+  <div class="hero_area">
+
+    <div class="hero_bg_box">
+      <div class="bg_img_box">
+        <img src="images/hero-bg.png" alt="">
+      </div>
+    </div>
+
+    <!-- header section strats -->
+    <header class="header_section">
+      <div class="container-fluid">                     
+        <nav class="navbar navbar-expand-lg custom_nav-container ">
+          <a class="navbar-brand" href="index.html">
+            
+            <span>
+              ALL in One
+            </span>
+          </a>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class=""> </span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav  ">
+              <li class="nav-item ">
+                <a class="nav-link" href="index.html">Ballina</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="stuido_frizerkat.html">Frizerka<span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="Meny.html">Vendi i kerkimeve</a>
+              </li>
+        
+              <form class="form-inline">
+                <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
+                  <i class="fa fa-search" aria-hidden="true"></i>
+                </button>
+              </form>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </header>
+   
+    
+
+
+
+    <h1 style="color: rgb(244, 159, 32); text-align: center; margin-top: 20px; font-size: 40px;  ">ANIDA</h1>
+    <hr style="width: 250px;">
+    <h3 style="text-align: center; color: white;">Sherbimin e keni me poshte</h3>
+
+<div class="containerr1">
+  
+<div class="boxx1">
+
+ <h3 style="color: wheat; text-align: left; margin-left: 25px;">Ketu e keni lokacionin</h3>
+ <iframe  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d564.6271747775072!2d20.96262366955458!3d41.99992039483836!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1353f107ddefdb0f%3A0x8fd0ac46eaac6a9f!2sStudio%20Anida!5e1!3m2!1sen!2smk!4v1731968417775!5m2!1sen!2smk" width="350" height="200" style="border: 5px solid #000 ; "   allowfullscreen=""  referrerpolicy="no-referrer-when-downgrade"></iframe>
+</div>
+
+<div class="boxx1" style="display: flex; flex-direction: column; align-items: center;">
+    <p style="text-align: center; color: white; font-size: 30px;">info</p>
+    <hr>
+    <div style="display: flex; justify-content: center; margin-top: 10px;">
+    <a href="https://www.facebook.com/studioanida1/" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" style="width: 24px; height: 24px; margin: 0 10px;">
+    </a>
+    <a href="https://www.instagram.com/studioanida/" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" style="width: 24px; height: 24px; margin: 0 10px;">
+    </a>
+    <a href="mailto:info@studioanida.mk">
+        <i class="fas fa-envelope" style="font-size: 24px; margin: 0 10px;"></i>
+    </a>
+    <a href="tel:+38971435149">
+        <i class="fas fa-phone" style="font-size: 24px; margin: 0 10px;"></i>
+    </a>
+</div>
+</div>
+</div>
+
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</div>
+<!-- KETu GJENDET MENYJA E Mengjesit     -->
+
+<br>
+<br>
+<br>
+<br>
+<section class="menu" id="menu">
+    <div class="heading">
+        <h1 style="margin-top: -200px;"></h1>
+       <span>Sherbimin qe posedon Studio</span>
+       <h3>ANIDA</h3>
+    </div>
+    <div class="swiper menu-slider">
+      <div class="swiper-wrapper">
+         <div class="swiper-slide slide">
+            <h3 class="title">Shebrimet</h3>
+          
+ <div class="product-container">
+    <div class="product-card">
+        <img src="images\studio Frizerkat\studioanida-bridal-makeup-2.jpg" alt="Produkt 1" class="product-image">
+        <div class="product-info">
+            <h3 class="product-title">Grimi i dasmese</h3>
+            <p class="product-description">$9.99</p>
+            <button class="product-button" onclick="toggleDescription(this)">Lexo me shume</button>
+            <p class="more-info">Po kërkoni shërbimin e përsosur të make up-it të nusërisë për t'ju bërë të dukeni dhe të ndiheni më mirë në ditën tuaj të madhe? Mos kërkoni më larg se shërbimi ynë perfekt i make up-it të nusërisë!
+
+                Ekipi ynë i grimerëve të aftë dhe me përvojë do të punojë me ju për të krijuar një pamje nuseje të përsosur dhe të përjetshme që rrit bukurinë tuaj natyrore 
+                dhe plotëson në mënyrë të përsosur fustanin dhe temën tuaj të dasmës. Ne përdorim vetëm produkte me cilësi më të mirë dhe 
+                jetëgjatë për t'u siguruar që make up-i juaj të duket mahnitës dhe të qëndrojë i përsosur gjatë gjithë ditës dhe natës.</p>
+        </div>
+    </div>
+
+    <div class="product-card">
+        <img src="images\studio Frizerkat\studioanida-face-and-eye-makeup.jpg" alt="Produkt 2" class="product-image">
+        <div class="product-info">
+            <h3 class="product-title">Grim për fytyrë & sy</h3>
+            <p class="product-description">$9.99</p>
+            <button class="product-button" onclick="toggleDescription(this)">Lexo me shume</button>
+            <p class="more-info">Ne përdorim vetëm produktet e cilësisë më të mirë për t'u siguruar që grimi i fytyrës dhe syve tuaj të duket mahnitës dhe i përsosur, dhe ne qëndrojmë të përditësuar me tendencat dhe teknikat më të fundit për t'ju ofruar pamjet më aktuale dhe moderne.</p>
+        </div>
+    </div>
+
+    <div class="product-card">
+        <img src="images\studio Frizerkat\floke dhe grim.jpg" alt="Produkt 3" class="product-image">
+        <div class="product-info">
+            <h3 class="product-title">Flokë & Grim</h3>
+            <p class="product-description">$9.99</p>
+            <button class="product-button" onclick="toggleDescription(this)">Lexo me shume</button>
+            <p class="more-info">Ekipi ynë i stilistëve dhe make up artistëve të aftë dhe me përvojë do të punojë me ju për të krijuar një pamje mahnitëse dhe të personalizuar që përputhet në mënyrë të përkryer me stilin dhe preferencat tuaja unike.
+                 Nëse jeni duke u përgatitur për një event të veçantë ose thjesht dëshironi ta trajtoni veten me një pamje të vecantë, ne jemi aty për ju.</p>
+        </div>
+    </div>
+
+    <div class="product-card">
+        <img src="images\studio Frizerkat\studio-anida-nora-istrefi-make-up.jpg" alt="Produkt 4" class="product-image">
+        <div class="product-info">
+            <h3 class="product-title">VIP Grim</h3>
+            <p class="product-description">$9.99</p>
+            <button class="product-button" onclick="toggleDescription(this)">Lexo me shume</button>
+            <p class="more-info">Tek Studio Anida, Shërbimi ynë i grimit VIP është sinonim i përsosmërisë. Ne përdorim vetëm produkte të cilësisë më të lartë,
+                 duke u siguruar që grimi juaj të jetë jo vetëm i bukur, por edhe t'i përmbahet standardeve më të larta. Duke qëndruar përpara tendencave dhe teknikave, ekipi ynë krijon pamje që janë jo vetëm aktuale, por edhe në ballë të modës.
+
+                Në fushën e shërbimit tonë të grimit VIP, saktësia është parësore. Ne e konsiderojmë bukurinë një formë arti, duke u fokusuar në detaje të ndërlikuara për të përmirësuar tiparet tuaja të dallueshme. 
+                Me vëmendje të përpiktë, studioja jonë krijon pamje grimi që theksojnë çdo kontur, duke krijuar një pamje të sofistikuar që i përshtatet statusit tuaj VIP.</p>
+        </div>
+    </div>
+</div>
+<h3 class="title">Stafi Jone</h3>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+      <div class="our-team">
+        <div class="picture">
+          <img style="width: 130px; height: 130px;" class="img-fluid" src="images\studio Frizerkat\Anida_studio\studio-anida-ceo.jpg">
+        </div>
+        <div class="team-content">
+          <h3 class="name">CEO / MAKEUP ARTIST</h3>
+          <h4 class="title">ANIDA ILJAZI</h4>
+        </div>
+        <div class="boxx1" style="display: flex; flex-direction: column; align-items: center; margin-top: -20px; margin-bottom: -30px;">
+       
+            <div style="display: flex; justify-content: center; ">
+            <a href="https://www.facebook.com/studioanida1/" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" style="width: 24px; height: 24px; margin: 0 5px;">
+            </a>
+            <a href="https://www.instagram.com/studioanida/" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" style="width: 24px; height: 24px; margin: 0 5px;">
+            </a>
+            <a href="mailto:info@studioanida.mk">
+                <i class="fas fa-envelope" style="font-size: 24px; margin: 0 5px;"></i>
+            </a>
+            <a href="tel:+38971435149">
+                <i class="fas fa-phone" style="font-size: 24px; margin: 0 5px;"></i>
+            </a>
+        </div>
+        </div>
+      </div>
+    </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+      <div class="our-team">
+        <div class="picture">
+          <img style="width: 130px; height: 130px;" class="img-fluid" src="images\studio Frizerkat\Anida_studio\Harisa-Lika.jpeg">
+        </div>
+        <div class="team-content">
+          <h3 class="name">Hair Stylist</h3>
+          <h4 class="title">HARISA ILJAZI</h4>
+        </div>
+
+        <div class="boxx1" style="display: flex; flex-direction: column; align-items: center; margin-top: -20px; margin-bottom: -30px;">
+       
+            <div style="display: flex; justify-content: center;  ">
+            <a href="https://www.facebook.com/studioanida1/" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" style="width: 24px; height: 24px; margin: 0 5px;">
+            </a>
+            <a href="https://www.instagram.com/studioanida/" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" style="width: 24px; height: 24px; margin: 0 5px;">
+            </a>
+            <a href="mailto:info@studioanida.mk">
+                <i class="fas fa-envelope" style="font-size: 24px; margin: 0 5px;"></i>
+            </a>
+            <a href="tel:+38971435149">
+                <i class="fas fa-phone" style="font-size: 24px; margin: 0 5px;"></i>
+            </a>
+        </div>
+        </div>
+        
+  
+      </div>
+    </div>
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+        <div class="our-team">
+          <div class="picture">
+            <img style="width: 130px; height: 130px;" class="img-fluid" src="images\studio Frizerkat\Anida_studio\Fatina-iljazi.jpg">
+          </div>
+          <div class="team-content">
+            <h3 class="name">Makeup Artist</h3>
+            <h4 class="title">FATINA ILJAZI</h4>
+          </div>
+  
+          <div class="boxx1" style="display: flex; flex-direction: column; align-items: center; margin-top: -20px; margin-bottom: -30px;">
+         
+              <div style="display: flex; justify-content: center; ">
+              <a href="https://www.facebook.com/studioanida1/" target="_blank">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" style="width: 24px; height: 24px; margin: 0 5px;">
+              </a>
+              <a href="https://www.instagram.com/studioanida/" target="_blank">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" style="width: 24px; height: 24px; margin: 0 5px;">
+              </a>
+              <a href="mailto:info@studioanida.mk">
+                  <i class="fas fa-envelope" style="font-size: 24px; margin: 0 5px;"></i>
+              </a>
+              <a href="tel:+38971435149">
+                  <i class="fas fa-phone" style="font-size: 24px; margin: 0 5px;"></i>
+              </a>
+          </div>
+          </div>
+          
+    
+        </div>
+      </div>
+
+
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+        <div class="our-team">
+          <div class="picture">
+            <img style="width: 130px; height: 130px;" class="img-fluid" src="images\studio Frizerkat\Anida_studio\Arife Iljazi.jpg">
+          </div>
+          <div class="team-content">
+            <h3 class="name">Makeup Artist</h3>
+            <h4 class="title">ARIFE ILJAZI</h4>
+          </div>
+  
+          <div class="boxx1" style="display: flex; flex-direction: column; align-items: center; margin-top: -20px; margin-bottom: -30px;">
+         
+              <div style="display: flex; justify-content: center; ">
+              <a href="https://www.facebook.com/studioanida1/" target="_blank">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" style="width: 24px; height: 24px; margin: 0 5px;">
+              </a>
+              <a href="https://www.instagram.com/studioanida/" target="_blank">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" style="width: 24px; height: 24px; margin: 0 5px;">
+              </a>
+              <a href="mailto:info@studioanida.mk">
+                  <i class="fas fa-envelope" style="font-size: 24px; margin: 0 5px;"></i>
+              </a>
+              <a href="tel:+38971435149">
+                  <i class="fas fa-phone" style="font-size: 24px; margin: 0 5px;"></i>
+              </a>
+          </div>
+          </div>
+          
+    
+        </div>
+      </div>
+
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+        <div class="our-team">
+          <div class="picture">
+            <img style="width: 130px; height: 130px;" class="img-fluid" src="images\studio Frizerkat\Anida_studio\Anisa-Lika.jpg">
+          </div>
+          <div class="team-content">
+            <h3 class="name">Makeup Artist</h3>
+            <h4 class="title">ANISA LIKA</h4>
+          </div>
+  
+          <div class="boxx1" style="display: flex; flex-direction: column; align-items: center; margin-top: -20px; margin-bottom: -30px;">
+         
+              <div style="display: flex; justify-content: center; ">
+              <a href="https://www.facebook.com/studioanida1/" target="_blank">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" style="width: 24px; height: 24px; margin: 0 5px;">
+              </a>
+              <a href="https://www.instagram.com/studioanida/" target="_blank">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" style="width: 24px; height: 24px; margin: 0 5px;">
+              </a>
+              <a href="mailto:info@studioanida.mk">
+                  <i class="fas fa-envelope" style="font-size: 24px; margin: 0 5px;"></i>
+              </a>
+              <a href="tel:+38971435149">
+                  <i class="fas fa-phone" style="font-size: 24px; margin: 0 5px;"></i>
+              </a>
+          </div>
+          </div>
+          
+    
+        </div>
+      </div>
+
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+        <div class="our-team">
+          <div class="picture">
+            <img style="width: 130px; height: 130px;" class="img-fluid" src="images\studio Frizerkat\Anida_studio\Vlera-Krasniqi.jpeg">
+          </div>
+          <div class="team-content">
+            <h3 class="name">Recepcioniste</h3>
+            <h4 style="font-size: 25px;" class="title">VLERA KRASNIQI</h4>
+          </div>
+  
+          <div class="boxx1" style="display: flex; flex-direction: column; align-items: center; margin-top: -20px; margin-bottom: -30px;">
+         
+              <div style="display: flex; justify-content: center; ">
+              <a href="https://www.facebook.com/studioanida1/" target="_blank">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" style="width: 24px; height: 24px; margin: 0 5px;">
+              </a>
+              <a href="https://www.instagram.com/studioanida/" target="_blank">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" style="width: 24px; height: 24px; margin: 0 5px;">
+              </a>
+              <a href="mailto:info@studioanida.mk">
+                  <i class="fas fa-envelope" style="font-size: 24px; margin: 0 5px;"></i>
+              </a>
+              <a href="tel:+38971435149">
+                  <i class="fas fa-phone" style="font-size: 24px; margin: 0 5px;"></i>
+              </a>
+          </div>
+          </div>
+          
+    
+        </div>
+      </div>
+
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+        <div class="our-team">
+          <div class="picture">
+            <img style="width: 130px; height: 130px;" class="img-fluid" src="images\studio Frizerkat\Anida_studio\Harisa-Lika.jpeg">
+          </div>
+          <div class="team-content">
+            <h3 class="name">Makeup Artist</h3>
+            <h4 class="title">HARISA LIKA</h4>
+          </div>
+  
+          <div class="boxx1" style="display: flex; flex-direction: column; align-items: center; margin-top: -20px; margin-bottom: -30px;">
+         
+              <div style="display: flex; justify-content: center; ">
+              <a href="https://www.facebook.com/studioanida1/" target="_blank">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" style="width: 24px; height: 24px; margin: 0 5px;">
+              </a>
+              <a href="https://www.instagram.com/studioanida/" target="_blank">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" style="width: 24px; height: 24px; margin: 0 5px;">
+              </a>
+              <a href="mailto:info@studioanida.mk">
+                  <i class="fas fa-envelope" style="font-size: 24px; margin: 0 5px;"></i>
+              </a>
+              <a href="tel:+38971435149">
+                  <i class="fas fa-phone" style="font-size: 24px; margin: 0 5px;"></i>
+              </a>
+          </div>
+          </div>
+          
+    
+        </div>
+      </div>
+
+
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+        <div class="our-team">
+          <div class="picture">
+            <img style="width: 130px; height: 130px;" class="img-fluid" src="images\studio Frizerkat\Anida_studio\Eliza-Emurllahu.jpeg">
+          </div>
+          <div class="team-content">
+            <h3 class="name">Intern</h3>
+            <h4 style="font-size: 25px;" class="title">ELIZA EMURLLAHU</h4>
+          </div>
+  
+          <div class="boxx1" style="display: flex; flex-direction: column; align-items: center; margin-top: -20px; margin-bottom: -30px;">
+         
+              <div style="display: flex; justify-content: center; ">
+              <a href="https://www.facebook.com/studioanida1/" target="_blank">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" style="width: 24px; height: 24px; margin: 0 5px;">
+              </a>
+              <a href="https://www.instagram.com/studioanida/" target="_blank">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" style="width: 24px; height: 24px; margin: 0 5px;">
+              </a>
+              <a href="mailto:info@studioanida.mk">
+                  <i class="fas fa-envelope" style="font-size: 24px; margin: 0 5px;"></i>
+              </a>
+              <a href="tel:+38971435149">
+                  <i class="fas fa-phone" style="font-size: 24px; margin: 0 5px;"></i>
+              </a>
+          </div>
+          </div>
+          
+    
+        </div>
+      </div>
+
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+        <div class="our-team">
+          <div class="picture">
+            <img style="width: 130px; height: 130px;" class="img-fluid" src="images\studio Frizerkat\Anida_studio\Arza Sadiki.jpeg">
+          </div>
+          <div class="team-content">
+            <h3 class="name">Intern</h3>
+            <h4 class="title">ARZA SADIKI</h4>
+          </div>
+  
+          <div class="boxx1" style="display: flex; flex-direction: column; align-items: center; margin-top: -20px; margin-bottom: -30px;">
+         
+              <div style="display: flex; justify-content: center; ">
+              <a href="https://www.facebook.com/studioanida1/" target="_blank">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" style="width: 24px; height: 24px; margin: 0 5px;">
+              </a>
+              <a href="https://www.instagram.com/studioanida/" target="_blank">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" style="width: 24px; height: 24px; margin: 0 5px;">
+              </a>
+              <a href="mailto:info@studioanida.mk">
+                  <i class="fas fa-envelope" style="font-size: 24px; margin: 0 5px;"></i>
+              </a>
+              <a href="tel:+38971435149">
+                  <i class="fas fa-phone" style="font-size: 24px; margin: 0 5px;"></i>
+              </a>
+          </div>
+          </div>
+          
+    
+        </div>
+      </div>
+
+
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+         </div>
+
+
+
+
+
+                           
+                        </div>
+
+
+
+                  <a href="stuido_frizerkat.html"  class="btn">Kthehu te Frizerkat</a>
+ </section>
+ 
+ <section style="margin-top: 0px;" class="footer_section">
+  <div class="container">
+    <p>
+      <a style="font-size: 24px; color:#007BFF; text-align: right;" class="nav-link" href="STUDIO_ANIDA\index.html"> LOGIN </a>
+      <h3 style="font-size: 12px;  text-align: right; margin-top: -30px; ">Only Anida's Staf</h3>
+      &copy; <span id="displayYear"></span> All Rights Reserved By
+      <a href="https://html.design/">Free Html Templates</a>
+    </p>
+  </div>
+</section>
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+<script src="js/script.js"></script>
+<script>
+   lightGallery(document.querySelector('.gallery .gallery-container'));
+   function toggleDescription(button) {
+    // Gjejmë elementin me klasën 'more-info' që është pas butonit
+    var moreInfo = button.nextElementSibling;
+
+    // Nëse përshkrimi është i fshehur, e shfaqim, në të kundërt e fshehim
+    if (moreInfo.style.display === "none" || moreInfo.style.display === "") {
+        moreInfo.style.display = "block";
+        button.textContent = "Mbylle";  // Ndryshon teksti i butonit
+    } else {
+        moreInfo.style.display = "none";
+        button.textContent = "Merr më shumë";  // Ndryshon teksti i butonit
+    }
+}
+</script>
+
+
+  <!-- footer section -->
+
+  <!-- footer section -->
+
+  <!-- jQery -->
+  <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+  <!-- popper js -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+  </script>
+  <!-- bootstrap js -->
+  <script type="text/javascript" src="js/bootstrap.js"></script>
+  <!-- owl slider -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
+  </script>
+  <!-- custom js -->
+  <script type="text/javascript" src="js/custom.js"></script>
+  <!-- Google Map -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
+  </script>
+  <!-- End Google Map -->
+  <script src="\js\Searching.js"></script>
+   
+
+</body>
+
+</html>

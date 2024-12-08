@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menuja e Produkteve</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        #searchInput {
+            padding: 10px;
+            margin-top: 10px;
+            width: 300px;
+        }
+
+        #searchBtn {
+            padding: 10px 15px;
+            background-color: #555;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        #searchBtn:hover {
+            background-color: #777;
+        }
+
+        #priceFilter, #locationFilter {
+            margin-left: 20px;
+            padding: 10px;
+        }
+
+       #productList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+    /* Fshihet vetëm nëse nuk ka rezultate përkatëse */
+}
+
+
+        .product {
+            background-color: white;
+            border: 1px solid #ddd;
+            margin: 10px;
+            padding: 20px;
+            width: 200px;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        .product img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .product h3 {
+            margin: 10px 0;
+        }
+
+        .product p {
+            font-size: 18px;
+            color: #555;
+        }
+
+        .product button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        .product button:hover {
+            background-color: #218838;
+        }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&libraries=geometry"></script>
+</head>
+<body>
+    <header>
+        <h1>DELIVERY</h1>
+        <input type="text" id="searchInput" placeholder="Kërko për produkt...">
+        <button id="searchBtn">Kërko</button>
+        <label for="priceFilter">Filtroni sipas çmimit:</label>
+        <select id="priceFilter">
+            <option value="all">Të gjitha</option>
+            <option value="low-to-high">Nga më i liri në më të shtrenjti</option>
+            <option value="high-to-low">Nga më i shtrenjti në më të lirin</option>
+        </select>
+
+        <label for="locationFilter">Filtroni sipas afërsisë:</label>
+        <input type="checkbox" id="locationFilter"> Aktivizo filtrin e afërsisë
+    </header>
+    
+    <div id="productList">
+        <!-- Produktet do të shfaqen këtu nga JavaScript -->
+    </div>
+
+    <script>
+        const products = [
+            { id: 1, name: "hamburger", type: "burger", price: 5, restaurant: "Restorant BOSS",location: { lat: 41.9975, lng: 20.9610}, image:  "https://via.placeholder.com/200x150", page: "Boss_rest.html" },
+            { id: 11, name: "pizza", type: "pizza", price: 5, restaurant: "Restorant BOSS",location: { lat: 41.9975, lng: 20.9610}, image:  "https://via.placeholder.com/200x150", page: "Boss_rest.html" },   //OK
+            { id: 2, name: "hamburger", type: "burger", price: 6, restaurant: "Hamburger TAJO",  location: { lat: 42.0082, lng: 20.9746 }, image: "https://via.placeholder.com/200x150" },  // OK
+            { id: 3, name: "hamburger", type: "burger", price: 7, restaurant: "Restoranti LUTA", location: { lat: 41.9932, lng: 20.9602 }, image: "https://via.placeholder.com/200x150" }, // OK
+            { id: 4, name: "hamburger", type: "burger", price: 3, restaurant: "Restoranti SIRENA", location: { lat: 42.0076, lng: 20.9732 }, image: "https://via.placeholder.com/200x150" }, // OK
+            { id: 5, name: "hotdog", type: "hotdog", price: 2, restaurant: "FastFood KIKI", location: { lat: 42.0049, lng: 20.9665 }, image: "https://via.placeholder.com/200x150" },
+            { id: 6, name: "hotdog", type: "hotdog", price: 4, restaurant: "Restoranti Coca", location: { lat: 41.3014, lng: 19.8176 }, image: "https://via.placeholder.com/200x150" },
+            { id: 7, name: "Cheeseburger", type: "burger", price: 8, restaurant: "Restoranti Gourmet", location: { lat: 41.3034, lng: 19.8184 }, image: "https://via.placeholder.com/200x150" },
+            { id: 8, name: "Burger me Patate", type: "burger", price: 9, restaurant: "Restoranti Gourmet", location: { lat: 41.3027, lng: 19.8180 }, image: "https://via.placeholder.com/200x150" },
+            { id: 9, name: "Pije Frutash", type: "pije", price: 5, restaurant: "Restoranti FruitLand", location: { lat: 41.3018, lng: 19.8183 }, image: "https://via.placeholder.com/200x150" },
+            { id: 10, name:"Birrë Artizanal", type: "pije", price: 6, restaurant: "Restoranti Brew", location: { lat: 41.3004, lng: 19.8186 }, image: "https://via.placeholder.com/200x150" }
+        ];
+
+        const searchInput = document.getElementById('searchInput');
+        const searchBtn = document.getElementById('searchBtn');
+        const priceFilter = document.getElementById('priceFilter');
+        const productList = document.getElementById('productList');
+        const locationFilter = document.getElementById('locationFilter');
+
+        let filteredProducts = [...products];
+        let userLocation = { lat: 41.2995, lng: 19.8189 }; // Lokacioni i përdoruesit (për shembull)
+
+        // Funksioni që merr lokacionin e përdoruesit nga Geolocation API
+        function getUserLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    userLocation = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+                    filterProducts(); // Filtrimi bëhet automatikisht pasi të marrim lokacionin
+                });
+            }
+        }
+
+        function calculateDistance(productLocation) {
+            const userLatLng = new google.maps.LatLng(userLocation.lat, userLocation.lng);
+            const productLatLng = new google.maps.LatLng(productLocation.lat, productLocation.lng);
+            return google.maps.geometry.spherical.computeDistanceBetween(userLatLng, productLatLng); // Distanca në metra
+        }
+
+        function renderProducts(productsToRender) {
+    productList.innerHTML = '';
+    productsToRender.forEach(product => {
+        const productElement = document.createElement('div');
+        productElement.classList.add('product');
+        
+        // Kontrollojmë nëse restoranti është BOSS dhe i japim lidhjen
+        const productLink = product.page || '#'; // Nëse nuk ka lidhje, përdorim një default
+        
+        productElement.innerHTML = `
+            <img src="${product.image}" alt="${product.name}">
+            <h3><a href="${productLink}">${product.restaurant} - ${product.name}</a></h3>
+            <p>${product.price} €</p>
+            <p>Afërsia: ${product.distance ? (product.distance / 1000).toFixed(2) + ' km' : 'N/A'}</p>
+          
+        `;
+        productList.appendChild(productElement);
+    });
+    productList.style.display = 'flex';
+}
+
+
+        function filterProducts() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const filterType = searchTerm.includes('burger') ? 'burger' : searchTerm.includes('pije') ? 'pije' : '';
+            
+            filteredProducts = products.filter(product => {
+                const matchesType = filterType ? product.type.includes(filterType) : true;
+                const matchesName = product.name.toLowerCase().includes(searchTerm);
+                return matchesType && matchesName;
+            });
+
+            // Filtrimi i afërsisë
+            if (locationFilter.checked) {
+                filteredProducts.forEach(product => {
+                    product.distance = calculateDistance(product.location); // Llogarit distancën për secilin produkt
+                });
+                filteredProducts.sort((a, b) => a.distance - b.distance); // Rendit sipas distancës
+            }
+
+            // Filtrimi sipas çmimit
+            const priceOption = priceFilter.value;
+            if (priceOption === 'low-to-high') {
+                filteredProducts.sort((a, b) => a.price - b.price);
+            } else if (priceOption === 'high-to-low') {
+                filteredProducts.sort((a, b) => b.price - a.price);
+            }
+
+            renderProducts(filteredProducts);
+        }
+
+        // Ngjit eventet për kërkim dhe filtrim
+        searchBtn.addEventListener('click', filterProducts);
+        priceFilter.addEventListener('change', filterProducts);
+        locationFilter.addEventListener('change', filterProducts);
+        searchInput.addEventListener('input', filterProducts);
+
+        // Merr lokacionin e përdoruesit kur faqja ngarkohet
+        getUserLocation();
+
+    </script>
+</body>
+</html>

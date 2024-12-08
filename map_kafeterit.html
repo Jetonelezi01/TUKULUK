@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harta e Tetovës</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+  
+    <!-- fonts style -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+  
+    <!--owl slider stylesheet -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+  
+    <!-- font awesome style -->
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+  
+    <!-- Custom styles for this template -->
+    <link href="css/style.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="css/responsive.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            height: 100vh;
+        }
+        #header {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        #menu {
+            width: auto;
+            background-color: #fff;
+            padding: 10px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            text-align: center;
+        }
+        h3 {
+            text-align: left;
+        }
+        #map {
+            height: 200px; 
+            width: auto; /* Zvogëlon lartësinë e hartës për headerin */
+            flex: 1;
+        }
+
+
+
+        .restaurant-icon {
+            font-size: 20px; /* Madhësia e ikonës */
+            color: red; /* Ngjyra e ikonës */
+        }
+        .drink-icon {
+            font-size: 20px;
+            color: blue;
+        }
+        .bus-icon {
+            font-size: 20px;
+            color: green;
+        }
+        .taxi-icon {
+            font-size: 20px;
+            color: yellow;
+        }
+        .hookah-icon {
+            font-size: 20px;
+            color: purple;
+        }
+        .fast-food-icon {
+            font-size: 20px;
+            color: orange;
+        }
+        .beauty-salon-icon {
+            font-size: 20px;
+            color: pink;
+        }
+        .barber-icon {
+            font-size: 20px;
+            color: gray;
+        }
+
+
+
+        .red-dot, .blu-dot, .green-dot, .orange-dot, .pink-dot{
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 5px;
+            vertical-align: middle;
+        }
+        .red-dot {
+            background-color: red;
+        }
+        .blu-dot {
+            background-color: blue;
+        }
+        .green-dot{
+            background-color: green;
+        }
+        .orange-dot{
+            background-color: orange;
+
+        }
+        .pink-dot{
+            background-color: pink;
+        }
+
+        span {
+            margin-left: 15px;
+        }
+        a:hover {
+            font-size: 20px;
+        }
+        body {
+            font-family: sans-serif, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa; /* Ngjyrë e lehtë sfondi */
+        }
+
+        .menu_page {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .menu_header {
+            background-color: #007BFF; /* Ngjyra e header-it */
+            color: white;
+            padding: 20px 0;
+        }
+
+        .menu_logo {
+            max-width: 200px; /* Madhësia maksimale për logon */
+        }
+
+        .menu_container {
+            margin-top: 20px;
+        }
+
+        .main_menu {
+            list-style: none; /* Hiq pikat nga lista */
+            padding: 0;
+        }
+
+        .main_menu > li {
+            position: relative; /* Nevojitet për pozicionimin e nëntëmenusë */
+            display: inline-block; /* Shfaq menunë në rresht */
+            margin: 0 15px; /* Hapësira midis menuve */
+        }
+
+        .main_menu a {
+            text-decoration: none;
+            color: #f3f3f3; /* Ngjyra e lidhjeve të menuve */
+            padding: 10px 15px;
+        }
+
+        .submenu {
+            display: none; /* Fshi nëntëmenunë fillimisht */
+            position: absolute; /* Pozitio nën menunë kryesore */
+            top: 100%; /* Rendi poshtë menuve kryesore */
+            left: 0;
+            background-color: white;
+            border: 1px solid #ddd; /* Kufiri i lehtë */
+            z-index: 1; /* Siguro që nëntëmenuja të jetë mbi përmbajtjen */
+        }
+
+        .main_menu li:hover .submenu {
+            display: block; /* Shfaq nëntëmenunë kur kalon me maus mbi menunë kryesore */
+        }
+
+        .submenu li {
+            white-space: nowrap; /* Hiq shtrirjen e rreshtit */
+        }
+
+        .submenu a {
+            padding: 10px 15px; /* Hapësira për lidhjet e nëntëmenusë */
+            display: block; /* Bëj lidhjet të mbushin hapësirën e nëntëmenusë */
+            color: #333; /* Ngjyra e lidhjeve të nëntëmenusë */
+        }
+
+        .submenu a:hover {
+            background-color: #f1f1f1; /* Ngjyra e sfondit kur kalon me maus */
+        }
+        .menu_logo {
+    max-width: 50px; /* Adjust width as necessary */
+    height: auto; /* Maintain aspect ratio */
+    display: inline-block; /* Align with text */
+    vertical-align: middle; /* Align vertically with text */
+}
+
+.main_menu li {
+    display: inline-block; /* Keep menu items in a row */
+    margin: 0 15px; /* Spacing between items */
+}
+hr {
+    border: none; /* Remove default border */
+            height: 2px; /* Set the thickness */
+            background-color: #ffffff; /* Set the color */
+            width: 28%; /* Set the width to 50% of the container */
+            margin: 20px auto; 
+        }
+
+
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header */
+  
+
+
+        .menu-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1; /* Ky rregull bën që menunë të shfaqet në qendër vertikalisht */
+        }
+
+        .menu {
+            list-style-type: none;
+         
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
+            margin: 0;
+            flex-wrap: wrap; /* Do të ndihmojë që kategoria të shfaqen në mënyrë vertikale në ekranet e vogla */
+        }
+
+        .menu li {
+            position: relative;
+            padding: 15px 20px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            margin: 5px;
+        }
+
+        .menu li:hover  a:hover {
+            background-color: #555;
+        }
+
+        /* Shtimi i ikonave brenda menuve */
+        .menu li i {
+            margin-right: 10px;
+        }
+
+        /* Submenu (nënkategoria) */
+        .submenu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #444;
+            padding: 10px 0;
+            list-style-type: none;
+            min-width: 200px;
+        }
+
+        .submenu li {
+            padding: 10px;
+            color: white;
+        }
+
+        .submenu li:hover {
+            background-color: #666;
+        }
+
+        /* Kategori që ka nënkategoria */
+        .menu li:hover .submenu {
+            display: block;
+        }
+
+        /* Animimi i nënkategorive */
+        .submenu {
+            transition: opacity 0.3s ease;
+        }
+
+        .submenu li {
+            opacity: 0;
+            animation: fadeIn 0.3s forwards;
+        }
+
+        .submenu li:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .submenu li:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .submenu li:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .submenu li:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .submenu li:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+
+        /* Efekti i animimit */
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Media queries për ekranet e vogla */
+        @media (max-width: 500px) {
+            .menu {
+                display: block;
+                width: 100%;
+            }
+
+            .menu li {
+                width: 98%;
+                text-align: left;
+            }
+
+            .submenu {
+                position: relative;
+                min-width: 80%;
+            }
+          }
+
+
+          #map {
+    height: 100%;  /* Lartësia e plotë për mbushjen e ekranit */
+    width: 100%;   /* Gjerësia e plotë */
+}
+
+.hero_area {
+    display: flex;
+    flex-direction: column;
+    height: 100%;  /* Sigurohuni që zona hero të mbushë tërë ekranin */
+}
+
+
+@media (max-width: 768px) {
+    #map {
+        height: 300px; /* Shtoni një lartësi më të madhe për celularët */
+    }
+}
+
+    </style>
+</head>
+<body>
+    <body>
+
+        <div class="hero_area">
+      
+          <div class="hero_bg_box">
+            <div class="bg_img_box">
+              <img src="images/hero-bg.png" alt="">
+            </div>
+          </div>
+      
+          <!-- header section strats -->
+          <header class="header_section">
+            <div class="container-fluid">
+              <nav class="navbar navbar-expand-lg custom_nav-container ">
+                <a class="navbar-brand" href="index.html">
+                  
+                  <span>
+                    ALL in One
+                  </span>
+                </a>
+      
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class=""> </span>
+                </button>
+      
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav  ">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Ballina<span class="sr-only">(current)</span></a>
+                      </li>
+                    <li class="nav-item active">
+                      <a class="nav-link" href="Meny.html">VENDI I KERKIMEVE</a>
+                    </li>
+                    
+       
+                    <form class="form-inline">
+                      <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                      </button>
+                    </form>
+                  </ul>
+                </div>
+              </nav>
+            </div>
+          </header>
+          <h1 style="color: white; text-align: center; margin-top: 20px;">Harta e Tetoves</h1>
+
+    <div id="menu">
+        <h2>Ndrysho Mapin</h2>
+        <hr>
+        <ul>
+            <h3>
+                <span class="red-dot"></span>
+                <a href="map_restorantet.html" style="text-decoration: none; color: inherit;">Restorante</a>
+                <br>
+                <span class="blu-dot"></span>
+                <a href="map.html" style="text-decoration: none; color: inherit;">Harta e kompletuar</a>
+                <br>
+                <span class="green-dot"></span>
+                <a href="buss_station_map.html" style="text-decoration: none; color: inherit;">Stacioni i Autobuseve</a>
+                <br>
+                <span class="orange-dot"></span>
+                <a href="fast_food_map.html" style="text-decoration: none; color: inherit; font-size: 26px;">Fast Food</a>
+            </h3>
+        </ul>
+    </div>
+    <div id="map"></div>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    
+    <script>
+        // Krijo hartën
+        var map = L.map('map').setView([42.010011817089, 20.97175839871173], 13);
+    
+        // Shto një shtresë të hartës
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 20,
+            attribution: '© HARTA E TETOVES'
+        }).addTo(map);
+    
+        // Koordinatat për vendet e specifikuara
+        var locations = [
+        { name: 'M HOUSE 1', coords: [42.0105597129863, 20.97153698306282], type: 'drink'},
+            { name: 'M HOUSE 2', coords: [41.99149955152144, 20.959717771128673], type: 'drink' },
+            { name: 'GARDEN', coords: [42.00757788715745, 20.971320011810416], type: 'drink' },
+            { name: 'MARO', coords: [41.98903805065451, 20.95967210798338] , type: 'drink'},
+            { name: 'ULTRA', coords: [41.99098137693165, 20.96017549227912], type: 'drink' },
+            { name: 'GRISH', coords: [41.99023309166355, 20.959281421707733] , type: 'drink'},
+            { name: 'ALI BABA', coords: [41.9995717547072, 20.96303969897796] , type: 'drink'},
+        
+            // ... (Lista e vendeve vazhdon)
+        ];
+    
+        // Shto ikona e restorantit në hartë me tooltip
+        var markers = locations.map(function(location) {
+            var iconClass;
+            var iconHtml;
+    
+            // Cakto klasën dhe HTML për ikona të ndryshme
+            switch (location.type) {
+                case 'restaurant':
+                    iconClass = 'restaurant-icon';
+                    iconHtml = '<i class="fas fa-utensils"></i>';
+                    break;
+                case 'drink':
+                    iconClass = 'drink-icon';
+                    iconHtml = '<i class="fas fa-glass-martini"></i>';
+                    break;
+                case 'bus':
+                    iconClass = 'bus-icon';
+                    iconHtml = '<i class="fas fa-bus"></i>';
+                    break;
+                case 'taxi':
+                    iconClass = 'taxi-icon';
+                    iconHtml = '<i class="fas fa-taxi"></i>';
+                    break;
+                case 'hookah':
+                    iconClass = 'hookah-icon';
+                    iconHtml = '<i class="fas fa-smoking"></i>';
+                    break;
+                case 'fast-food':
+                    iconClass = 'fast-food-icon';
+                    iconHtml = '<i class="fas fa-hamburger"></i>';
+                    break;
+                case 'beauty-salon':
+                    iconClass = 'beauty-salon-icon';
+                    iconHtml = '<i class="fas fa-scissors"></i>';
+                    break;
+                case 'barber':
+                    iconClass = 'barber-icon';
+                    iconHtml = '<i class="fas fa-cut"></i>';
+                    break;
+            }
+    
+            // Krijo dhe shto ikona
+            return L.marker(location.coords, {
+                icon: L.divIcon({
+                    className: iconClass,
+                    html: iconHtml,
+                    iconSize: [20, 20]
+                })
+            }).addTo(map);
+        });
+    
+        // Funksioni për të kontrolluar zoom-in dhe shfaqjen e emrave
+        function updateMarkersVisibility() {
+    var currentZoom = map.getZoom();
+
+    markers.forEach(function(marker, index) {
+        // Vetëm nëse zoom është më i madh se 15, shfaq emrin (tooltip)
+        if (currentZoom >= 15) {
+            marker.bindTooltip(locations[index].name, { permanent: true, direction: 'right', offset: L.point(10, 0) }).addTo(map);
+        } else {
+            marker.unbindTooltip(); // Fshi emrin kur zoom është më i vogël se 15
+        }
+    });
+}
+
+// Ngjarja e zoom-it
+map.on('zoomend', updateMarkersVisibility);
+
+// Thirret fillimisht për të vendosur gjendjen e duhur
+updateMarkersVisibility();
+    </script>
+    
+</body>
+</html>

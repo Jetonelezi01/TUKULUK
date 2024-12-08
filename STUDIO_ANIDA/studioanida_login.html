@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Biznesi Yt - Frizeri Femrash</title>
+  <style>
+    /* Global styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #000000;
+      color: #f0f0f0;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Header styles */
+    header {
+      background-color: #222;
+      color: #fff;
+      padding: 20px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    header .logo h1 {
+      font-size: 32px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      color: #f8b400;
+    }
+
+    /* Navigation menu styles */
+    nav {
+      flex-grow: 1;
+      text-align: right;
+    }
+
+    header nav ul {
+      list-style-type: none;
+      display: flex;
+      justify-content: flex-end;
+      gap: 30px;
+    }
+
+    header nav ul li {
+      display: inline-block;
+    }
+
+    header nav ul li a {
+      text-decoration: none;
+      color: #fff;
+      font-size: 18px;
+      text-transform: uppercase;
+      transition: color 0.3s, transform 0.3s;
+    }
+
+    header nav ul li a:hover {
+      color: #f8b400;
+      transform: translateY(-5px);
+    }
+
+    /* Mobile Menu (Hamburger) */
+    .menu-icon {
+      display: none;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .menu-icon div {
+      width: 25px;
+      height: 3px;
+      background-color: #fff;
+    }
+
+    /* Date and Time */
+    .datetime {
+      color: #f8b400;
+      font-size: 26px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-align: center;
+      width: 100%;
+    }
+
+    .datetime .date {
+      font-size: 36px;
+    }
+
+    .datetime .time {
+      font-size: 120px;
+      font-weight: bold;
+      letter-spacing: 12px;
+    }
+
+    /* Hero Section styles */
+    .hero {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 1;
+    }
+
+    .hero-content {
+      z-index: 2;
+      color: #fff;
+      animation: fadeInUp 2s ease-out;
+    }
+
+    .hero-content h2 {
+      font-size: 50px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .hero-content p {
+      font-size: 20px;
+      max-width: 600px;
+      margin: 0 auto;
+      font-style: italic;
+    }
+
+    /* Footer styles */
+    footer {
+      background-color: #444;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      position: relative;
+      bottom: 0;
+      width: 100%;
+    }
+
+    footer p {
+      font-size: 14px;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Button Styles */
+    .cta-button {
+      background-color: #f8b400;
+      padding: 15px 30px;
+      color: #fff;
+      font-size: 18px;
+      text-decoration: none;
+      border-radius: 30px;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .cta-button:hover {
+      background-color: #ff8c00;
+      transform: scale(1.05);
+    }
+
+    /* Mobile responsive styles */
+    @media (max-width: 768px) {
+      header {
+        padding: 20px 15px;
+      }
+      
+
+      header .logo h1 {
+        font-size: 28px;
+      }
+
+      /* Hide the navigation bar by default on mobile */
+      header nav ul {
+        display: none;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+        margin-top: 20px;
+      }
+
+      header nav ul li a {
+        font-size: 16px;
+      }
+
+      .menu-icon {
+        display: flex;
+      }
+
+      /* Show menu when the icon is clicked */
+      .menu-icon.open + nav ul {
+        display: flex;
+      }
+      .datetime .date {
+      font-size: 36px;
+    }
+
+    .datetime .time {
+      font-size: 60px;
+      font-weight: bold;
+      letter-spacing: 12px;
+    }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <h1>Studio ANIDA</h1>
+    </div>
+
+    <!-- Mobile menu icon -->
+    <div class="menu-icon" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+
+    <!-- Navigation menu -->
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="studio_anida_shiko_rezervimet.php">Shiko Rezervimet</a></li>
+        <li><a href="studio_anida_admin.php">Beje Rezervimin</a></li>
+        <li><a href="http://localhost/ALLinONE/index.html">ALLinONE</a></li>
+
+
+      </ul>
+    </nav>
+  </header>
+
+
+
+
+        <div  style="margin-top: 80px;" class="datetime" id="datetime">
+            <div class="date" id="date"></div>
+            <hr style="border: none;
+            height: 2px; 
+            background-color: #ffffff;
+            width: 28%;
+            margin: 20px auto; 
+            margin-top: -1px;
+            margin-bottom: -10px;">
+            <div class="time" id="time"></div>
+
+
+
+            
+  <footer style="position: fixed;">
+    <p>&copy; 2024 Biznesi Yt - All rights reserved</p>
+  </footer>
+
+  <script>
+    // Function to display current date and time
+    function updateDateTime() {
+      const now = new Date();
+      
+      // Format Date as Dita-Muaji-Viti
+      const day = now.getDate().toString().padStart(2, '0');
+      const month = (now.getMonth() + 1).toString().padStart(2, '0');
+      const year = now.getFullYear();
+      const currentDate = `${day}-${month}-${year}`;
+      document.getElementById("date").innerText = currentDate;
+
+      // Format Time as Ora:Minuta:Sekonda
+      const hours = now.getHours().toString().padStart(2, '0');
+      const minutes = now.getMinutes().toString().padStart(2, '0');
+      const seconds = now.getSeconds().toString().padStart(2, '0');
+      const currentTime = `${hours}:${minutes}:${seconds}`;
+      document.getElementById("time").innerText = currentTime;
+    }
+
+    // Update the time every second
+    setInterval(updateDateTime, 1000);
+    updateDateTime();  // Initial call to display the date and time immediately
+
+    // Toggle mobile menu visibility
+    function toggleMenu() {
+      document.querySelector('.menu-icon').classList.toggle('open');
+      document.querySelector('nav ul').classList.toggle('open');
+    }
+  </script>
+</body>
+</html>
