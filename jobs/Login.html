@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review App</title>
+    <style>
+        /* CSS - Stili i faqes */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #login-container {
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .review-container {
+            width: 400px;
+            background-color: #f1f1f1;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        #reviews {
+            max-height: 200px;
+            overflow-y: scroll;
+            margin-bottom: 10px;
+            padding: 10px;
+        }
+
+        #rating {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .star {
+            font-size: 30px;
+            cursor: pointer;
+            color: gray;
+        }
+
+        .star.selected {
+            color: gold;
+        }
+
+        #comment-input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .review {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .review h3 {
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .review p {
+            margin: 5px 0;
+        }
+
+        .review .stars {
+            color: gold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Section -->
+    <div class="login-container" id="login-container">
+        <h2>Login</h2>
+        <button id="google-login">Login with Google</button>
+        <button id="facebook-login">Login with Facebook</button>
+    </div>
+
+    <!-- Review Section -->
+    <div class="review-container" id="review-container" style="display: none;">
+        <h3>Leave a Review</h3>
+
+        <!-- Rating System -->
+        <div id="rating">
+            <span class="star" data-value="1">&#9733;</span>
+            <span class="star" data-value="2">&#9733;</span>
+            <span class="star" data-value="3">&#9733;</span>
+            <span class="star" data-value="4">&#9733;</span>
+            <span class="star" data-value="5">&#9733;</span>
+        </div>
+
+        <!-- Comment Input -->
+        <textarea id="comment-input" placeholder="Write your review..." rows="4"></textarea>
+        <button id="submit-review">Submit Review</button>
+
+        <div id="reviews">
+            <!-- Reviews will appear here -->
+        </div>
+    </div>
+
+    <!-- JavaScript - Integrimi me Google dhe Facebook -->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://connect.facebook.net/en_US/sdk.js" async defer></script>
+
+    <script>
+        // Google OAuth 2.0 Setup
+        function onGoogleLogin(googleUser) {
+            const profile = googleUser.getBasicProfile();
+            console.log("Logged in as: " + profile.getName());
+            document.getElementById('login-container').style.display = 'none';
+            document.getElementById('review-container').style.display = 'block';
+        }
+
+        function startGoogleAuth() {
+            gapi.load('auth2', function() {
+                gapi.auth2.init().then(function() {
+                    gapi.signin2.render('google-login', {
+                        'scope': 'profile email',
+                        'onsuccess': onGoogleLogin
+                    });
+                });
+            });
+        }
+
+        // Facebook SDK Initialization
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId      : '2395519317446412',  // Vendosni këtu ID-në tuaj të aplikacionit
+                cookie     : true,
+                xfbml      : true,
+                version    : 'v14.0'
+            });
+        };
+
+        let userName = '';
+
+        function onFacebookLogin(response) {
+            if (response.status === 'connected') {
+                FB.api('/me', {fields: 'name'}, function(response) {
+                    userName = response.name;
+                    console.log('Logged in as: ' + userName);
+                    document.getElementById('login-container').style.display = 'none';
+                    document.getElementById('review-container').style.display = 'block';
+                    document.getElementById('comment-input').placeholder = `Write your review, ${userName}...`;
+                });
+            }
+        }
+
+        function fbLogin() {
+            FB.login(onFacebookLogin, {scope: 'public_profile,email'});
+        }
+
+        // Event Listeners për butonat e Login
+        document.getElementById('google-login').addEventListener('click', startGoogleAuth);
+        document.getElementById('facebook-login').addEventListener('click', fbLogin);
+
+        // Handle Star Rating
+        let selectedRating = 0;
+
+        const stars = document.querySelectorAll('.star');
+        stars.forEach(star => {
+            star.addEventListener('click', () => {
+                selectedRating = parseInt(star.getAttribute('data-value'));
+                stars.forEach(s => s.classList.remove('selected'));
+                for (let i = 0; i < selectedRating; i++) {
+                    stars[i].classList.add('selected');
+                }
+            });
+        });
+
+        // Submit Review
+        document.getElementById('submit-review').addEventListener('click', function() {
+            const comment = document.getElementById('comment-input').value;
+            if (selectedRating === 0 || comment.trim() === '') {
+                alert('Please provide a rating and a comment.');
+                return;
+            }
+
+            const reviewsDiv = document.getElementById('reviews');
+            const newReview = document.createElement('div');
+            newReview.classList.add('review');
+
+            const starsDiv = document.createElement('div');
+            starsDiv.classList.add('stars');
+            starsDiv.textContent = '★'.repeat(selectedRating);
+
+            const reviewName = document.createElement('h3');
+            reviewName.textContent = userName;
+
+            const reviewText = document.createElement('p');
+            reviewText.textContent = comment;
+
+            newReview.appendChild(reviewName);
+            newReview.appendChild(starsDiv);
+            newReview.appendChild(reviewText);
+
+            reviewsDiv.prepend(newReview); // Add review at the top
+            document.getElementById('comment-input').value = ''; // Clear the input field
+            selectedRating = 0; // Reset the rating
+            stars.forEach(s => s.classList.remove('selected')); // Clear stars
+        });
+    </script>
+</body>
+</html>
