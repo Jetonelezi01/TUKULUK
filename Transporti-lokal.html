@@ -43,13 +43,12 @@
             color: #333;
         }
 
-        /* Harta me kufi dhe më e vogël */
         #map {
-            height: 400px; /* Lartësia e hartës */
-            width: 80%; /* Gjerësia e hartës */
-            margin: 0 auto; /* Qendron në qendër të ekranit */
+            height: 400px;
+            width: 80%;
+            margin: 0 auto;
             background-color: #e0e0e0;
-            border: 3px solid #333; /* Kufiri rreth hartës */
+            border: 3px solid #333;
         }
 
         #result {
@@ -60,8 +59,8 @@
             font-size: 24px;
             font-weight: bold;
             color: #333;
-            display: none; /* Initially hidden */
-            margin-top: 20px; /* Vendosim hapësirë mbi rezultat */
+            display: none;
+            margin-top: 20px;
         }
 
         .line-text {
@@ -83,7 +82,6 @@
             background-color: #e53935;
         }
 
-        /* Pozicionimi i butonit për heqje selektimi nën hartë */
         #reset-button {
             position: relative;
             top: 20px;
@@ -101,15 +99,19 @@
         #reset-button:hover {
             background-color: #e53935;
         }
+
+        #line-selection {
+            margin: 20px 0;
+            text-align: center;
+            font-size: 18px;
+        }
     </style>
 
-    <!-- Shtimi i Leaflet.js -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </head>
 <body>
 
-    <!-- Header dhe Menuja -->
     <header>
         <h1>Transporti Publik në Tetovë</h1>
         <nav>
@@ -120,223 +122,164 @@
         </nav>
     </header>
 
-    <!-- Harta dhe Resultatet -->
+    <section id="line-selection">
+        <label for="line-select">Zgjidh linjën:</label>
+        <select id="line-select">
+            <option value="1">Linja 1</option>
+            <option value="2">Linja 2</option>
+        </select>
+    </section>
+
     <section id="harta">
         <h2 style="text-align: center;" >Harta e Transportit Publik</h2>
         <div id="map"></div>
-        <div id="result"></div> <!-- Ketu do te shfaqen rezultatet -->
-        <button id="reset-button" style="display:none;" onclick="resetSelection()">Heq Selektimin</button> <!-- Butoni për heqje selektimi -->
+        <div id="result"></div>
+        <button id="reset-button" style="display:none;" onclick="resetSelection()">Heq Selektimin</button>
     </section>
 
     <script>
-        // Lista e destinacioneve për çdo linjë dhe oraret për stacione
         const linjat = { 
-    1: [
-        {name: "Uejl", coords: [41.98965781433841, 20.959747051872924], schedule:                ["07:00", "08:00", "09:00", "09:55", "11:30", "12:45", "14:15", "15:25", "16:30", "17:45", "19:15", "20:20", "21:25"]},
-        {name: "Ultra", coords: [41.990758194625194, 20.96005125827733], schedule:               ["07:01", "08:01", "09:01", "09:56", "11:32", "12:48", "14:18", "15:26", "16:31", "17:46", "19:16", "20:21", "21:26"]},
-        {name: "korneri", coords: [41.99585629034819, 20.96107532276832], schedule:              ["07:03", "08:03", "09:03", "09:58", "11:35", "12:51", "14:21", "15:29", "16:34", "17:49", "19:19", "20:24", "21:29"]},
-        {name: "Gulf", coords: [41.998981829906505, 20.96171478897401], schedule:                ["07:05", "08:05", "09:05", "10:00", "11:37", "12:53", "14:23", "15:31", "16:36", "17:51", "19:21", "20:26", "21:31"]},
-        {name: "Shipadi", coords: [42.001366809526644, 20.962210756655626], schedule:            ["07:06", "08:06", "09:06", "10:01", "11:40", "12:55", "14:25", "15:32", "16:38", "17:53", "19:23", "20:28", "21:32"]},
-        {name: "Mostar - Rotring", coords: [42.00369047565609, 20.96474988025497], schedule:     ["07:08", "08:08", "09:08", "10:02", "11:43", "12:57", "14:27", "15:34", "16:40", "17:55", "19:25", "20:30", "21:34"]},
-        {name: "Xhamia e Pashës", coords: [42.005866843482536, 20.96750479789931], schedule:     ["07:10", "08:10", "09:10", "10:04", "11:45", "13:00", "14:30", "15:37", "16:43", "17:58", "19:28", "20:33", "21:36"]},
-        {name: "Comodita - Gjyqi", coords: [42.00828183613371, 20.96971155904111], schedule:     ["07:11", "08:11", "09:11", "10:06", "11:48", "13:02", "14:32", "15:40", "16:45", "18:00", "19:30", "20:35", "21:40"]},
-        {name: "Matrix", coords: [42.00943246463927, 20.97103523748032], schedule:               ["07:13", "08:13", "09:13", "10:07", "11:51", "13:05", "14:35", "15:42", "16:48", "18:03", "19:33", "20:38", "21:42"]},
-        {name: "Plaseti", coords: [42.00893980898796, 20.972514225661943], schedule:             ["07:15", "08:15", "09:15", "10:09", "11:54", "13:08", "14:37", "15:44", "16:50", "18:05", "19:35", "20:40", "21:44"]},
-        {name: "Vero Jumbo", coords: [42.00634982931269, 20.979491256189558], schedule:          ["07:19", "08:19", "09:19", "10:13", "11:57", "13:10", "14:41", "15:48", "16:52", "18:09", "19:37", "20:42", "21:49"]},
-        {name: "Pallma Mall", coords: [42.0042497630422, 20.987976528496812], schedule:          ["07:25", "08:25", "09:25", "10:20", "12:00", "13:15", "14:45", "15:55", "16:55", "18:15", "19:40", "20:45", "21:55"]},
-
-
-        {name: "Pallma Mall", coords: [42.00439976149123, 20.986893359155093], schedule:         ["07:30", "08:30", "09:30", "10:30", "12:10", "13:25", "14:50", "16:05", "17:10", "18:50", "19:45", "20:50", "22:10"]},
-        {name: "Vero Jumbo", coords: [42.00646240044014, 20.979764166774206], schedule:          ["07:37", "08:37", "09:32", "10:33", "12:14", "13:29", "14:58", "16:08", "17:12", "18:56", "19:49", "20:54", "22:13"]},
-        {name: "Pallati i Kultures", coords: [42.00912330151689, 20.97258773014826 ], schedule:  ["07:40", "08:40", "09:35", "10:36", "12:17", "13:32", "15:02", "16:10", "17:13", "19:00", "19:53", "20:58", "22:15"]},
-        {name: "Shparkase Bank", coords: [42.00915655466961, 20.970481042090547], schedule:      ["07:41", "08:41", "09:36", "10:39", "12:20", "13:35", "15:04", "16:12", "17:15", "19:01", "19:55", "21:00", "22:17"]},
-        {name: "Comodita - Gjyqi", coords: [42.00833659601479, 20.969550295228835], schedule:    ["07:42", "08:42", "09:38", "10:42", "12:23", "13:38", "15:07", "16:13", "17:17", "19:02", "19:58", "21:03", "22:19"]},
-        {name: "Xhamia e Pashës", coords: [42.005891152141274, 20.967270371104085], schedule:    ["07:44", "08:44", "09:39", "10:45", "12:26", "13:41", "15:09", "16:15", "17:19", "19:04", "20:01", "21:06", "22:20"]},
-        {name: "Mostar - Rotring", coords: [42.00384710316394, 20.964770470072683], schedule:    ["07:46", "08:46", "09:41", "10:47", "12:30", "13:45", "15:11", "16:17", "17:20", "19:06", "20:03", "21:08", "22:22"]},
-        {name: "Shipadi", coords: [42.00156424195946, 20.96213659306121], schedule:              ["07:47", "08:47", "09:43", "10:50", "12:34", "13:49", "15:13", "16:19", "17:21", "19:07", "20:06", "21:11", "22:24"]},
-        {name: "Mak Petrol", coords: [41.99870097667812, 20.96143597020263], schedule:           ["07:49", "08:49", "09:44", "10:53", "12:37", "13:52", "15:15", "16:21", "17:24", "19:09", "20:09", "21:14", "22:25"]},
-        {name: "Antillop Mobilje", coords: [41.996161326730714, 20.96091717180194], schedule:    ["07:50", "08:50", "09:46", "10:55", "12:39", "13:54", "15:16", "16:22", "17:26", "19:10", "20:11", "21:15", "22:27"]},
-        {name: "Ultra", coords: [41.991599214720715, 20.959959090544565 ], schedule:             ["07:53", "08:53", "09:49", "10:58", "12:43", "13:58", "15:19", "16:24", "17:29", "19:13", "20:14", "21:18", "22:29"]},
-        {name: "Uejl", coords: [41.98927208894684, 20.95983152755705], schedule:                 ["07:55", "08:55", "09:50", "11:00", "12:45", "14:00", "15:20", "16:25", "17:30", "19:15", "20:15", "21:20", "22:30"]},
-    ],
-    
-    // Linja kthesë 1 - Kjo është linja kthese që do të shtojmë
-
-};
+            1: [
+    {name: "Uejl", coords: [41.98965781433841, 20.959747051872924], schedule:                ["07:00", "08:00", "09:00", "09:55", "11:30", "12:45", "14:15", "15:25", "16:30", "17:45", "19:15", "20:20", "21:25"]},
+    {name: "Ultra", coords: [41.990758194625194, 20.96005125827733], schedule:               ["07:01", "08:01", "09:01", "09:56", "11:32", "12:48", "14:18", "15:26", "16:31", "17:46", "19:16", "20:21", "21:26"]},
+    {name: "korneri", coords: [41.99585629034819, 20.96107532276832], schedule:              ["07:03", "08:03", "09:03", "09:58", "11:35", "12:51", "14:21", "15:29", "16:34", "17:49", "19:19", "20:24", "21:29"]},
+    {name: "Gulf", coords: [41.998981829906505, 20.96171478897401], schedule:                ["07:05", "08:05", "09:05", "10:00", "11:37", "12:53", "14:23", "15:31", "16:36", "17:51", "19:21", "20:26", "21:31"]},
+    {name: "Shipadi", coords: [42.001366809526644, 20.962210756655626], schedule:            ["07:06", "08:06", "09:06", "10:01", "11:40", "12:55", "14:25", "15:32", "16:38", "17:53", "19:23", "20:28", "21:32"]},
+    {name: "Mostar - Rotring", coords: [42.00369047565609, 20.96474988025497], schedule:     ["07:08", "08:08", "09:08", "10:02", "11:43", "12:57", "14:27", "15:34", "16:40", "17:55", "19:25", "20:30", "21:34"]},
+    {name: "Xhamia e Pashës / kipper", coords: [42.005866843482536, 20.96750479789931], schedule:     ["07:10", "08:10", "09:10", "10:04", "11:45", "13:00", "14:30", "15:37", "16:43", "17:58", "19:28", "20:33", "21:36"]},
+    {name: "Comodita - Gjyqi", coords: [42.00828183613371, 20.96971155904111], schedule:     ["07:11", "08:11", "09:11", "10:06", "11:48", "13:02", "14:32", "15:40", "16:45", "18:00", "19:30", "20:35", "21:40"]},
+    {name: "Matrix", coords: [42.00943246463927, 20.97103523748032], schedule:               ["07:13", "08:13", "09:13", "10:07", "11:51", "13:05", "14:35", "15:42", "16:48", "18:03", "19:33", "20:38", "21:42"]},
+    {name: "Plaseti", coords: [42.00893980898796, 20.972514225661943], schedule:             ["07:15", "08:15", "09:15", "10:09", "11:54", "13:08", "14:37", "15:44", "16:50", "18:05", "19:35", "20:40", "21:44"]},
+    {name: "La Gondola", coords: [42.00634982931269, 20.979491256189558], schedule:          ["07:19", "08:19", "09:19", "10:13", "11:57", "13:10", "14:41", "15:48", "16:52", "18:09", "19:37", "20:42", "21:49"]},
 
 
 
 
+    {name: "Pallma Mall ,", coords: [42.00439976149123, 20.986893359155093], schedule:         ["07:30", "08:30", "09:30", "10:30", "12:10", "13:25", "14:50", "16:05", "17:10", "18:50", "19:45", "20:50", "22:10"]},
+    {name: "Vero Jumbo", coords: [42.00646240044014, 20.979764166774206], schedule:          ["07:37", "08:37", "09:32", "10:33", "12:14", "13:29", "14:58", "16:08", "17:12", "18:56", "19:49", "20:54", "22:13"]},
+    {name: "Pallati i Kultures", coords: [42.00912330151689, 20.97258773014826 ], schedule:  ["07:40", "08:40", "09:35", "10:36", "12:17", "13:32", "15:02", "16:10", "17:13", "19:00", "19:53", "20:58", "22:15"]},
+    {name: "Shparkase Bank", coords: [42.00915655466961, 20.970481042090547], schedule:      ["07:41", "08:41", "09:36", "10:39", "12:20", "13:35", "15:04", "16:12", "17:15", "19:01", "19:55", "21:00", "22:17"]},
+    {name: "gjyqi", coords: [42.00833659601479, 20.969550295228835], schedule:    ["07:42", "08:42", "09:38", "10:42", "12:23", "13:38", "15:07", "16:13", "17:17", "19:02", "19:58", "21:03", "22:19"]},
+    {name: "Xhamia e Pashës", coords: [42.005891152141274, 20.967270371104085], schedule:    ["07:44", "08:44", "09:39", "10:45", "12:26", "13:41", "15:09", "16:15", "17:19", "19:04", "20:01", "21:06", "22:20"]},
+    {name: "Mostar - Rotring", coords: [42.00384710316394, 20.964770470072683], schedule:    ["07:46", "08:46", "09:41", "10:47", "12:30", "13:45", "15:11", "16:17", "17:20", "19:06", "20:03", "21:08", "22:22"]},
+    {name: "Shipadi ,", coords: [42.00156424195946, 20.96213659306121], schedule:              ["07:47", "08:47", "09:43", "10:50", "12:34", "13:49", "15:13", "16:19", "17:21", "19:07", "20:06", "21:11", "22:24"]},
+    {name: "Mak Petrol", coords: [41.99870097667812, 20.96143597020263], schedule:           ["07:49", "08:49", "09:44", "10:53", "12:37", "13:52", "15:15", "16:21", "17:24", "19:09", "20:09", "21:14", "22:25"]},
+    {name: "Antillop Mobilje", coords: [41.996161326730714, 20.96091717180194], schedule:    ["07:50", "08:50", "09:46", "10:55", "12:39", "13:54", "15:16", "16:22", "17:26", "19:10", "20:11", "21:15", "22:27"]},
+    {name: "Molino", coords: [41.991599214720715, 20.959959090544565 ], schedule:             ["07:53", "08:53", "09:49", "10:58", "12:43", "13:58", "15:19", "16:24", "17:29", "19:13", "20:14", "21:18", "22:29"]},
 
-        let selectedPoints = []; // Lista për ruajtjen e pikave të selektuara
-        let markers = []; // Lista për ruajtjen e markerëve në hartë
+],
+2:[
+    {name: "f.Xhepcisht - Renova", coords: [42.03887841532953, 21.006054227579884], schedule:                ["07:00", "08:00", "09:00", "09:55", "11:30", "12:45", "14:15", "15:25", "16:30", "17:45", "19:15", "20:20", "21:25"]},
+    {name: "f.Xhepcisht - Alpi", coords: [42.03638409201511, 21.003232290485265], schedule:               ["07:01", "08:01", "09:01", "09:56", "11:32", "12:48", "14:18", "15:26", "16:31", "17:46", "19:16", "20:21", "21:26"]},
+    {name: "f.Xhepcisht - Venecia", coords: [42.03074101028661, 21.00030857518729], schedule:                ["07:00", "08:00", "09:00", "09:55", "11:30", "12:45", "14:15", "15:25", "16:30", "17:45", "19:15", "20:20", "21:25"]},
+    {name: "f.Poroj - Shkolla ", coords: [42.02693499321676, 20.99442007311969], schedule:               ["07:01", "08:01", "09:01", "09:56", "11:32", "12:48", "14:18", "15:26", "16:31", "17:46", "19:16", "20:21", "21:26"]},
+    {name: "f.Poroj  - Ira", coords: [42.024755242008176, 20.99037530193134], schedule:                ["07:00", "08:00", "09:00", "09:55", "11:30", "12:45", "14:15", "15:25", "16:30", "17:45", "19:15", "20:20", "21:25"]},
+    {name: "Drenovec - Xhamia", coords: [42.02204934917561, 20.985788427915374], schedule:               ["07:01", "08:01", "09:01", "09:56", "11:32", "12:48", "14:18", "15:26", "16:31", "17:46", "19:16", "20:21", "21:26"]},
+    {name: "sh.m.k 7 Marsi", coords: [42.019270417734965, 20.98115967292253], schedule:                ["07:00", "08:00", "09:00", "09:55", "11:30", "12:45", "14:15", "15:25", "16:30", "17:45", "19:15", "20:20", "21:25"]},
+    {name: "Restorant Kurtishi", coords: [42.01637126243383, 20.979375243770672], schedule:               ["07:01", "08:01", "09:01", "09:56", "11:32", "12:48", "14:18", "15:26", "16:31", "17:46", "19:16", "20:21", "21:26"]},
+    {name: "Kazerma", coords: [42.01478802776559, 20.980629223322335], schedule:                ["07:00", "08:00", "09:00", "09:55", "11:30", "12:45", "14:15", "15:25", "16:30", "17:45", "19:15", "20:20", "21:25"]},
+    {name: "Tetovarja ", coords: [42.00945088059928, 20.978232586829108], schedule:               ["07:01", "08:01", "09:01", "09:56", "11:32", "12:48", "14:18", "15:26", "16:31", "17:46", "19:16", "20:21", "21:26"]},
+    {name: "Pallati  i kultures", coords: [42.00910626426645, 20.972605616583866], schedule:                ["07:00", "08:00", "09:00", "09:55", "11:30", "12:45", "14:15", "15:25", "16:30", "17:45", "19:15", "20:20", "21:25"]},
+    {name: "Shparkase Bank", coords: [42.00907815001595, 20.970391182157137], schedule:               ["07:01", "08:01", "09:01", "09:56", "11:32", "12:48", "14:18", "15:26", "16:31", "17:46", "19:16", "20:21", "21:26"]},
+    {name: "Gjyqi ", coords: [42.00762067751548, 20.968827287407322], schedule:                ["07:00", "08:00", "09:00", "09:55", "11:30", "12:45", "14:15", "15:25", "16:30", "17:45", "19:15", "20:20", "21:25"]},
+    {name: "Xhamia e Larme", coords: [42.005948823262855, 20.967323367829312], schedule:               ["07:01", "08:01", "09:01", "09:56", "11:32", "12:48", "14:18", "15:26", "16:31", "17:46", "19:16", "20:21", "21:26"]},
+    {name: "Embeltore Mostar", coords: [42.0036101764711, 20.96440143674855], schedule:                ["07:00", "08:00", "09:00", "09:55", "11:30", "12:45", "14:15", "15:25", "16:30", "17:45", "19:15", "20:20", "21:25"]},
+    {name: "Shipadi ", coords: [42.00154378305384, 20.962096314153154], schedule:               ["07:01", "08:01", "09:01", "09:56", "11:32", "12:48", "14:18", "15:26", "16:31", "17:46", "19:16", "20:21", "21:26"]},
+    {name: "Mak Petrol", coords: [41.99863995157277, 20.961402164020626], schedule:                ["07:00", "08:00", "09:00", "09:55", "11:30", "12:45", "14:15", "15:25", "16:30", "17:45", "19:15", "20:20", "21:25"]},
+    {name: "Antillop Mobilje", coords: [41.996001658327, 20.960851790289293], schedule:               ["07:01", "08:01", "09:01", "09:56", "11:32", "12:48", "14:18", "15:26", "16:31", "17:46", "19:16", "20:21", "21:26"]},
+    {name: "Molino ", coords: [41.99182420986711, 20.960010742959163], schedule:                ["07:00", "08:00", "09:00", "09:55", "11:30", "12:45", "14:15", "15:25", "16:30", "17:45", "19:15", "20:20", "21:25"]},
+    {name: "Uejl ", coords: [41.98964286740153, 20.959758831438105], schedule:               ["07:01", "08:01", "09:01", "09:56", "11:32", "12:48", "14:18", "15:26", "16:31", "17:46", "19:16", "20:21", "21:26"]},
 
-        // Inicimi i hartës
-        const map = L.map('map').setView([42.0016, 20.9622], 13); // Qendra është afër Shipadi
+]
+        };
 
-        // Shto shtresën e OpenStreetMap
+        let selectedPoint = null;
+        let markers = [];
+        const map = L.map('map').setView([42.0016, 20.9622], 13);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="">TETOVA</a> contributors'
         }).addTo(map);
 
-        // Funksioni për të shtuar të gjitha stacionet në hartë
-        function addStations() {
-            for (const linja in linjat) {
-                linjat[linja].forEach(station => {
-                    let marker = L.marker(station.coords)
-                        .addTo(map)
-                        .bindPopup(`${station.name}<br>Orari: ${station.schedule.join(", ")}`)
-                        .on('click', () => selectPoint(station)); // Selektimi i pikës
-                    markers.push(marker); // Ruaj markerin në listë
-                });
-            }
+        function updateMapForSelectedLine(lineNumber) {
+            markers.forEach(marker => marker.remove());
+            markers = [];
+            linjat[lineNumber].forEach(station => {
+                let marker = L.marker(station.coords)
+                    .addTo(map)
+                    .bindPopup(`${station.name}<br>Orari: ${station.schedule.join(", ")}`)
+                    .on('click', () => selectPoint(station));
+                markers.push(marker);
+            });
         }
 
-        // Funksioni për selektimin e pikës
         function selectPoint(station) {
-            if (selectedPoints.length < 2) {
-                selectedPoints.push(station);
-                markers.forEach(marker => {
-                    if (marker.getLatLng().equals(station.coords)) {
-                        marker.setOpacity(0.5); // Zbulo markerin selektuar
-                    }
-                });
-            }
-
-            if (selectedPoints.length === 2) {
-                checkLine();
-            }
+            selectedPoint = station;
+            markers.forEach(marker => marker.setOpacity(1));
+            markers.forEach(marker => {
+                if (marker.getLatLng().equals(station.coords)) {
+                    marker.setOpacity(0.5);
+                }
+            });
+            checkArrivalTime(station);
         }
 
-        function checkLine() {
-            const [firstStation, secondStation] = selectedPoints;
-            const line = findLine(firstStation, secondStation);
-            const resultDiv = document.getElementById('result');
+        function checkArrivalTime(station) {
+    const resultDiv = document.getElementById('result');
+    const minutesToArrival = calculateTimeUntilNextBus(station);
+    resultDiv.innerHTML = `<div class="line-text">Autobusi mbërrin për ${minutesToArrival}  në stacionin ${station.name}.</div>`;
+    resultDiv.style.display = 'block';
+    document.getElementById('reset-button').style.display = 'block';
 
-            if (line) {
-                const stationsOnLine = linjat[line].map(station => station.name);
-
-                const firstIndex = linjat[line].findIndex(station => station.name === firstStation.name);
-                const secondIndex = linjat[line].findIndex(station => station.name === secondStation.name);
-
-                const stationsInBetween = linjat[line].slice(Math.min(firstIndex, secondIndex), Math.max(firstIndex, secondIndex) + 1);
-
-                let resultHtml = '';
-                let minutesToArrival = calculateTimeUntilNextBus(firstStation);
-
-                resultHtml += `<div style="font-size: 24px; font-weight: bold;">${stationsInBetween[0].name}</div>`;
-
-                for (let i = 1; i < stationsInBetween.length - 1; i++) {
-                    resultHtml += `<div style="font-size: 18px; padding-left: 10px;">&#8226; ${stationsInBetween[i].name}</div>`;
-                }
-
-                if (stationsInBetween.length > 1) {
-                    resultHtml += `<div style="font-size: 24px; font-weight: bold;">${stationsInBetween[stationsInBetween.length - 1].name}</div>`;
-                }
-
-                resultDiv.innerHTML = `<div class="line-text">Linja ${line} kalon nga:</div>${resultHtml}<br><br><div><strong>Autobusi mbërrin për ${minutesToArrival} minuta.</strong></div>`;
-            } else {
-                resultDiv.innerHTML = `<div class="line-text">Nuk ka linjë që lidh këto stacione. Duhet të përdorni dy linja të ndryshme.</div>`;
-            }
-
-            resultDiv.style.display = 'block';
-            document.getElementById('reset-button').style.display = 'block'; // Shfaq butonin për heqjen e selektimit
-
-            // Scroll to the result div
-            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-
-        // Funksioni për gjetjen e linjës që lidh dy stacione
-        function findLine(firstStation, secondStation) {
-            let line1 = null;
-            let line2 = null;
-
-            for (const linja in linjat) {
-                if (linjat[linja].some(station => station.name === firstStation.name)) {
-                    line1 = linja;
-                }
-                if (linjat[linja].some(station => station.name === secondStation.name)) {
-                    line2 = linja;
-                }
-            }
-
-            return line1 === line2 ? line1 : null;
-        }
-
-
-
-        
-
-
-
-
-
-        function calculateTimeUntilNextBus(station) {
-    const now = new Date();
-    const currentTime = now.getHours() * 60 + now.getMinutes(); // Koha aktuale në minuta
-
-    let nextBusTime = null;
-
-    // Përshko orarin e autobusëve dhe gjej të parin që është më vonë se koha aktuale
-    for (let schedule of station.schedule) {
-        const [hour, minute] = schedule.split(":").map(num => parseInt(num)); // Konvertimi i orarit në minuta
-        const busTime = hour * 60 + minute; // Koha e autobusit në minuta
-
-        console.log(`Aktuale: ${currentTime}, Autobus: ${busTime}, Ora: ${hour}, Minutat: ${minute}`); // Debugging
-
-        // Kontrollo nëse koha e autobusit është pas kohës aktuale
-        if (busTime > currentTime) {
-            nextBusTime = busTime;
-            break; // Gjejmë autobusët që do të vijnë pas kohës aktuale
-        }
-    }
-
-    // Kontrollo nëse nuk ka autobusë për sot
-    if (nextBusTime === null) {
-        console.log("Nuk ka më autobusë për sot. Kontrollojmë për autobusët e ditës tjetër.");
-        
-        // Nëse nuk ka autobusë për sot, kontrollo për ditën tjetër
-        const firstBusTomorrow = station.schedule[0]; // Merr autobusët që vijnë nesër
-        const [firstHour, firstMinute] = firstBusTomorrow.split(":").map(num => parseInt(num));
-        nextBusTime = firstHour * 60 + firstMinute;
-
-        console.log(`Kemi autobus për nesër, ora e parë: ${nextBusTime}`);
-    }
-
-    // Llogaritja e minutave deri në autobusët
-    const minutesUntilNextBus = nextBusTime - currentTime;
-    console.log(`Minutat deri në autobusin tjetër: ${minutesUntilNextBus}`); // Debugging
-
-    // Llogarit orët dhe minutat nga minutat
-    const hoursUntilNextBus = Math.floor(minutesUntilNextBus / 60); // Gjej orët
-    const minutesRemaining = minutesUntilNextBus % 60; // Gjej minutat
-
-    // Kthe kohën si një string (p.sh., "1 orë 30 minuta")
-    const timeUntilNextBus = `${hoursUntilNextBus} orë ${minutesRemaining} minuta`;
-    console.log(`Koha deri në autobusin tjetër: ${timeUntilNextBus}`);
-
-    return timeUntilNextBus;
+    // Kjo është shtesa për të rrokullisur faqen poshtë
+    scrollToMessage();
 }
 
+        function calculateTimeUntilNextBus(station) {
+            const now = new Date();
+            const currentTime = now.getHours() * 60 + now.getMinutes();
+            let nextBusTime = null;
 
+            for (let schedule of station.schedule) {
+                const [hour, minute] = schedule.split(":").map(num => parseInt(num));
+                const busTime = hour * 60 + minute;
+                if (busTime > currentTime) {
+                    nextBusTime = busTime;
+                    break;
+                }
+            }
 
+            if (nextBusTime === null) {
+                const firstBusTomorrow = station.schedule[0];
+                const [firstHour, firstMinute] = firstBusTomorrow.split(":").map(num => parseInt(num));
+                nextBusTime = firstHour * 60 + firstMinute;
+            }
 
+            const minutesUntilNextBus = nextBusTime - currentTime;
+            const hoursUntilNextBus = Math.floor(minutesUntilNextBus / 60);
+            const minutesRemaining = minutesUntilNextBus % 60;
+            return `
+            
+            ${hoursUntilNextBus} orë,  ${minutesRemaining} minuta`;
+        }
 
+        function scrollToMessage() {
+    const resultDiv = document.getElementById('result');
+    resultDiv.scrollIntoView({ behavior: 'smooth' });
+}
 
-
-
-function resetSelection() {
-            selectedPoints = []; // Pastron listën e pikave të selektuara
-            markers.forEach(marker => marker.setOpacity(1)); // Rindiz markerët në opacitetin e tyre fillestar
-
-            // Fshi rezultatet dhe fsheh butonin për heqjen e selektimit
-            const resultDiv = document.getElementById('result');
-            resultDiv.style.display = 'none';
+        function resetSelection() {
+            selectedPoint = null;
+            markers.forEach(marker => marker.setOpacity(1));
+            document.getElementById('result').style.display = 'none';
             document.getElementById('reset-button').style.display = 'none';
         }
 
-        // Inicimi i stacioneve dhe shtimi i tyre në hartë
-        addStations();
+        document.getElementById('line-select').addEventListener('change', function () {
+            const selectedLine = this.value;
+            updateMapForSelectedLine(selectedLine);
+        });
+
+        updateMapForSelectedLine(1);
     </script>
 </body>
 </html>
