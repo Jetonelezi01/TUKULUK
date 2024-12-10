@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shitja e Biletave të Autobusit Lokal</title>
+    <style>
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Header styling */
+        header {
+            background-color: #0056b3;
+            color: white;
+            width: 100%;
+            padding: 30px 0;
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 40px; /* Hapësirë mes header dhe boxes */
+            display: flex;
+            justify-content: space-between; /* Ndajmë hapësirën mes titullit dhe menusë */
+            align-items: center; /* Sigurojmë që të jenë të rreshtuar vertikalisht */
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        /* Menyja e navigimit */
+        nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1em;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #003366;
+        }
+
+        /* Boxit e biletave */
+        .container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            max-width: 1200px;
+            width: 100%;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .ticket-box {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #ddd;
+            display: flex;
+            flex-direction: column; /* Siguron që të gjitha përmbajtjet brenda boksit të renditen vertikalisht */
+            height: auto; /* Lejon që boksi të rritet në lartësi në përputhje me përmbajtjen */
+        }
+
+        .ticket-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .ticket-header {
+            background-color: #0056b3;
+            color: white;
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            padding: 20px;
+        }
+
+        .ticket-body {
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%; /* Kjo siguron që të gjitha elementet brenda të shtrihen në lartësi */
+        }
+
+        .ticket-description {
+            font-size: 1em;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .ticket-prices {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: flex-start;
+            margin-top: auto; /* Siguron që çmimet të shfaqen më poshtë */
+        }
+
+        .price {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            align-items: center;
+        }
+
+        .price-comment {
+            color: #888;
+            font-size: 0.9em;
+            margin-right: 10px;
+        }
+
+        .price-value {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        /* Për përgjigje më të mirë në ekrane të vogla */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .language-selector {
+            display: flex;
+            justify-content: flex-start;
+            gap: 10px;
+            margin: 20px;
+        }
+
+        .language-selector img {
+            cursor: pointer;
+            width: 30px; /* Gjatësia e flamurit */
+            height: 20px; /* Lartësia e flamurit */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .language-selector img:hover {
+            opacity: 0.7;
+        }
+
+        html {
+    scroll-behavior: smooth;
+}
+
+#map {
+            width: 750px;
+            height: 450px;
+            border: 2px solid #000000;
+            margin-top: 20px;
+        }
+    </style>
+       <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+       <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+</head>
+<body>
+    <header>
+        <div>Shitja e Biletave të Autobusit Lokal</div>
+        <nav>
+            <a href="#cmimet">Biletat</a>
+            <a href="#">Pikat e shitjes</a>
+            <a href="#">Shërbimet</a>
+            <a href="#">Kontakti</a>
+        </nav>
+    </header>
+    <div class="language-selector">
+        <img src="https://th.bing.com/th?id=OSK.HEROo1Hy4-nUoE3huqwGw_SjCFSLjqRVU_x_mgmpLklPuMU&w=296&h=176&c=1&rs=2&o=6&dpr=1.5&pid=SANGAM" alt="Shqip" title="Shqip" onclick="setLanguage('shqip')">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg" alt="English" title="English" onclick="setLanguage('anglisht')">
+        <img src="https://th.bing.com/th?id=OIP.yC5HOVTe4JBzyP1X_wABOwHaDt&w=350&h=175&c=8&rs=1&qlt=90&o=6&dpr=1.5&pid=3.1&rm=2" alt="Maqedonisht" title="Maqedonisht" onclick="setLanguage('maqedonisht')">
+    </div>
+
+
+    <h1 id="cmimet">Cmimet e biletave</h1>
+    <div class="container">
+        <!-- Ticket 1 -->
+        <div class="ticket-box">
+            <div class="ticket-header">KATEGORIA - A</div>
+            <div class="ticket-body">
+                <p class="ticket-description" data-translate-key="a-txt1"></p>
+                <div class="ticket-prices">
+                    <div class="price">
+                        <span class="price-comment" data-translate-key="nje"></span>
+                        <span class="price-value">20 den</span>
+                    </div>
+                    <div class="price">
+                        <span class="price-comment" data-translate-key="mujore"></span>
+                        <span class="price-value">900 den</span>
+                    </div>
+                    <div class="price">
+                        <span class="price-comment" data-translate-key="vjetore"></span>
+                        <span class="price-value">9000 den</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ticket 2 -->
+        <div class="ticket-box">
+            <div class="ticket-header">KATEGORIA - B</div>
+            <div class="ticket-body">
+                <p class="ticket-description" data-translate-key="a-txt2"></p>
+                <div class="ticket-prices">
+                    <div class="price">
+                        <span class="price-comment" data-translate-key="nje"></span>
+                        <span class="price-value">20 den</span>
+                    </div>
+                    <div class="price">
+                        <span class="price-comment" data-translate-key="mujore"></span>
+                        <span class="price-value">600 den</span>
+                    </div>
+                    <div class="price">
+                        <span class="price-comment" data-translate-key="vjetore"></span>
+                        <span class="price-value">6000 den</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ticket 3 -->
+        <div class="ticket-box">
+            <div class="ticket-header">KATEGORIA - C</div>
+            <div class="ticket-body">
+                <p class="ticket-description" data-translate-key="a-txt3"></p>
+                <div class="ticket-prices">
+                    <div class="price">
+                        <span class="price-comment" data-translate-key="nje"></span>
+                        <span class="price-value">20 den</span>
+                    </div>
+                    <div class="price">
+                        <span class="price-comment" data-translate-key="mujore"></span>
+                        <span class="price-value">350 den</span>
+                    </div>
+                    <div class="price">
+                        <span class="price-comment" data-translate-key="vjetore"></span>
+                        <span class="price-value">3500 den</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ticket 4 -->
+        <div class="ticket-box">
+            <div class="ticket-header">KATEGORIA - D</div>
+            <div class="ticket-body">
+                <p class="ticket-description" data-translate-key="a-txt4"></p>
+                <div class="ticket-prices">
+                    <div class="price">
+                        <span class="price-comment" data-translate-key="nje"></span>
+                        <span class="price-value">20 den</span>
+                    </div>
+                    <div class="price">
+                        <span class="price-comment" data-translate-key="mujore"></span>
+                        <span class="price-value">450 den</span>
+                    </div>
+                    <div class="price">
+                        <span class="price-comment" data-translate-key="vjetore"></span>
+                        <span class="price-value">4500 den</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ticket 5 -->
+        <div class="ticket-box">
+            <div class="ticket-header">KATEGORIA - E</div>
+            <div class="ticket-body">
+                <p class="ticket-description" data-translate-key="a-txt5"></p>
+                <div class="ticket-prices">
+                    <div class="price">
+                        <span class="price-comment" data-translate-key="nje"></span>
+                        <span class="price-value">0 den</span>
+                    </div>
+                    <div class="price">
+                        <span class="price-comment" data-translate-key="mujore"></span>
+                        <span class="price-value">0 den</span>
+                    </div>
+                    <div class="price">
+                        <span class="price-comment" data-translate-key="vjetore"></span>
+                        <span class="price-value">0 den</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    <div class="ticket-box">
+        <div class="ticket-header">KATEGORIA - F</div>
+        <div class="ticket-body">
+            <p class="ticket-description" data-translate-key="a-txt5"></p>
+            <div class="ticket-prices">
+                <div class="price">
+                    <span class="price-comment" data-translate-key="nje"></span>
+                    <span class="price-value">20 den</span>
+                </div>
+                <div class="price">
+                    <span class="price-comment" data-translate-key="mujore"></span>
+                    <span class="price-value">250 den</span>
+                </div>
+                <div class="price">
+                    <span class="price-comment" data-translate-key="vjetore"></span>
+                    <span class="price-value">2500 den</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<div class="ticket-box">
+    <div class="ticket-header">KATEGORIA - G</div>
+    <div class="ticket-body">
+        <p class="ticket-description" data-translate-key="a-txt5"></p>
+        <div class="ticket-prices">
+            <div class="price">
+                <span class="price-comment" data-translate-key="nje"></span>
+                <span class="price-value">20 den</span>
+            </div>
+            <div class="price">
+                <span class="price-comment" data-translate-key="mujore"></span>
+                <span class="price-value">300 den</span>
+            </div>
+            <div class="price">
+                <span class="price-comment" data-translate-key="vjetore"></span>
+                <span class="price-value">3000 den</span>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<br><br><br>
+<h1 id="pikat">PIKAT E SHITJES</h1>
+<hr style="width:170px; border:solid;  color:rgb(74, 122, 255); margin-top: -10px;">
+<h2 style=" color:red; float: left;" >Linja 1</h2>
+<hr style="width: 100px; ">
+<div id="map"></div>
+
+
+</body>
+<script>
+    const translations = {
+        "a-txt1": {
+            "shqip": "Biletë bazë",
+            "anglisht": "Basic Bilet",
+            "maqedonisht": "MAC"
+        },
+        "a-txt2": {
+            "shqip": "Administratorët publik",
+            "anglisht": "Public administration",
+            "maqedonisht": "MAC"
+        },
+        "a-txt3": {
+            "shqip": "Pensionistë, persona të moshuar (mbi 62 vjeç) dhe persona me nivel të ulët invaliditeti",
+            "anglisht": "Pensioners, elderly people (over 62 years old), and people with a lower degree of disability",
+            "maqedonisht": "MAC"
+        },
+        "a-txt4": {
+            "shqip": "Për të punësuarit në Komunën e Tetovës, si dhe të punësuarit në organe të themeluara nga Komuna e Tetovës",
+            "anglisht": "Employees in the Municipality of Tetovo and in bodies established by the Municipality of Tetovo",
+            "maqedonisht": "MAC"
+        },
+        "a-txt5": {
+            "shqip": "Për shërbime me tarifë të lartë dhe blerjen e biletës mujore për punë dhe shërbime të tjera",
+            "anglisht": "For high tariff services and monthly tickets for work and other services",
+            "maqedonisht": "MAC"
+        },
+        "a-txt6": {
+            "shqip": "Kategoria më e vogël që ka çmime të ulëta për udhëtime të përkohshme dhe ngjarje speciale",
+            "anglisht": "The smallest category with reduced fares for occasional trips and special events",
+            "maqedonisht": "MAC"
+        },
+        "a-txt7": {
+            "shqip": "Çmimet për shërbime extra mund të variojnë",
+            "anglisht": "Prices for extra services can vary",
+            "maqedonisht": "MAC"
+        },
+        "nje": {
+            "shqip": "Për një drejtim",
+            "anglisht": "For one direction",
+            "maqedonisht": "MAC"
+        },
+        "mujore": {
+            "shqip": "Biletë Mujore",
+            "anglisht": "Monthly Ticket",
+            "maqedonisht": "MAC"
+        },
+        "vjetore": {
+            "shqip": "Biletë Vjetore",
+            "anglisht": "Annual Ticket",
+            "maqedonisht": "MAC"
+        },
+
+        "point-1": {
+        "shqip": "Stacioni i autobusave Tetovë",
+        "anglisht": "Station bus of Tetovo",
+        "maqedonisht": "Граве Осигурување” (Автобуска Станица)"
+    },
+    "point-2": {
+        "shqip": "Tara Tobako (Pallma Mall)",
+        "anglisht": "Tara Tobaco (Pallma Mall)",
+        "maqedonisht": "Тара Тобако (Палма Мол)"
+    },
+    "point-3": {
+        "shqip": "Piti Premium (Pazari i gjelbert)",
+        "anglisht": "Piti Premium",
+        "maqedonisht": "Пити Премиум (Зелен Пазар)"
+    },
+    "point-4": {
+        "shqip": "DB Kollonijall (Pazari i gjelbert)",
+        "anglisht": "DB Kollonijall",
+        "maqedonisht": "ДБ Колонијал” (Зелен Пазар)"
+    },
+    "point-5": {
+        "shqip": "Tobako Sadiki",
+        "anglisht": "Tobacco Sadiki",
+        "maqedonisht": "Садики Тобако"
+    },
+    "point-6": {
+        "shqip": "Tobako Zippo",
+        "anglisht": "Tobacco Zippo",
+        "maqedonisht": "Зипо Тобако"
+    },
+    "point-7": {
+        "shqip": "Boks",
+        "anglisht": "Box",
+        "maqedonisht": "Вокс"
+    },
+    "point-8": {
+        "shqip": "Tobako Tushi",
+        "anglisht": "Tobacco Tushi",
+        "maqedonisht": "Туши Тобако"
+    },
+    "point-9": {
+        "shqip": "Venecia Market",
+        "anglisht": "Venecia Market",
+        "maqedonisht": "Венеција Маркет"
+    },
+    "point-10": {
+        "shqip": "Lider Market",
+        "anglisht": "Lider Market",
+        "maqedonisht": "Лидер Маркет"
+    },
+    "point-11": {
+        "shqip": "Tobako Monako",
+        "anglisht": "Tobacco Monako",
+        "maqedonisht": "Монако Тобако"
+    },
+    "point-12": {
+        "shqip": "Tobako X",
+        "anglisht": "Tobacco X",
+        "maqedonisht": "Вирџинија Тобако"
+    },
+    "point-13": {
+        "shqip": "Swiss Market",
+        "anglisht": "Swiss Market",
+        "maqedonisht": "Свис Маркет Село"
+    },
+    "point-14": {
+        "shqip": "Blu Market Mujo",
+        "anglisht": "Blue Market Mujo",
+        "maqedonisht": "Блу Маркет Мујо"
+    },
+    };
+
+    let currentLanguage = "shqip";  // Gjuhën e paracaktuar (Shqip)
+
+// Funksioni për të vendosur gjuhën
+function setLanguage(language) {
+    currentLanguage = language;  // Përdorimi i gjuhës së zgjedhur
+
+    // Ndrysho tekstin në të gjithë faqen që ka atributin data-translate-key
+    const elements = document.querySelectorAll("[data-translate-key]");  // Gjej të gjitha elementet që kanë atributin data-translate-key
+    elements.forEach(element => {
+        const key = element.getAttribute("data-translate-key");  // Merr çelësin përkthimi
+        const translation = translations[key];  // Merr përkthimin për çelësin
+        if (translation) {
+            element.innerText = translation[currentLanguage];  // Ndrysho tekstin në element
+        }
+    });
+
+    // Përditëso titujt e pikave të shitjes në hartë
+    updatePointsOfSale();
+}
+
+// Funksioni për të përditësuar titujt e pikave të shitjes
+function updatePointsOfSale() {
+    // Fshij të gjitha markerat ekzistues nga harta
+    map.eachLayer(function (layer) {
+        if (layer instanceof L.Marker) {
+            map.removeLayer(layer);
+        }
+    });
+
+    // Shtoni markerat e rinj me titujt e përkthyer
+    pointsOfSale.forEach(function(point) {
+        var title = translations[point.key][currentLanguage]; // Merr titullin përkatës në gjuhën aktuale
+        L.marker([point.lat, point.lng])
+            .addTo(map)
+            .bindPopup(title);  // Përdor titullin përkatës në popup
+    });
+}
+
+// Funksioni për të ndërruar gjuhën në fillim kur faqja ngarkohet
+window.onload = function() {
+    setLanguage(currentLanguage);  // Vendos gjuhën e paracaktuar kur faqja hapet
+}
+
+
+
+
+document.querySelector('a[href="#cmimet"]').addEventListener('click', function(e) {
+    e.preventDefault(); // Parandalon veprimin e lidhjes të shkaktojë ndonjë ngjarje tjetër
+    document.getElementById('cmimet').scrollIntoView({
+        behavior: 'smooth'
+    });
+});
+
+
+var map = L.map('map').setView([42.009241253302484, 20.97035503293045], 14);  // Latitude and Longitude of Tetovo, example coordinates
+
+        // Set up the tile layer (OpenStreetMap)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Add some markers for points of sale
+        var pointsOfSale = [
+    {lat: 42.00785169726698, lng: 20.985448562251783, key: "point-1"},
+    {lat: 42.004288568316056, lng: 20.989354121139012, key: "point-2"},
+    {lat: 42.007456796496385, lng: 20.977777678522386, key: "point-3"},
+
+    {lat: 42.007509642036105,  lng: 20.977457189141198, key: "point-4"},
+    {lat: 42.00784303892035,  lng: 20.97474730890338, key: "point-5"},
+    {lat: 42.00858938095211,  lng: 20.97384955625898, key: "point-6"},
+    
+    {lat: 42.00955066127898, lng:  20.970818955129303, key: "point-7"},
+    {lat: 42.00862765933506,  lng: 20.969799682205455, key: "point-8"},
+    {lat: 42.0064434862979,  lng: 20.968022513585108, key: "point-9"},
+    {lat: 42.00371546244135,  lng: 20.964125401649017, key: "point-10"},
+    {lat: 42.00351960452665,  lng: 20.964109061865493, key: "point-11"},
+    {lat: 41.99953997901413,  lng: 20.961655518224457, key: "point-12"},
+    {lat: 41.997198368159815,  lng: 20.96153133271428, key: "point-13"},
+    {lat: 41.99511279548117,  lng: 20.96062326268321, key: "point-14"},
+];
+
+        pointsOfSale.forEach(function(point) {
+            L.marker([point.lat, point.lng])
+                .addTo(map)
+                .bindPopup(point.title);
+        });
+</script>
+</html>
