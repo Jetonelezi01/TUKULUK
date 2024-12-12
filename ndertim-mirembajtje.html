@@ -270,6 +270,85 @@ hr {
         .language-selector img:hover {
             opacity: 0.7;
         }
+/* Kategoritë - Responsiv dhe struktura */
+.categories-section {
+  margin: 10px;
+  text-align: center;
+}
+
+.categories-title {
+  font-size: 24px;
+  color: #000000;
+  margin-bottom: 20px;
+}
+
+.categories-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.category-item {
+  width: 27%; /* Katër kategori në një rresht */
+  margin-bottom: 40px;
+  text-align: center;
+  
+}
+
+.category-item img {
+  width: 100%; /* Kategoria do të ketë madhësinë e plotë të kutisë */
+  height: auto;
+  border-radius: 20px; /* Radius i imët për këndet */
+  box-shadow: 0 4px 8px rgba(255, 10, 10, 0.2); /* Hije e lehtë për pamje më të mirë */
+  transition: transform 0.3s ease-in-out; /* Animacion për efekt */
+  background-color: white;
+}
+
+.category-item img:hover {
+  transform: scale(1.05); /* Efekti i rritjes së imazhit kur kaloni mbi të */
+}
+
+.category-description {
+  font-size: 40px;
+  color: #000000;
+  margin-top: 10px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+h2{
+  font-size: 80px;
+  text-align: center;
+  color:white;
+}
+
+/* Për ekrane më të vogla */
+@media (max-width: 768px) {
+  .category-item {
+    width: 45%; /* Dy kategori në një rresht */
+  }
+  h2{
+    font-size: 26px;
+    color: white;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  }
+  hr{
+    margin-top: 5px;
+    width: 70px;
+  }
+
+  .category-description{
+    font-size: 14px;
+  }
+  
+}
+
+@media (max-width: 500px) {
+  .category-item {
+    width: 27%; /* Një kategori në një rresht për ekranet e vogla */
+    
+  }
+  
+}
+ 
 
 
     </style>
@@ -282,7 +361,7 @@ hr {
   <div class="hero_area">
 
     <div class="hero_bg_box">
-      <div class="bg_img_box">
+      <div style="height: 2401px;" class="bg_img_box">
         <img src="images/hero-bg.png" alt="">
       </div>
     </div>
@@ -329,75 +408,97 @@ hr {
         <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg" alt="English" title="English" onclick="setLanguage('anglisht')">
         <img src="https://th.bing.com/th?id=OIP.yC5HOVTe4JBzyP1X_wABOwHaDt&w=350&h=175&c=8&rs=1&qlt=90&o=6&dpr=1.5&pid=3.1&rm=2" alt="Maqedonisht" title="Maqedonisht" onclick="setLanguage('maqedonisht')">
     </div>
-
-    <h1 style="color: white; text-align: center; margin-top: 20px;">Menuja qe ofron kompania jone</h1>
-    
-    <div class="menu-wrapper">
-      <ul class="menu">
-          <li class="fas fa-utensils">   <i  style="padding-left: 16px;" style="font-size: 27;" data-translate-key="Ushqime" ></i>  
-              <ul class="submenu">
-                  <li><a href="restorantet.html" style="color: white; text-decoration: none;    "  data-translate-key="Restorant">Restorantet</a></li>
-                  <li><a href="Fast_Food.html" style="color: white; text-decoration: none;" data-translate-key="fast_food">Ushqime te shpejta</a></li>
-                  <li><a href="Delivery.html" style="color: white; text-decoration: none;">Delivery</a></li>
-                  <li><a href="Kuzhinat_popullore.html" style="color: white; text-decoration: none;">Kuzhinat Popullore</a></li>
-              </ul>
-          </li>
-          <li class="fas fa-coffee" ><i style="padding-left: 10px;" data-translate-key="Kafeterit"></i>
-            <ul class="submenu">
-                <li ><a href="Kafeterite.html" style="color: white; text-decoration: none;" data-translate-key="Kafeterit">Kafeterit</a></li>
-                <li><a href="Shisha_bar.html" style="color: white; text-decoration: none;" data-translate-key="shisha_bar">Shisha Baret</a></li>
-            </ul>
-        </li>
-        <li class="fas fa-hammer"><i  style="padding-left: 10px;" data-translate-key="Ndertimtari"></i> 
-            <ul class="submenu">
-                <li>Betonjerka</li>
-                <li><a href="Uje_instalues.html " style="color: white; text-decoration: none;">Uje Instalues</a></li>
-                <li>Elektricist</li>
-                <li>Moler</li>
-                <li>Gipser</li>
-                <li>Arkitekt</li>
-                <li>Inxhinjer</li>
-            </ul>
-        </li>
-        <li class="fas fa-stethoscope"><i  style="padding-left: 13px;"  data-translate-key="mjeksi"></i> 
-            <ul class="submenu">
-                <li>Kirurg</li>
-                <li>Fizoterapist</li>
-                <li>Kardiolog</li>
-                <li>Etj.</li>
-            </ul>
-        </li>
-        <li class="fas fa-bus"><i  style="padding-left: 10px;" data-translate-key="Transport"></i> 
-            <ul class="submenu">
-                <li><a href="Transporti-lokal.html" style="color: white; text-decoration: none;">Transporti Lokal</a></li>
-                <li>Transporti Urban</li>
-                <li>Shtet-Shtet</li>
-                <li>Agjencionet</li>
-                <li>Taksit</li>
-            </ul>
-        </li>
-        <li class="fas fa-cogs" ><i style="padding-left: 8px;" data-translate-key="Sherbime">Sherbime</i> 
-            <ul class="submenu">
-                <li>Kerkim Puntori</li>
-                <li>Kerkim Pune</li>
-                <li><a href="stuido_frizerkat.html" style="color: white; text-decoration: none;">Studio Frizerkat</a></li>
-            </ul>
-        </li>
-        <li><i class="fas fa-map"></i> <a href="map.html" style="color: white; text-decoration: none;" data-translate-key="Harta">Harta</a></li>
-   
-      </li>
-    </ul>
-</div>
-
-
-
-
-
-
-
-
-
+    <h2 data-translate-key="ndertim_mirmbajtje" >Ndertim & Mirembajtje</h2>
+    <hr style="background-color: white; width: 140px;">
   </div>
+    <section class="categories-section">
+
+      <div class="categories-container">
+        <div class="category-item">
+          <a href="index.html" class="category-link">
+            <img src="images/foto-logo/Elektricist.jpeg" alt="Elektricist" class="category-image">
+            <p class="category-description" data-translate-key="elektricist">Elektricist</p>
+          </a>
+        </div>
+        <div class="category-item" >
+          <img src="images/foto-logo/Kamera-Montues.jpeg" alt="Teknik Kamerash" class="category-image">
+          <p class="category-description" data-translate-key="kamera">Teknik Kamerash</p>
+        </div>
+        <div class="category-item">
+          <img src="images/foto-logo/Dyer-Dritare.jpeg" alt="Dyer & Dritare" class="category-image">
+          <p class="category-description" data-translate-key="dyer">Dyer & Dritare</p>
+        </div>
+        <div class="category-item">
+          <img src="images/foto-logo/Moler.jpeg" alt="Bojaxhi" class="category-image">
+          <p class="category-description"data-translate-key="bojaxhi">Bojaxhi</p>
+        </div>
+        <div class="category-item">
+          <img src="images/foto-logo/Pllaka-montues.jpeg" alt="Mjeshter parketi" class="category-image">
+          <p class="category-description" data-translate-key="parket">Mjeshter parketi</p>
+        </div>
+        <div class="category-item">
+          <img src="images/foto-logo/Klim.jpeg" alt="Ngrohje, Ftohje / Ventilim" class="category-image">
+          <p class="category-description" data-translate-key="ngrh-fth">Ngrohje, Ftohje / Ventilim</p>
+        </div>
+        <div class="category-item">
+          <img src="images/foto-logo/Mekanik.jpeg" alt="Mekanik Makinash" class="category-image">
+          <p class="category-description" data-translate-key="mekanik">Mekanik Makinash</p>
+        </div>
+        <div class="category-item">
+          <img src="images/foto-logo/paint-car.jpeg" alt="Ngjyrosje Makinash / Polir" class="category-image">
+          <p class="category-description" data-translate-key="ngjyrosje">Ngjyrosje Makinash / Polir</p>
+        </div>
+        <div class="category-item">
+          <img src="images/foto-logo/Saldator.jpeg" alt="Saldator" class="category-image">
+          <p class="category-description" data-translate-key="saldator">Saldator</p>
+        </div>
+        <div class="category-item">
+          <img src="images/foto-logo/Gipser.jpeg " alt="Punime Gipsi" class="category-image">
+          <p class="category-description" data-translate-key="gips">Punime Gipsi</p>
+        </div>
+
+        <div class="category-item">
+            <img src="images/foto-logo/Riparime-Elektroshtepiakesh.jpeg" alt="Riparime Elektrike" class="category-image">
+            <p class="category-description" data-translate-key="ripar">Riparime Elektrike</p>
+          </div>
+          <div class="category-item">
+            <img src="images/foto-logo/Teknik Ndertimi.jpeg" alt="Teknik Ndertimi" class="category-image">
+            <p class="category-description" data-translate-key="ndert">Teknik Ndertimi</p>
+          </div>
+          <div class="category-item">
+            <img src="images/foto-logo/Hidraulik.jpeg" alt="Hidraulik" class="category-image">
+            <p class="category-description" data-translate-key="Hidraulik">Hidraulik</p>
+          </div>
+
+          <div class="category-item">
+            <img src="images/foto-logo/Mjeshter kulmesh.jpeg" alt="Mjeshter Catie" class="category-image">
+            <p class="category-description" data-translate-key="catie">Mjeshter Catie</p>
+          </div>
+
+          <div class="category-item">
+            <img src="images/foto-logo/Larje tapetash.jpeg" alt="Pastrim Tapetash" class="category-image">
+            <p class="category-description" data-translate-key="tapet">Pastrim Tapetash</p>
+          </div>
+
+          <div class="category-item">
+            <img src="images/foto-logo/Pastrim Shtepish.jpeg" alt="Pastrim Shtepish" class="category-image">
+            <p class="category-description" data-translate-key="shtp">Pastrim Shtepish</p>
+          </div>
+
+          <div class="category-item">
+            <img src="images/foto-logo/harta.jpeg" alt="Harta" class="category-image">
+            <p class="category-description" data-translate-key="harta">Harta</p>
+          </div>
+     
+      </div>
+    </section>
+
+
+
+
+
+
+
   <!-- footer section -->
   <section class="footer_section">
     <div class="container">
@@ -461,56 +562,115 @@ hr {
 <script>
     // Objekt që përmban përkthimet nga shqip në anglisht dhe maqedonisht
     const translations = {
-        "Ushqime": {
-            "shqip": "               Ushqime",
-            "anglisht": "           Food",
+        "ndertim_mirmbajtje": {
+            "shqip": "Ndertim & Mirembajtje",
+            "anglisht": "Construction & Maintenance",
             "maqedonisht": "            MAC"
         },
-        "Kafeterit": {
-            "shqip": "   Kafeterit",
-            "anglisht": "Cafeteria",
+        "elektricist": {
+            "shqip": "Elektricist",
+            "anglisht": "Electrician",
             "maqedonisht": "MAC"
         },
-        "fast_food": {
-            "shqip": "Ushqime te shpejta",
-            "anglisht": "Fast Food",
+        "kamera": {
+            "shqip": "Teknik Kamerash",
+            "anglisht": "Camera Technicia",
             "maqedonisht": "MAC"
         },
-        "shisha_bar": {
-            "shqip": "Shisha Baret",
-            "anglisht": "Hookah Bar",
+        "bukuri": {
+            "shqip": "Bukuri dhe Shendet",
+            "anglisht": "Beauty and Health",
             "maqedonisht": "MAC"
         },
-        "Ndertimtari": {
-            "shqip": "Ndertimtari",
-            "anglisht": "Construction",
+        "dyer": {
+            "shqip": "Dyer & Dritare",
+            "anglisht": "Doors & Windows",
             "maqedonisht": "MAC"
         },
-        "Transport":{
-            "shqip":"Transporti",
-            "anglisht" : "Transport",
-            "maqedonisht" : "MAC"
+        "bojaxhi": {
+            "shqip": "Bojaxhi",
+            "anglisht": "Decorator",
+            "maqedonisht": "MAC"
         },
-        "Sherbime":{
-            "shqip" : "Sherbime",
-            "anglisht" : "Services",
-            "maqedonisht" : "MAC"
+        "parket": {
+            "shqip": "Mjeshter Parketi",
+            "anglisht": "Parquet Master",
+            "maqedonisht": "MAC"
         },
-        "Harta":{
-            "shqip" : "Harta",
-            "anglisht" : "Map",
-            "maqedonisht" : "MAC"
+        "ngrh-fth": {
+            "shqip": "Ngrohje, Ftohje / Ventilim",
+            "anglisht": "Heating, Cooling / Ventilation",
+            "maqedonisht": "MAC"
         },
-        "Restorant":{
-            "shqip" : "Restorant",
-            "anglisht" : "Restaurants",
-            "maqedonisht" : "MAC"
+        "Mekanik": {
+            "shqip": "Mekanik Makinash",
+            "anglisht": "Car Mechanic",
+            "maqedonisht": "MAC"
         },
-        "mjeksi":{
-            "shqip" : "Mjeksi",
-            "anglisht" : "x",
-            "maqedonisht" : "MAC"
-        }
+        "ngjyrosje": {
+            "shqip": "Ngjyrosje Makinash / Polir",
+            "anglisht": "Painting Car",
+            "maqedonisht": "MAC"
+        },
+
+
+
+        "saldator": {
+            "shqip": "Saldator",
+            "anglisht": "Welder",
+            "maqedonisht": "MAC"
+        },
+
+        "gips": {
+            "shqip": "Punime Gipsi",
+            "anglisht": "plaster works",
+            "maqedonisht": "MAC"
+        },
+
+        "ripar": {
+            "shqip": "Riparime Elektrike",
+            "anglisht": "Electric repairs",
+            "maqedonisht": "MAC"
+        },
+
+        "solar": {
+            "shqip": "Teknik Solar",
+            "anglisht": "Solar technician",
+            "maqedonisht": "MAC"
+        },
+
+        "hidraulik": {
+            "shqip": "Hidraulik",
+            "anglisht": "Plumber",
+            "maqedonisht": "MAC"
+        },
+
+        "ndert": {
+            "shqip": "Teknik Ndertimi",
+            "anglisht": "construction technician",
+            "maqedonisht": "MAC"
+        },
+
+        "catie": {
+            "shqip": "Mjeshter Catie",
+            "anglisht": "ENG",
+            "maqedonisht": "MAC"
+        },
+
+        "tapet": {
+            "shqip": "Pastrim Tapetash",
+            "anglisht": "Carpet Cleaning",
+            "maqedonisht": "MAC"
+        },
+
+        "shtp": {
+            "shqip": "Pastrim Shtepie",
+            "anglisht": "House Cleaning",
+            "maqedonisht": "MAC"
+        },
+  
+
+        
     };
 
     // Variabli që ruan gjuhën aktuale

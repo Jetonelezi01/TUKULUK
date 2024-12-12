@@ -270,6 +270,85 @@ hr {
         .language-selector img:hover {
             opacity: 0.7;
         }
+/* Kategoritë - Responsiv dhe struktura */
+.categories-section {
+  margin: 10px;
+  text-align: center;
+}
+
+.categories-title {
+  font-size: 24px;
+  color: #000000;
+  margin-bottom: 20px;
+}
+
+.categories-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.category-item {
+  width: 27%; /* Katër kategori në një rresht */
+  margin-bottom: 40px;
+  text-align: center;
+  
+}
+
+.category-item img {
+  width: 100%; /* Kategoria do të ketë madhësinë e plotë të kutisë */
+  height: auto;
+  border-radius: 20px; /* Radius i imët për këndet */
+  box-shadow: 0 4px 8px rgba(255, 10, 10, 0.2); /* Hije e lehtë për pamje më të mirë */
+  transition: transform 0.3s ease-in-out; /* Animacion për efekt */
+  background-color: white;
+}
+
+.category-item img:hover {
+  transform: scale(1.05); /* Efekti i rritjes së imazhit kur kaloni mbi të */
+}
+
+.category-description {
+  font-size: 40px;
+  color: #000000;
+  margin-top: 10px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+h2{
+  font-size: 80px;
+  text-align: center;
+  color:white;
+}
+
+/* Për ekrane më të vogla */
+@media (max-width: 768px) {
+  .category-item {
+    width: 45%; /* Dy kategori në një rresht */
+  }
+  h2{
+    font-size: 26px;
+    color: white;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  }
+  hr{
+    margin-top: 5px;
+    width: 70px;
+  }
+
+  .category-description{
+    font-size: 14px;
+  }
+  
+}
+
+@media (max-width: 500px) {
+  .category-item {
+    width: 27%; /* Një kategori në një rresht për ekranet e vogla */
+    
+  }
+  
+}
+ 
 
 
     </style>
@@ -282,7 +361,7 @@ hr {
   <div class="hero_area">
 
     <div class="hero_bg_box">
-      <div class="bg_img_box">
+      <div style="height: 2401px;" class="bg_img_box">
         <img src="images/hero-bg.png" alt="">
       </div>
     </div>
@@ -329,75 +408,87 @@ hr {
         <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg" alt="English" title="English" onclick="setLanguage('anglisht')">
         <img src="https://th.bing.com/th?id=OIP.yC5HOVTe4JBzyP1X_wABOwHaDt&w=350&h=175&c=8&rs=1&qlt=90&o=6&dpr=1.5&pid=3.1&rm=2" alt="Maqedonisht" title="Maqedonisht" onclick="setLanguage('maqedonisht')">
     </div>
-
-    <h1 style="color: white; text-align: center; margin-top: 20px;">Menuja qe ofron kompania jone</h1>
-    
-    <div class="menu-wrapper">
-      <ul class="menu">
-          <li class="fas fa-utensils">   <i  style="padding-left: 16px;" style="font-size: 27;" data-translate-key="Ushqime" ></i>  
-              <ul class="submenu">
-                  <li><a href="restorantet.html" style="color: white; text-decoration: none;    "  data-translate-key="Restorant">Restorantet</a></li>
-                  <li><a href="Fast_Food.html" style="color: white; text-decoration: none;" data-translate-key="fast_food">Ushqime te shpejta</a></li>
-                  <li><a href="Delivery.html" style="color: white; text-decoration: none;">Delivery</a></li>
-                  <li><a href="Kuzhinat_popullore.html" style="color: white; text-decoration: none;">Kuzhinat Popullore</a></li>
-              </ul>
-          </li>
-          <li class="fas fa-coffee" ><i style="padding-left: 10px;" data-translate-key="Kafeterit"></i>
-            <ul class="submenu">
-                <li ><a href="Kafeterite.html" style="color: white; text-decoration: none;" data-translate-key="Kafeterit">Kafeterit</a></li>
-                <li><a href="Shisha_bar.html" style="color: white; text-decoration: none;" data-translate-key="shisha_bar">Shisha Baret</a></li>
-            </ul>
-        </li>
-        <li class="fas fa-hammer"><i  style="padding-left: 10px;" data-translate-key="Ndertimtari"></i> 
-            <ul class="submenu">
-                <li>Betonjerka</li>
-                <li><a href="Uje_instalues.html " style="color: white; text-decoration: none;">Uje Instalues</a></li>
-                <li>Elektricist</li>
-                <li>Moler</li>
-                <li>Gipser</li>
-                <li>Arkitekt</li>
-                <li>Inxhinjer</li>
-            </ul>
-        </li>
-        <li class="fas fa-stethoscope"><i  style="padding-left: 13px;"  data-translate-key="mjeksi"></i> 
-            <ul class="submenu">
-                <li>Kirurg</li>
-                <li>Fizoterapist</li>
-                <li>Kardiolog</li>
-                <li>Etj.</li>
-            </ul>
-        </li>
-        <li class="fas fa-bus"><i  style="padding-left: 10px;" data-translate-key="Transport"></i> 
-            <ul class="submenu">
-                <li><a href="Transporti-lokal.html" style="color: white; text-decoration: none;">Transporti Lokal</a></li>
-                <li>Transporti Urban</li>
-                <li>Shtet-Shtet</li>
-                <li>Agjencionet</li>
-                <li>Taksit</li>
-            </ul>
-        </li>
-        <li class="fas fa-cogs" ><i style="padding-left: 8px;" data-translate-key="Sherbime">Sherbime</i> 
-            <ul class="submenu">
-                <li>Kerkim Puntori</li>
-                <li>Kerkim Pune</li>
-                <li><a href="stuido_frizerkat.html" style="color: white; text-decoration: none;">Studio Frizerkat</a></li>
-            </ul>
-        </li>
-        <li><i class="fas fa-map"></i> <a href="map.html" style="color: white; text-decoration: none;" data-translate-key="Harta">Harta</a></li>
-   
-      </li>
-    </ul>
-</div>
-
-
-
-
-
-
-
-
-
+    <h2 data-translate-key="bukuri" >Bukuri & Shendet</h2>
+    <hr style="background-color: white; width: 140px;">
   </div>
+  <section class="categories-section">
+    <div class="categories-container">
+      <div class="category-item">
+        <a href="index.html" class="category-link">
+          <img src="images/foto-logo/berber.png" alt="Berber" class="category-image">
+          <p class="category-description" data-translate-key="berber">Berber</p>
+        </a>
+      </div>
+      <div class="category-item">
+        <a href="stuido_frizerkat.html" class="category-link">
+          <img src="images/foto-logo/studio-drizerkat.png" alt="Studio Frizerkat" class="category-image">
+          <p class="category-description" data-translate-key="frizerkat">Studio Frizerkat</p>
+        </a>
+      </div>
+      <div class="category-item">
+        <a href="link3.html" class="category-link">
+          <img src="images/foto-logo/thonj.jpeg" alt="Estetiste Thonjsh" class="category-image">
+          <p class="category-description" data-translate-key="thonj">Estetiste Thonjsh</p>
+        </a>
+      </div>
+      <div class="category-item">
+        <a href="link4.html" class="category-link">
+          <img src="images/foto-logo/solarium.png" alt="Solarium" class="category-image">
+          <p class="category-description" data-translate-key="solarium">Solarium</p>
+        </a>
+      </div>
+      <div class="category-item">
+        <a href="link5.html" class="category-link">
+          <img src="images/foto-logo/Depilim.png" alt="Depilim" class="category-image">
+          <p class="category-description" data-translate-key="depilim">Depilim</p>
+        </a>
+      </div>
+      <div class="category-item">
+        <a href="link6.html" class="category-link">
+          <img src="images/foto-logo/stilist.png" alt="Stilist / Rrobaqepes" class="category-image">
+          <p class="category-description" data-translate-key="stilist">Stilist / Rrobaqepes</p>
+        </a>
+      </div>
+      <div class="category-item">
+        <a href="link7.html" class="category-link">
+          <img src="images/foto-logo/babysutter.png" alt="Kujdestare Femijesh" class="category-image">
+          <p class="category-description" data-translate-key="kujdestare">Kujdestare Femijesh</p>
+        </a>
+      </div>
+
+      <div class="category-item">
+        <a href="link7.html" class="category-link">
+          <img src="images/foto-logo/personal-trainer.png" alt="Trajner Personal" class="category-image">
+          <p class="category-description" data-translate-key="trajner">Trajner Personal</p>
+        </a>
+      </div>
+      <div class="category-item">
+        <a href="link7.html" class="category-link">
+          <img src="images/foto-logo/fizoterapist.png" alt="Fizoterapist" class="category-image">
+          <p class="category-description" data-translate-key="fizo">Fizoterapist</p>
+        </a>
+      </div>
+      <div class="category-item">
+        <a href="link7.html" class="category-link">
+          <img src="images/foto-logo/psikolog.png" alt="Psikolog" class="category-image">
+          <p class="category-description" data-translate-key="psiko">Psikolog</p>
+        </a>
+      </div>
+      <div class="category-item">
+        <a href="link7.html" class="category-link">
+          <img src="images/foto-logo/dentist.png" alt="Dentist" class="category-image">
+          <p class="category-description" data-translate-key="dentist">Dentist</p>
+        </a>
+      </div>
+    </div>
+  </section>
+  
+
+
+
+
+
+
   <!-- footer section -->
   <section class="footer_section">
     <div class="container">
@@ -461,56 +552,70 @@ hr {
 <script>
     // Objekt që përmban përkthimet nga shqip në anglisht dhe maqedonisht
     const translations = {
-        "Ushqime": {
-            "shqip": "               Ushqime",
-            "anglisht": "           Food",
-            "maqedonisht": "            MAC"
-        },
-        "Kafeterit": {
-            "shqip": "   Kafeterit",
-            "anglisht": "Cafeteria",
+        "bukuri": {
+            "shqip": "Bukuri & Shendet",
+            "anglisht": "Beauty & Health",
             "maqedonisht": "MAC"
         },
-        "fast_food": {
-            "shqip": "Ushqime te shpejta",
-            "anglisht": "Fast Food",
+        "berber": {
+            "shqip": "Berber",
+            "anglisht": "Barber",
             "maqedonisht": "MAC"
         },
-        "shisha_bar": {
-            "shqip": "Shisha Baret",
-            "anglisht": "Hookah Bar",
+        "frizerkat": {
+            "shqip": "Studio Frizerkat",
+            "anglisht": "Studio Beauty",
             "maqedonisht": "MAC"
         },
-        "Ndertimtari": {
-            "shqip": "Ndertimtari",
-            "anglisht": "Construction",
+        "thonj": {
+            "shqip": "Estetiste Thonjsh",
+            "anglisht": "Nail beautician",
             "maqedonisht": "MAC"
         },
-        "Transport":{
-            "shqip":"Transporti",
-            "anglisht" : "Transport",
-            "maqedonisht" : "MAC"
+        "solarium": {
+            "shqip": "Solarium",
+            "anglisht": "Solarium",
+            "maqedonisht": "MAC"
         },
-        "Sherbime":{
-            "shqip" : "Sherbime",
-            "anglisht" : "Services",
-            "maqedonisht" : "MAC"
+        "kujdestare": {
+            "shqip": "kujdestare e fëmijëve",
+            "anglisht": "BabySitter",
+            "maqedonisht": "MAC"
         },
-        "Harta":{
-            "shqip" : "Harta",
-            "anglisht" : "Map",
-            "maqedonisht" : "MAC"
+        "trajner": {
+            "shqip": "Trajner personal",
+            "anglisht": "Personal Trainer",
+            "maqedonisht": "MAC"
         },
-        "Restorant":{
-            "shqip" : "Restorant",
-            "anglisht" : "Restaurants",
-            "maqedonisht" : "MAC"
+        "fizo": {
+            "shqip": "Fizoterapist",
+            "anglisht": "Physiotherapists",
+            "maqedonisht": "MAC"
         },
-        "mjeksi":{
-            "shqip" : "Mjeksi",
-            "anglisht" : "x",
-            "maqedonisht" : "MAC"
-        }
+        
+        "psiko": {
+            "shqip": "Psikolog",
+            "anglisht": "Psychologist",
+            "maqedonisht": "MAC"
+        },
+        "dentist": {
+            "shqip": "Dentist",
+            "anglisht": "Dentist",
+            "maqedonisht": "MAC"
+        },
+  "depilim": {
+            "shqip": "Depilim",
+            "anglisht": "Waxing",
+            "maqedonisht": "MAC"
+        },
+        "stilist": {
+            "shqip": "Stilist / Rrobaqepes",
+            "anglisht": "Stylist / Seamstress",
+            "maqedonisht": "MAC"
+        },
+        
+
+        
     };
 
     // Variabli që ruan gjuhën aktuale
