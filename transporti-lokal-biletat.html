@@ -8,48 +8,103 @@
         
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
             margin: 0;
             padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
+            background-color: #f0f0f0;
         }
 
-        /* Header styling */
         header {
-            background-color: #0056b3;
+            background-color: #002c6d;
             color: white;
-            width: 100%;
-            padding: 30px 0;
-            font-size: 2em;
-            font-weight: bold;
-            margin-bottom: 40px; /* Hapësirë mes header dhe boxes */
-            display: flex;
-            justify-content: space-between; /* Ndajmë hapësirën mes titullit dhe menusë */
-            align-items: center; /* Sigurojmë që të jenë të rreshtuar vertikalisht */
-            padding-left: 20px;
-            padding-right: 20px;
+            padding: 10px 0;
+            text-align: center;
         }
 
-        /* Menyja e navigimit */
-        nav {
-            display: flex;
-            gap: 30px;
+        header nav ul {
+            list-style-type: none;
+            padding: 0;
         }
 
-        nav a {
+        header nav ul li {
+            display: inline;
+            margin: 0 20px;
+        }
+
+        header nav ul li a {
             color: white;
             text-decoration: none;
-            font-size: 1.1em;
-            padding: 10px 20px;
-            border-radius: 5px;
-            transition: background-color 0.3s;
+            font-size: 18px;
         }
 
-        nav a:hover {
-            background-color: #003366;
+        section {
+            padding: 20px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        #map {
+            height: 400px;
+            width: 80%;
+            margin: 0 auto;
+            background-color: #e0e0e0;
+            border: 3px solid #333;
+        }
+
+        #result {
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            display: none;
+            margin-top: 20px;
+        }
+
+        .line-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: green;
+        }
+
+        .reset-btn {
+            background-color: #f44336;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .reset-btn:hover {
+            background-color: #e53935;
+        }
+
+        #reset-button {
+            position: relative;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #f44336;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            z-index: 1000;
+        }
+
+        #reset-button:hover {
+            background-color: #e53935;
+        }
+
+        #line-selection {
+            margin: 20px 0;
+            text-align: center;
+            font-size: 18px;
         }
 
         /* Boxit e biletave */
@@ -84,9 +139,10 @@
             background-color: #0056b3;
             color: white;
             text-align: center;
-            font-size: 1.5em;
+            font-size: 1.3em;
             font-weight: bold;
             padding: 20px;
+            font-family:'Courier New', Courier, monospace
         }
 
         .ticket-body {
@@ -141,6 +197,7 @@
             .container {
                 grid-template-columns: 1fr;
             }
+            
         }
 
         .language-selector {
@@ -166,24 +223,47 @@
     scroll-behavior: smooth;
 }
 
-#map {
-            width: 750px;
+#map, #map2, #map3, #map4{
+            width: 350px;
             height: 450px;
             border: 2px solid #000000;
             margin-top: 20px;
+         
         }
+        
     </style>
        <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+       <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+
+       <!-- fonts style -->
+       <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+     
+       <!--owl slider stylesheet -->
+       <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+     
+       <!-- font awesome style -->
+       <link href="css/font-awesome.min.css" rel="stylesheet" />
+     
+       <!-- Custom styles for this template -->
+       <link href="css/style.css" rel="stylesheet" />
+         <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+         <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </head>
 <body>
     <header>
-        <div>Shitja e Biletave të Autobusit Lokal</div>
+        <a class="navbar-brand" href="index.html">
+            <span>
+              ALL in ONE
+            </span>
+          </a>
+    
         <nav>
-            <a href="#cmimet">Biletat</a>
-            <a href="#">Pikat e shitjes</a>
-            <a href="#">Shërbimet</a>
-            <a href="#">Kontakti</a>
+            <ul>
+                <li><a href="index.html">Ballina</a></li>
+                <li><a href="#cmimet">Biletat</a></li>
+                <li><a href="#pikat">Pikat e shitjes</a></li>
+            </ul>
         </nav>
     </header>
     <div class="language-selector">
@@ -193,7 +273,8 @@
     </div>
 
 
-    <h1 id="cmimet">Cmimet e biletave</h1>
+    <h1 id="cmimet"  style=" font-size:29px ; text-align:  center; font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif">Cmimet e biletave</h1>
+    <hr style="background-color:black; ">
     <div class="container">
         <!-- Ticket 1 -->
         <div class="ticket-box">
@@ -309,7 +390,7 @@
     <div class="ticket-box">
         <div class="ticket-header">KATEGORIA - F</div>
         <div class="ticket-body">
-            <p class="ticket-description" data-translate-key="a-txt5"></p>
+            <p class="ticket-description" data-translate-key="a-txt6"></p>
             <div class="ticket-prices">
                 <div class="price">
                     <span class="price-comment" data-translate-key="nje"></span>
@@ -331,7 +412,7 @@
 <div class="ticket-box">
     <div class="ticket-header">KATEGORIA - G</div>
     <div class="ticket-body">
-        <p class="ticket-description" data-translate-key="a-txt5"></p>
+        <p class="ticket-description" data-translate-key="a-txt7"></p>
         <div class="ticket-prices">
             <div class="price">
                 <span class="price-comment" data-translate-key="nje"></span>
@@ -350,11 +431,28 @@
 </div>
 </div>
 <br><br><br>
-<h1 id="pikat">PIKAT E SHITJES</h1>
-<hr style="width:170px; border:solid;  color:rgb(74, 122, 255); margin-top: -10px;">
-<h2 style=" color:red; float: left;" >Linja 1</h2>
-<hr style="width: 100px; ">
+<h1 id="pikat"  style=" font-size:29px ; text-align:  center; font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif">Pikat e shitjes</h1>
+<hr style="background-color:black; ">
+<br>
+<h2 style=" color:rgb(0, 0, 0); padding-left: 60px;  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif" >Linja 1</h2>
+<hr style="width: 160px;  background-color: blue; margin-left: 30px;">
 <div id="map"></div>
+
+<br><br>
+<h2 style=" color:rgb(0, 0, 0); padding-left: 60px;  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif" >Linja 2</h2>
+<hr style="width: 160px;  background-color: blue; margin-left: 30px; ">
+<div style="margin-left: 13px;" id="map2"></div>
+
+<br><br>
+<h2 style=" color:rgb(0, 0, 0); padding-left: 60px;  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif" >Linja 3</h2>
+<hr style="width: 160px;  background-color: blue; margin-left: 30px; ">
+<div style="margin-left: 13px;" id="map3"></div>
+
+<br><br>
+<h2 style=" color:rgb(0, 0, 0); padding-left: 60px;  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif" >Linja 4 (sezonale)</h2>
+<hr style="width: 160px;  background-color: blue; margin-left: 30px; ">
+<div style="margin-left: 13px;" id="map4"></div>
+<br><br>
 
 
 </body>
@@ -481,6 +579,81 @@
         "anglisht": "Blue Market Mujo",
         "maqedonisht": "Блу Маркет Мујо"
     },
+
+    "point-15": {
+        "shqip": "Market Voka",
+        "anglisht": "Market Voka",
+        "maqedonisht": "Вока Маркет"
+    },
+    "point-16": {
+        "shqip": "Market Miga",
+        "anglisht": "Market Miga",
+        "maqedonisht": "Мига Маркет"
+    },
+    "point-17": {
+        "shqip": "Market Shullani",
+        "anglisht": "Market Shullani",
+        "maqedonisht": "Шуљани Маркет"
+    },
+    "point-18": {
+        "shqip": "Market Tuana",
+        "anglisht": "Market Tuana",
+        "maqedonisht": "Туана Маркет"
+    },
+    "point-19": {
+        "shqip": "Market Fresh",
+        "anglisht": "Market Fresh",
+        "maqedonisht": "Фреш Маркет"
+    },
+    "point-20": {
+        "shqip": "Market Jetmir",
+        "anglisht": "Market Jetmir",
+        "maqedonisht": "Јетмир Маркет"
+    },
+
+
+
+
+    "point-21": {
+        "shqip": "Market Bate",
+        "anglisht": "Market Bate",
+        "maqedonisht": "Бате Маркет"
+    },
+    "point-22": {
+        "shqip": "Tobako Timer",
+        "anglisht": "Tobacco Timer",
+        "maqedonisht": "Тимер Тобако"
+    },
+    "point-23": {
+        "shqip": "Tobako Zafir",
+        "anglisht": "Tobacco Zafir",
+        "maqedonisht": "Зафир Тобако"
+    },
+    "point-24": {
+        "shqip": "Hellall Aoe Market",
+        "anglisht": "Hellall Aoe Market",
+        "maqedonisht": "Хелал Аое Маркет"
+    },
+    "point-25": {
+        "shqip": "Market Drini",
+        "anglisht": "Market Drini",
+        "maqedonisht": "Дрини Маркет"
+    },
+    "point-26": {
+        "shqip": "Alb Kom Market",
+        "anglisht": "Alb Kom Market",
+        "maqedonisht": "Алб Ком Маркет"
+    },
+    "point-27": {
+        "shqip": "Market Goni",
+        "anglisht": "Market Goni",
+        "maqedonisht": "Гони Маркет"
+    },
+    "point-28": {
+        "shqip": "Market Goldi",
+        "anglisht": "Market Goldi",
+        "maqedonisht": "Голди Маркет"
+    },
     };
 
     let currentLanguage = "shqip";  // Gjuhën e paracaktuar (Shqip)
@@ -501,6 +674,10 @@ function setLanguage(language) {
 
     // Përditëso titujt e pikave të shitjes në hartë
     updatePointsOfSale();
+    updatePointsOfSale2();
+    updatePointsOfSale3();
+    updatePointsOfSale4();
+    
 }
 
 // Funksioni për të përditësuar titujt e pikave të shitjes
@@ -510,6 +687,7 @@ function updatePointsOfSale() {
         if (layer instanceof L.Marker) {
             map.removeLayer(layer);
         }
+        
     });
 
     // Shtoni markerat e rinj me titujt e përkthyer
@@ -541,7 +719,7 @@ var map = L.map('map').setView([42.009241253302484, 20.97035503293045], 14);  //
 
         // Set up the tile layer (OpenStreetMap)
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+             attribution: '&copy; <a href="index.html">ALLinONE</a> TETOVA'
         }).addTo(map);
 
         // Add some markers for points of sale
@@ -569,5 +747,172 @@ var map = L.map('map').setView([42.009241253302484, 20.97035503293045], 14);  //
                 .addTo(map)
                 .bindPopup(point.title);
         });
+
+        var map2 = L.map('map2').setView([42.010241253302484, 20.98035503293045], 14);  // Koordinatat e Tetovës për harten e dytë
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="index.html">ALLinONE</a> TETOVA'
+        }).addTo(map2);
+
+        var pointsOfSale2 = [
+        {lat: 42.00785169726698, lng: 20.985448562251783, key: "point-1"},
+        {lat: 42.004288568316056, lng: 20.989354121139012, key: "point-2"},
+        {lat: 42.007456796496385, lng: 20.977777678522386, key: "point-3"},
+
+    {lat: 42.007509642036105,  lng: 20.977457189141198, key: "point-4"},
+    {lat: 42.00784303892035,  lng: 20.97474730890338, key: "point-5"},
+    {lat: 42.00858938095211,  lng: 20.97384955625898, key: "point-6"},
+    
+    {lat: 42.00955066127898, lng:  20.970818955129303, key: "point-7"},
+    {lat: 42.00862765933506,  lng: 20.969799682205455, key: "point-8"},
+    {lat: 42.0064434862979,  lng: 20.968022513585108, key: "point-9"},
+    {lat: 42.00371546244135,  lng: 20.964125401649017, key: "point-10"},
+
+    {lat:42.004484099782914,  lng: 20.962819694801777, key: "point-15"},
+    {lat:41.99984017565431,  lng: 20.95029183097265, key: "point-16"},
+    {lat:41.995675909999555,   lng: 20.9506853364562, key: "point-17"},
+    {lat:41.98854425744369,  lng: 20.946106275517515, key: "point-18"},
+    {lat:41.984020019723154, lng: 20.94314046959481, key: "point-19"},
+    {lat:41.981178210808274,   lng: 20.941349822018264, key: "point-20"},
+        ];
+
+
+    
+
+        
+        function updatePointsOfSale2() {
+    // Fshij të gjitha markerat ekzistues nga harta
+    map2.eachLayer(function (layer) {
+        if (layer instanceof L.Marker) {
+            map2.removeLayer(layer);
+        }
+        
+    });
+
+    // Shtoni markerat e rinj me titujt e përkthyer
+    pointsOfSale2.forEach(function(point) {
+        var title = translations[point.key][currentLanguage]; // Merr titullin përkatës në gjuhën aktuale
+        L.marker([point.lat, point.lng])
+            .addTo(map2)
+            .bindPopup(title);  // Përdor titullin përkatës në popup
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        var map3 = L.map('map3').setView([42.010241253302484, 20.98035503293045], 14);  // Koordinatat e Tetovës për harten e dytë
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="index.html">ALLinONE</a> TETOVA'
+    }).addTo(map3);
+
+    var pointsOfSale3 = [
+    {lat: 42.00785169726698, lng: 20.985448562251783, key: "point-1"},
+    {lat: 42.004288568316056, lng: 20.989354121139012, key: "point-2"},
+    {lat: 42.007456796496385, lng: 20.977777678522386, key: "point-3"},
+    {lat: 42.007509642036105,  lng: 20.977457189141198, key: "point-4"},
+    {lat: 42.00784303892035,  lng: 20.97474730890338, key: "point-5"},
+    {lat: 42.00955066127898, lng:  20.970818955129303, key: "point-7"},
+    {lat: 42.00371546244135,  lng: 20.964125401649017, key: "point-10"},
+    {lat: 42.03239467210696,   lng: 21.00135961681678, key: "point-28"},
+    {lat: 42.03225886831217,   lng: 21.00124960595338, key: "point-27"},
+    {lat: 42.02117415594935,   lng: 20.984377663442334, key: "point-26"},
+    {lat: 42.0188528703227,   lng: 20.97699465876275, key: "point-25"},
+    {lat: 42.018240237446314,   lng: 20.97621645911931, key: "point-24"},
+    {lat: 42.01622744901084,   lng: 20.974708588175123, key: "point-23"},
+    {lat: 42.014151808449505,    lng: 20.971566843260543, key: "point-22"},
+    {lat: 42.009652748395496,    lng: 20.978905853380702, key: "point-21"},
+
+
+    ];
+
+
+
+
+
+    function updatePointsOfSale3() {
+    // Fshij të gjitha markerat ekzistues nga harta
+    map3.eachLayer(function (layer) {
+    if (layer instanceof L.Marker) {
+        map3.removeLayer(layer);
+    }
+
+    });
+
+    // Shtoni markerat e rinj me titujt e përkthyer
+    pointsOfSale3.forEach(function(point) {
+    var title = translations[point.key][currentLanguage]; // Merr titullin përkatës në gjuhën aktuale
+    L.marker([point.lat, point.lng])
+        .addTo(map3)
+        .bindPopup(title);  // Përdor titullin përkatës në popup
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+var map4 = L.map('map4').setView([42.010241253302484, 20.98035503293045], 14);  // Koordinatat e Tetovës për harten e dytë
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="index.html">ALLinONE</a> TETOVA'
+    }).addTo(map4);
+
+    var pointsOfSale4 = [
+    {lat: 42.03239467210696,   lng: 21.00135961681678, key: "point-28"},
+    {lat: 42.03225886831217,   lng: 21.00124960595338, key: "point-27"},
+    {lat: 42.02117415594935,   lng: 20.984377663442334, key: "point-26"},
+    {lat: 42.0188528703227,   lng: 20.97699465876275, key: "point-25"},
+    {lat: 42.018240237446314,   lng: 20.97621645911931, key: "point-24"},
+    {lat: 42.01622744901084,   lng: 20.974708588175123, key: "point-23"},
+    {lat: 42.014151808449505,    lng: 20.971566843260543, key: "point-22"},
+    {lat: 42.009652748395496,    lng: 20.978905853380702, key: "point-21"},
+    {lat: 42.00785169726698, lng: 20.985448562251783, key: "point-1"},
+    {lat: 42.004288568316056, lng: 20.989354121139012, key: "point-2"},
+    {lat: 42.007456796496385, lng: 20.977777678522386, key: "point-3"},
+    {lat: 42.00784303892035,  lng: 20.97474730890338, key: "point-5"},
+    {lat: 42.00955066127898, lng:  20.970818955129303, key: "point-7"},
+    {lat: 42.007509642036105,  lng: 20.977457189141198, key: "point-4"},
+    {lat: 42.00371546244135,  lng: 20.964125401649017, key: "point-10"},
+    ];
+
+
+
+
+
+    function updatePointsOfSale4() {
+    // Fshij të gjitha markerat ekzistues nga harta
+    map4.eachLayer(function (layer) {
+    if (layer instanceof L.Marker) {
+        map4.removeLayer(layer);
+    }
+
+    });
+
+    // Shtoni markerat e rinj me titujt e përkthyer
+    pointsOfSale4.forEach(function(point) {
+    var title = translations[point.key][currentLanguage]; // Merr titullin përkatës në gjuhën aktuale
+    L.marker([point.lat, point.lng])
+        .addTo(map4)
+        .bindPopup(title);  // Përdor titullin përkatës në popup
+    });
+}
 </script>
 </html>
