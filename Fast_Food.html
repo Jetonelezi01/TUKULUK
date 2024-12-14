@@ -30,6 +30,11 @@
   <!-- Custom styles for this template -->
   <link href="css/style.css" rel="stylesheet" />
   <!-- responsive style -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <!-- Custom styles -->
+  <link href="css/style.css" rel="stylesheet" />
 
 
 <style>
@@ -210,14 +215,7 @@
   margin: 20px;
   justify-items: center; /* Center items horizontally */
 }
-img{
-    
-            width:50;
-            height:20;
-             border-radius: 50%;
-              margin-top: 10px;
-               box-shadow: 10px -2px 15px 10px rgba(0, 0, 0, 0.3);
-        }
+
     h2{
         font-size: 24px;
     }
@@ -257,13 +255,7 @@ img{
 
   }
 
-  img{
-            width:20;
-            height:20;
-             border-radius: 50%;
-              margin-top: 10px;
-               box-shadow: 10px -2px 15px 10px rgba(0, 0, 0, 0.3);
-        }
+
     h2{
         font-size: 12px;
     }
@@ -276,7 +268,13 @@ img{
     hr{
         width: 60px;
     }
-    
+    #map {
+    width: 320px;
+    height: 400px;
+    border-radius: 0 !important;  /* Sigurohuni që nuk ka formë të rrumbullakët */
+    box-shadow: none;  /* Hiq hijen */
+    overflow: hidden;  /* Sigurohuni që asnjë element nuk del jashtë hartës */
+}
 }
 
 
@@ -345,14 +343,17 @@ main {
         }
    
 
-        img{
-            width:100;
-            height:100px;
-             border-radius: 50%;
-              margin-top: 10px;
-               box-shadow: 10px -2px 15px 10px rgba(0, 0, 0, 0.3);
+        span{
+          font-size: 28px;
         }
 
+        #map {
+    width: 100%;
+    height: 400px;
+    border-radius: 0 !important;  /* Sigurohuni që nuk ka formë të rrumbullakët */
+    box-shadow: none;  /* Hiq hijen */
+    overflow: hidden;  /* Sigurohuni që asnjë element nuk del jashtë hartës */
+}
 </style>
 
 
@@ -390,10 +391,11 @@ main {
               </li>
               
               <li class="nav-item active">
-                <a class="nav-link" href="Fast_Food.html">Fast Food<span class="sr-only">(current)</span> </a>
+                <a class="nav-link" href="Fast_Food.html">Fast Food <span class="sr-only">(current)</span> </a>
               </li>
+
               <li class="nav-item ">
-                <a class="nav-link" href="meny.html">Vendi i kerkimeve  </a>
+                <a class="nav-link" href="Meny.html">Vendi i kerkimeve </a>
               </li>
              
               <form class="form-inline">
@@ -415,10 +417,13 @@ main {
     <div class="container-fluid">
       <div class="heading_container heading_center">
         <p id="message"></p>
-        <h2 class="">
-          Fast Food <span> Pjestare</span>
+        <h2 style="margin-top: -70px;"  class="">
+  <span>Fast-Food</span>
           
         </h2>
+      </div>
+    
+  
       </div>
       <hr style="width: 185px;">
 
@@ -430,11 +435,15 @@ main {
       <div class="flip-card"  >
     <div class="flip-card-inner">
         <div class="flip-card-front">
-            <img alt="Avatar" style="width: 65px; height: 65px;" src="images\Restorantet Logo\Bocata_Logo.png" >
+            <img alt="Avatar" style="width:100;
+            height:100px;
+            border-radius: 50%;
+            margin-top: 10px;
+               box-shadow: 10px -2px 15px 10px rgba(0, 0, 0, 0.3);width: 65px; height: 65px;" src="images\studio Frizerkat\Studio_Anida_logo.png" >
             <h2 style="margin-top: 25px; font-weight: bold; ">TUCI</h2>
         </div>
         <div class="flip-card-back" onclick="window.location.href='tuci_fastfood.html'">
-            <h2 style="margin-top: 25px; font-weight: bold; ">Je i uritur?</h2>
+            <h2 style="margin-top: 25px; font-weight: bold; font-size: 19px;">Je i uritur?</h2>
             <hr>
             <p>Kliko per me shume</p>
         </div>
@@ -445,36 +454,120 @@ main {
 <div class="flip-card"  >
     <div class="flip-card-inner">
         <div class="flip-card-front">
-            <img alt="Avatar" style="width: 65px; height: 65px;" src="images\Restorantet Logo\Boss_Logo.png" >
+            <img alt="Avatar" style="width:100;
+            height:100px;
+            border-radius: 50%;
+            margin-top: 10px;
+               box-shadow: 10px -2px 15px 10px rgba(0, 0, 0, 0.3); width: 65px; height: 65px;" src="images\studio Frizerkat\Studio_Anida_logo.png" >
+            <h2 style="margin-top: 25px; font-weight: bold;  ">KIKI</h2>
+        </div>
+        <div class="flip-card-back" onclick="window.location.href='KIKI.html'">
+            <h2 style="margin-top: 25px; font-weight: bold;font-size: 19px; ">Je i uritur?</h2>
+            <hr>
+            <p>Kliko per me shume</p>
+        </div>
+    </div>
+</div>
+
+
+<div class="flip-card"  >
+    <div class="flip-card-inner">
+        <div class="flip-card-front">
+            <img alt="Avatar" style="width:100;
+            height:100px;
+            border-radius: 50%;
+            margin-top: 10px;
+               box-shadow: 10px -2px 15px 10px rgba(0, 0, 0, 0.3);width: 65px; height: 65px;" src="images\studio Frizerkat\Studio_Anida_logo.png" >
             <h2 style="margin-top: 25px; font-weight: bold; ">TIME OUT</h2>
         </div>
         <div class="flip-card-back" onclick="window.location.href='timeout_fastfood.html'">
-            <h2 style="margin-top: 25px; font-weight: bold; ">Je i uritur?</h2>
+            <h2 style="margin-top: 25px; font-weight: bold;font-size: 19px; ">Je i uritur?</h2>
             <hr>
             <p>Kliko per me shume</p>
         </div>
     </div>
 </div>
+
+
 
 
 <div class="flip-card"  >
-    <div class="flip-card-inner">
-        <div class="flip-card-front">
-            <img alt="Avatar" style="width: 65px; height: 65px;" src="images\Restorantet Logo\Napoli_logo.png" >
-            <h2 style="margin-top: 25px; font-weight: bold; ">SNAP FOOD</h2>
-        </div>
-        <div class="flip-card-back" onclick="window.location.href='snap_fastfood.html'">
-            <h2 style="margin-top: 25px; font-weight: bold; ">Je i uritur?</h2>
-            <hr>
-            <p>Kliko per me shume</p>
-        </div>
-    </div>
+  <div class="flip-card-inner">
+      <div class="flip-card-front">
+          <img alt="Avatar" style="width:100;
+          height:100px;
+          border-radius: 50%;
+          margin-top: 10px;
+             box-shadow: 10px -2px 15px 10px rgba(0, 0, 0, 0.3); width: 65px; height: 65px;" src="images\studio Frizerkat\Studio_Anida_logo.png" >
+          <h2 style="margin-top: 25px; font-weight: bold;  ">SNAP FOOD</h2>
+      </div>
+      <div class="flip-card-back" onclick="window.location.href='snap_fastfood.html'">
+          <h2 style="margin-top: 25px; font-weight: bold;font-size: 19px; ">Je i uritur?</h2>
+          <hr>
+          <p>Kliko per me shume</p>
+      </div>
+  </div>
 </div>
 
+
+
+
+
+
+
+
+     
+  
       
+    </div>
+    <hr style=" margin-top:20px; margin-bottom: 30px; width: 185px;">
+
+    <div class="container">
+
+
+      <!-- Leaflet Map -->
+      <div id="map"></div>
+      
+      <!-- Leaflet JS Script -->
+      <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+      <script>
+        // Create the map
+        var map = L.map('map').setView([42.009241253302484, 20.97035503293045], 13);
+
+// Harta OpenStreetMap
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: ' &copy; <a style="font-size:14px;" href="index.html">ALLinONE</a> TETOVA'
+}).addTo(map);
+
+// Pikat mbi hartë
+var markers = [
+    {lat: 42.019592937766014,  lng: 20.98196948083779, key: "SNAP-Food"},
+    {lat: 41.99565618115041, lng:  20.961138539587655, key: "Fast Food TUCI"},
+
+    {lat: 42.007224012751884,  lng:  20.972516677606574, key: "TIME OUT"},
+    {lat: 42.00497805490652, lng:  20.966568017707278, key: "Fast Food KIKI"},
+    
+];
+
+markers.forEach(function(marker) {
+    L.marker([marker.lat, marker.lng])  // Përdor marker dhe jo circleMarker
+        .addTo(map)
+        .bindPopup(marker.key);
+});
+      </script>
     </div>
 
     </section>
+
+
+
+
+
+
+
+
+
+
 
 
         </div>
@@ -485,98 +578,6 @@ main {
 
   <!-- info section -->
 
-  <section class="info_section layout_padding2">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6 col-lg-3 info_col">
-          <div class="info_contact">
-            <h4>
-              Address
-            </h4>
-            <div class="contact_link_box">
-              <a href="">
-                <i class="fa fa-map-marker" aria-hidden="true"></i>
-                <span>
-                  Location
-                </span>
-              </a>
-              <a href="">
-                <i class="fa fa-phone" aria-hidden="true"></i>
-                <span>
-                  Call +01 1234567890
-                </span>
-              </a>
-              <a href="">
-                <i class="fa fa-envelope" aria-hidden="true"></i>
-                <span>
-                  demo@gmail.com
-                </span>
-              </a>
-            </div>
-          </div>
-          <div class="info_social">
-            <a href="">
-              <i class="fa fa-facebook" aria-hidden="true"></i>
-            </a>
-            <a href="">
-              <i class="fa fa-twitter" aria-hidden="true"></i>
-            </a>
-            <a href="">
-              <i class="fa fa-linkedin" aria-hidden="true"></i>
-            </a>
-            <a href="">
-              <i class="fa fa-instagram" aria-hidden="true"></i>
-            </a>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3 info_col">
-          <div class="info_detail">
-            <h4>
-              Info
-            </h4>
-            <p>
-              necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful
-            </p>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-2 mx-auto info_col">
-          <div class="info_link_box">
-            <h4>
-              Links
-            </h4>
-            <div class="info_links">
-              <a class="active" href="index.html">
-                Home
-              </a>
-              <a class="" href="about.html">
-                About
-              </a>
-              <a class="" href="service.html">
-                Services
-              </a>
-              <a class="" href="why.html">
-                Why Us
-              </a>
-              <a class="" href="team.html">
-                Team
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3 info_col ">
-          <h4>
-            Subscribe
-          </h4>
-          <form action="#">
-            <input type="text" placeholder="Enter email" />
-            <button type="submit">
-              Subscribe
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- end info section -->
 
@@ -607,7 +608,7 @@ main {
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
   </script>
   <!-- End Google Map -->
-  <script src="\js\Searching.js"></script>
+  <script src="js\Searching.js"></script>
 
 
 
@@ -615,8 +616,7 @@ main {
 
 
   <script>
-
-
+   
 
 
 
@@ -639,22 +639,6 @@ main {
         adjustFontSize();
 
 
-  
-
-
-
 </script>
-
-
-
-
-
-
 </body>
-
-
-
-
-
-
 </html>

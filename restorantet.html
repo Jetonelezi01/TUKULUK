@@ -30,6 +30,11 @@
   <!-- Custom styles for this template -->
   <link href="css/style.css" rel="stylesheet" />
   <!-- responsive style -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <!-- Custom styles -->
+  <link href="css/style.css" rel="stylesheet" />
 
 
 <style>
@@ -210,16 +215,9 @@
   margin: 20px;
   justify-items: center; /* Center items horizontally */
 }
-img{
-    
-            width:50;
-            height:20;
-             border-radius: 50%;
-              margin-top: 10px;
-               box-shadow: 10px -2px 15px 10px rgba(0, 0, 0, 0.3);
-        }
+
     h2{
-        font-size: 24px;
+        font-size:16px;
     }
   
 }
@@ -257,13 +255,7 @@ img{
 
   }
 
-  img{
-            width:20;
-            height:20;
-             border-radius: 50%;
-              margin-top: 10px;
-               box-shadow: 10px -2px 15px 10px rgba(0, 0, 0, 0.3);
-        }
+
     h2{
         font-size: 12px;
     }
@@ -276,7 +268,13 @@ img{
     hr{
         width: 60px;
     }
-    
+    #map {
+    width: 320px;
+    height: 400px;
+    border-radius: 0 !important;  /* Sigurohuni që nuk ka formë të rrumbullakët */
+    box-shadow: none;  /* Hiq hijen */
+    overflow: hidden;  /* Sigurohuni që asnjë element nuk del jashtë hartës */
+}
 }
 
 
@@ -345,14 +343,17 @@ main {
         }
    
 
-        img{
-            width:100;
-            height:100px;
-             border-radius: 50%;
-              margin-top: 10px;
-               box-shadow: 10px -2px 15px 10px rgba(0, 0, 0, 0.3);
+        span{
+          font-size: 28px;
         }
 
+        #map {
+    width: 100%;
+    height: 400px;
+    border-radius: 0 !important;  /* Sigurohuni që nuk ka formë të rrumbullakët */
+    box-shadow: none;  /* Hiq hijen */
+    overflow: hidden;  /* Sigurohuni që asnjë element nuk del jashtë hartës */
+}
 </style>
 
 
@@ -390,11 +391,11 @@ main {
               </li>
               
               <li class="nav-item active">
-                <a class="nav-link" href="RESTORANTET.html">Restorantet <span class="sr-only">(current)</span> </a>
+                <a class="nav-link" href="Delivery.html">Delivery <span class="sr-only">(current)</span> </a>
               </li>
 
               <li class="nav-item ">
-                <a class="nav-link" href="meny.html">vendi i kerkimeve </a>
+                <a class="nav-link" href="Meny.html">Vendi i kerkimeve </a>
               </li>
              
               <form class="form-inline">
@@ -415,11 +416,14 @@ main {
   <section class="team_section layout_padding">
     <div class="container-fluid">
       <div class="heading_container heading_center">
-        <p id="message"></p>
-        <h2 class="">
-          Restorantet <span> Pjestare</span>
+        <p  id="message"></p>
+        <h2 style="margin-top: -70px;"  class="">
+  <span>RESTORANTET</span>
           
         </h2>
+      </div>
+    
+  
       </div>
       <hr style="width: 185px;">
 
@@ -431,13 +435,17 @@ main {
       <div class="flip-card"  >
     <div class="flip-card-inner">
         <div class="flip-card-front">
-            <img alt="Avatar" style="width: 65px; height: 65px;" src="images\Restorantet Logo\Bocata_Logo.png" >
+            <img alt="Avatar" style="width:100;
+            height:100px;
+            border-radius: 50%;
+            margin-top: 10px;
+               box-shadow: 10px -2px 15px 10px rgba(0, 0, 0, 0.3);width: 65px; height: 65px;" src="images\Restorantet Logo\Bocata_Logo.png" >
             <h2 style="margin-top: 25px; font-weight: bold; ">BOCATA</h2>
         </div>
         <div class="flip-card-back" onclick="window.location.href='Bocata_rest.html'">
-            <h2 style="margin-top: 25px; font-weight: bold; ">Je i uritur?</h2>
-            <hr>
-            <p>Kliko per me shume</p>
+            <h2 style="margin-top: 25px; font-weight: bold; font-size: 13px;">Je i uritur?</h2>
+            <hr style="margin-top: 1px;">
+            <p style="margin-top: -10px;">Kliko per me shume</p>
         </div>
     </div>
 </div>
@@ -446,14 +454,18 @@ main {
 <div class="flip-card"  >
     <div class="flip-card-inner">
         <div class="flip-card-front">
-            <img alt="Avatar" style="width: 65px; height: 65px;" src="images\Restorantet Logo\Boss_Logo.png" >
-            <h2 style="margin-top: 25px; font-weight: bold; ">BOSS</h2>
+            <img alt="Avatar" style="width:100;
+            height:100px;
+            border-radius: 50%;
+            margin-top: 10px;
+               box-shadow: 10px -2px 15px 10px rgba(0, 0, 0, 0.3); width: 65px; height: 65px;" src="images\Restorantet Logo\Boss_Logo.png" >
+            <h2 style="margin-top: 25px; font-weight: bold;  ">BOSS</h2>
         </div>
         <div class="flip-card-back" onclick="window.location.href='Boss_rest.html'">
-            <h2 style="margin-top: 25px; font-weight: bold; ">Je i uritur?</h2>
-            <hr>
-            <p>Kliko per me shume</p>
-        </div>
+          <h2 style="margin-top: 25px; font-weight: bold; font-size: 13px;">Je i uritur?</h2>
+          <hr style="margin-top: 1px;">
+          <p style="margin-top: -10px;">Kliko per me shume</p>
+      </div>
     </div>
 </div>
 
@@ -461,59 +473,82 @@ main {
 <div class="flip-card"  >
     <div class="flip-card-inner">
         <div class="flip-card-front">
-            <img alt="Avatar" style="width: 65px; height: 65px;" src="images\Restorantet Logo\Napoli_logo.png" >
+            <img alt="Avatar" style="width:100;
+            height:100px;
+            border-radius: 50%;
+            margin-top: 10px;
+               box-shadow: 10px -2px 15px 10px rgba(0, 0, 0, 0.3);width: 65px; height: 65px;" src="images\Restorantet Logo\Napoli_logo.png" >
             <h2 style="margin-top: 25px; font-weight: bold; ">NAPOLI</h2>
         </div>
         <div class="flip-card-back" onclick="window.location.href='napoli_rest.html'">
-            <h2 style="margin-top: 25px; font-weight: bold; ">Je i uritur?</h2>
-            <hr>
-            <p>Kliko per me shume</p>
-        </div>
+          <h2 style="margin-top: 25px; font-weight: bold; font-size: 13px;">Je i uritur?</h2>
+          <hr style="margin-top: 1px;">
+          <p style="margin-top: -10px;">Kliko per me shume</p>
+      </div>
     </div>
 </div>
 
 
-<div class="flip-card"  >
-    <div class="flip-card-inner">
-        <div class="flip-card-front">
-            <img alt="Avatar" style="width: 65px; height: 65px;" src="images\Restorantet Logo\Lisec_Logo.jpg" >
-            <h2 style="margin-top: 25px; font-weight: bold;  font-size: 19px;">PARAJSA E SHARRIT</h2>
-        </div>
-        <div class="flip-card-back" onclick="window.location.href='parajsaesharit_rest.html'">
-            <h2 style="margin-top: 25px; font-weight: bold; ">Je i uritur?</h2>
-            <hr>
-            <p>Kliko per me shume</p>
-        </div>
-    </div>
-</div>
-
-
-<div class="flip-card"  >
-    <div class="flip-card-inner">
-        <div class="flip-card-front">
-            <img alt="Avatar" style="width: 65px; height: 65px;" src="images\Restorantet Logo\Bakal_Logo.jpg" >
-            <h2 style="margin-top: 25px; font-weight: bold; ">BAKAL</h2>
-        </div>
-        <div class="flip-card-back" onclick="window.location.href='Bakal_rest.html'">
-            <h2 style="margin-top: 25px; font-weight: bold; ">Je i uritur?</h2>
-            <hr>
-            <p>Kliko per me shume</p>
-        </div>
-    </div>
-</div>
 
 
 <div class="flip-card"  >
   <div class="flip-card-inner">
       <div class="flip-card-front">
-          <img alt="Avatar" style="width: 65px; height: 65px;" src="\images\Restorantet Logo\Dante_Logo.jpg" >
+          <img alt="Avatar" style="width:100;
+          height:100px;
+          border-radius: 50%;
+          margin-top: 10px;
+             box-shadow: 10px -2px 15px 10px rgba(0, 0, 0, 0.3);width: 65px; height: 65px;" src="images\Restorantet Logo\Lisec_Logo.jpg" >
+                       <h2 style="margin-top: 25px; font-weight: bold; ">PARAJSA E SHARRIT</h2>
+                    </div>
+                    <div class="flip-card-back" onclick="window.location.href='parajsaesharit_rest.html'">
+        <h2 style="margin-top: 25px; font-weight: bold; font-size: 13px;">Je i uritur?</h2>
+        <hr style="margin-top: 1px;">
+        <p style="margin-top: -10px;">Kliko per me shume</p>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="flip-card"  >
+  <div class="flip-card-inner">
+      <div class="flip-card-front">
+          <img alt="Avatar" style="width:100;
+          height:100px;
+          border-radius: 50%;
+          margin-top: 10px;
+             box-shadow: 10px -2px 15px 10px rgba(0, 0, 0, 0.3);width: 65px; height: 65px;" src="images\Restorantet Logo\Bakal_Logo.jpg" >
+          <h2 style="margin-top: 25px; font-weight: bold; ">BAKAL</h2>
+      </div>
+      <div class="flip-card-back" onclick="window.location.href='Bakal_rest.html'">
+        <h2 style="margin-top: 25px; font-weight: bold; font-size: 13px;">Je i uritur?</h2>
+        <hr style="margin-top: 1px;">
+        <p style="margin-top: -10px;">Kliko per me shume</p>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<div class="flip-card"  >
+  <div class="flip-card-inner">
+      <div class="flip-card-front">
+          <img alt="Avatar" style="width:100;
+          height:100px;
+          border-radius: 50%;
+          margin-top: 10px;
+             box-shadow: 10px -2px 15px 10px rgba(0, 0, 0, 0.3);width: 65px; height: 65px;" src="\images\Restorantet Logo\Dante_Logo.jpg" >
           <h2 style="margin-top: 25px; font-weight: bold; ">DANTE</h2>
       </div>
       <div class="flip-card-back" onclick="window.location.href='Dante_rest.html'">
-          <h2 style="margin-top: 25px; font-weight: bold; ">Je i uritur?</h2>
-          <hr>
-          <p>Kliko per me shume</p>
-      </div>
+        <h2 style="margin-top: 25px; font-weight: bold; font-size: 13px;">Je i uritur?</h2>
+        <hr style="margin-top: 1px;">
+        <p style="margin-top: -10px;">Kliko per me shume</p>
+    </div>
   </div>
 </div>
 
@@ -522,29 +557,38 @@ main {
 <div class="flip-card"  >
   <div class="flip-card-inner">
       <div class="flip-card-front">
-          <img alt="Avatar" style="width: 65px; height: 65px;" src="\images\Restorantet Logo\Delfin_Logo.jpg" >
+          <img alt="Avatar" style="width:100;
+          height:100px;
+          border-radius: 50%;
+          margin-top: 10px;
+             box-shadow: 10px -2px 15px 10px rgba(0, 0, 0, 0.3);width: 65px; height: 65px;" src="\images\Restorantet Logo\Delfin_Logo.jpg" >
           <h2 style="margin-top: 25px; font-weight: bold; ">DELFIN</h2>
       </div>
       <div class="flip-card-back" onclick="window.location.href='Delfin_rest.html'">
-          <h2 style="margin-top: 25px; font-weight: bold; ">Je i uritur?</h2>
-          <hr>
-          <p>Kliko per me shume</p>
-      </div>
+        <h2 style="margin-top: 25px; font-weight: bold; font-size: 13px;">Je i uritur?</h2>
+        <hr style="margin-top: 1px;">
+        <p style="margin-top: -10px;">Kliko per me shume</p>
+    </div>
   </div>
 </div>
+
 
 
 <div class="flip-card"  >
   <div class="flip-card-inner">
       <div class="flip-card-front">
-          <img alt="Avatar" style="width: 65px; height: 65px;" src="\images\Restorantet Logo\Driada_Logo.jpg" >
+          <img alt="Avatar" style="width:100;
+          height:100px;
+          border-radius: 50%;
+          margin-top: 10px;
+             box-shadow: 10px -2px 15px 10px rgba(0, 0, 0, 0.3);width: 65px; height: 65px;" src="\images\Restorantet Logo\Driada_Logo.jpg" >
           <h2 style="margin-top: 25px; font-weight: bold; ">DRIADA</h2>
       </div>
       <div class="flip-card-back" onclick="window.location.href='Driada_rest.html'">
-          <h2 style="margin-top: 25px; font-weight: bold; ">Je i uritur?</h2>
-          <hr>
-          <p>Kliko per me shume</p>
-      </div>
+        <h2 style="margin-top: 25px; font-weight: bold; font-size: 13px;">Je i uritur?</h2>
+        <hr style="margin-top: 1px;">
+        <p style="margin-top: -10px;">Kliko per me shume</p>
+    </div>
   </div>
 </div>
 
@@ -552,14 +596,18 @@ main {
 <div class="flip-card"  >
   <div class="flip-card-inner">
       <div class="flip-card-front">
-          <img alt="Avatar" style="width: 65px; height: 65px;" src="\images\Restorantet Logo\Ema_Logo.jpg" >
+          <img alt="Avatar" style="width:100;
+          height:100px;
+          border-radius: 50%;
+          margin-top: 10px;
+             box-shadow: 10px -2px 15px 10px rgba(0, 0, 0, 0.3);width: 65px; height: 65px;" src="\images\Restorantet Logo\Ema_Logo.jpg" >
           <h2 style="margin-top: 25px; font-weight: bold; ">EMA</h2>
       </div>
       <div class="flip-card-back" onclick="window.location.href='Ema_rest.html'">
-          <h2 style="margin-top: 25px; font-weight: bold; ">Je i uritur?</h2>
-          <hr>
-          <p>Kliko per me shume</p>
-      </div>
+        <h2 style="margin-top: 25px; font-weight: bold; font-size: 13px;">Je i uritur?</h2>
+        <hr style="margin-top: 1px;">
+        <p style="margin-top: -10px;">Kliko per me shume</p>
+    </div>
   </div>
 </div>
 
@@ -567,74 +615,98 @@ main {
 <div class="flip-card"  >
   <div class="flip-card-inner">
       <div class="flip-card-front">
-          <img alt="Avatar" style="width: 65px; height: 65px;" src="\images\Restorantet Logo\Fratelli_Logo.jpg"" >
+          <img alt="Avatar" style="width:100;
+          height:100px;
+          border-radius: 50%;
+          margin-top: 10px;
+             box-shadow: 10px -2px 15px 10px rgba(0, 0, 0, 0.3);width: 65px; height: 65px;" src="\images\Restorantet Logo\Fratelli_Logo.jpg" >
           <h2 style="margin-top: 25px; font-weight: bold; ">FRATELLI</h2>
       </div>
       <div class="flip-card-back" onclick="window.location.href='Fratelli_rest.html'">
-          <h2 style="margin-top: 25px; font-weight: bold; ">Je i uritur?</h2>
-          <hr>
-          <p>Kliko per me shume</p>
-      </div>
+        <h2 style="margin-top: 25px; font-weight: bold; font-size: 13px;">Je i uritur?</h2>
+        <hr style="margin-top: 1px;">
+        <p style="margin-top: -10px;">Kliko per me shume</p>
+    </div>
   </div>
 </div>
-
 
 <div class="flip-card"  >
   <div class="flip-card-inner">
       <div class="flip-card-front">
-          <img alt="Avatar" style="width: 65px; height: 65px;" src="\images\Restorantet Logo\Grand_Logo.png" >
+          <img alt="Avatar" style="width:100;
+          height:100px;
+          border-radius: 50%;
+          margin-top: 10px;
+             box-shadow: 10px -2px 15px 10px rgba(0, 0, 0, 0.3);width: 65px; height: 65px;" src="\images\Restorantet Logo\Grand_Logo.png" >
           <h2 style="margin-top: 25px; font-weight: bold; ">GRAND</h2>
       </div>
       <div class="flip-card-back" onclick="window.location.href='Grand_rest.html'">
-          <h2 style="margin-top: 25px; font-weight: bold; ">Je i uritur?</h2>
-          <hr>
-          <p>Kliko per me shume</p>
-      </div>
+        <h2 style="margin-top: 25px; font-weight: bold; font-size: 13px;">Je i uritur?</h2>
+        <hr style="margin-top: 1px;">
+        <p style="margin-top: -10px;">Kliko per me shume</p>
+    </div>
   </div>
 </div>
+
+
 
 
 <div class="flip-card"  >
   <div class="flip-card-inner">
       <div class="flip-card-front">
-          <img alt="Avatar" style="width: 65px; height: 65px;" src="\images\Restorantet Logo\Kurtishi_Logo.jpg" >
-        <h2 style="margin-top: 25px; font-weight: bold; font-size: 19px;">KURTISHI 1 & 2</h2>
+          <img alt="Avatar" style="width:100;
+          height:100px;
+          border-radius: 50%;
+          margin-top: 10px;
+             box-shadow: 10px -2px 15px 10px rgba(0, 0, 0, 0.3);width: 65px; height: 65px;" src="\images\Restorantet Logo\Kurtishi_Logo.jpg" >
+          <h2 style="margin-top: 25px; font-weight: bold; ">KURTISHI 1 & 2</h2>
       </div>
       <div class="flip-card-back" onclick="window.location.href='Kurtishi_rest.html'">
-          <h2 style="margin-top: 25px; font-weight: bold; ">Je i uritur?</h2>
-          <hr>
-          <p>Kliko per me shume</p>
-      </div>
+        <h2 style="margin-top: 25px; font-weight: bold; font-size: 13px;">Je i uritur?</h2>
+        <hr style="margin-top: 1px;">
+        <p style="margin-top: -10px;">Kliko per me shume</p>
+    </div>
   </div>
 </div>
-
+     
 
 <div class="flip-card"  >
   <div class="flip-card-inner">
       <div class="flip-card-front">
-          <img alt="Avatar" style="width: 65px; height: 65px;" src="images\Restorantet Logo\Bakal_Logo.jpg" >
-          <h2 style="margin-top: 25px; font-weight: bold; font-size: 19px;">LA GONDOLA</h2>
+          <img alt="Avatar" style="width:100;
+          height:100px;
+          border-radius: 50%;
+          margin-top: 10px;
+             box-shadow: 10px -2px 15px 10px rgba(0, 0, 0, 0.3);width: 65px; height: 65px;" src="\images\Restorantet Logo\Bakal_Logo.jpg" >
+          <h2 style="margin-top: 25px; font-weight: bold; ">LA GONDOLA</h2>
       </div>
       <div class="flip-card-back" onclick="window.location.href='Lagondola_rest.html'">
-          <h2 style="margin-top: 25px; font-weight: bold; ">Je i uritur?</h2>
-          <hr>
-          <p>Kliko per me shume</p>
-      </div>
+        <h2 style="margin-top: 25px; font-weight: bold; font-size: 13px;">Je i uritur?</h2>
+        <hr style="margin-top: 1px;">
+        <p style="margin-top: -10px;">Kliko per me shume</p>
+    </div>
   </div>
 </div>
+
+
+
 
 
 <div class="flip-card"  >
   <div class="flip-card-inner">
       <div class="flip-card-front">
-          <img alt="Avatar" style="width: 65px; height: 65px;" src="images\Restorantet Logo\Molino_Logo.png" >
+          <img alt="Avatar" style="width:100;
+          height:100px;
+          border-radius: 50%;
+          margin-top: 10px;
+             box-shadow: 10px -2px 15px 10px rgba(0, 0, 0, 0.3);width: 65px; height: 65px;" src="\images\Restorantet Logo\Molino_Logo.png" >
           <h2 style="margin-top: 25px; font-weight: bold; ">MOLINO</h2>
       </div>
       <div class="flip-card-back" onclick="window.location.href='Molino_rest.html'">
-          <h2 style="margin-top: 25px; font-weight: bold; ">Je i uritur?</h2>
-          <hr>
-          <p>Kliko per me shume</p>
-      </div>
+        <h2 style="margin-top: 25px; font-weight: bold; font-size: 13px;">Je i uritur?</h2>
+        <hr style="margin-top: 1px;">
+        <p style="margin-top: -10px;">Kliko per me shume</p>
+    </div>
   </div>
 </div>
 
@@ -645,15 +717,62 @@ main {
 
 
 
-     
+
+
+
+
   
       
     </div>
+    <hr style=" margin-top:20px; margin-bottom: 30px; width: 185px;">
+
+    <div class="container">
 
 
+      <!-- Leaflet Map -->
+      <div id="map"></div>
       
+      <!-- Leaflet JS Script -->
+      <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+      <script>
+        // Create the map
+        var map = L.map('map').setView([42.009241253302484, 20.97035503293045], 13);
+
+// Harta OpenStreetMap
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: ' &copy; <a style="font-size:14px;" href="index.html">ALLinONE</a> TETOVA'
+}).addTo(map);
+
+// Pikat mbi hartë
+var markers = [
+    {lat: 42.00760803951976,  lng:  20.975565175103707, key: "BOCATA"},
+    {lat: 41.99755520826004,  lng:  20.96106564797333, key: "BOSS"},
+    {lat: 42.008594231502265,  lng:  20.97405130854292, key: "NAPOLI"},
+    {lat: 42.0111531265726,  lng:  20.919264856789365, key: "PARAJSA E SHARRIT"},
+    {lat: 41.96869262635684,  lng:  20.97950691075018, key: "BAKAL"},
+    {lat: 42.00890173429129,  lng:  20.97818709860628, key: "DANTE"},
+    {lat: 42.00867106917589,  lng:  20.973704331342525, key: "DELFIN"},
+    {lat: 42.01850229513796,  lng:  20.935820210439804, key: "DRIADA"},
+    {lat: 41.99710629425885,  lng:  21.011976571602844, key: "EMA"},
+    {lat: 42.00948388510547,  lng:  20.97617527253737, key: "FRATELLI"},
+    {lat: 42.00799732059576,  lng:  20.974388422223704, key: "GRAND"},
+    {lat: 41.998300697418266,  lng:  20.95216068006634, key: "KURTISHI 1"},
+    {lat: 42.01654568133767,  lng:  20.979036280067564, key: "KURTISHI 2"},
+    {lat: 42.00606523342902,  lng:  20.979442053204988, key: "LA GONDOLA"},
+    {lat: 41.99175833127489,  lng:  20.95971310890163, key: "MOLINO"},
+
+    
+];
+
+markers.forEach(function(marker) {
+    L.marker([marker.lat, marker.lng])  // Përdor marker dhe jo circleMarker
+        .addTo(map)
+        .bindPopup(marker.key);
+});
 
 
+      </script>
+    </div>
 
     </section>
 
@@ -676,98 +795,6 @@ main {
 
   <!-- info section -->
 
-  <section class="info_section layout_padding2">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6 col-lg-3 info_col">
-          <div class="info_contact">
-            <h4>
-              Address
-            </h4>
-            <div class="contact_link_box">
-              <a href="">
-                <i class="fa fa-map-marker" aria-hidden="true"></i>
-                <span>
-                  Location
-                </span>
-              </a>
-              <a href="">
-                <i class="fa fa-phone" aria-hidden="true"></i>
-                <span>
-                  Call +01 1234567890
-                </span>
-              </a>
-              <a href="">
-                <i class="fa fa-envelope" aria-hidden="true"></i>
-                <span>
-                  demo@gmail.com
-                </span>
-              </a>
-            </div>
-          </div>
-          <div class="info_social">
-            <a href="">
-              <i class="fa fa-facebook" aria-hidden="true"></i>
-            </a>
-            <a href="">
-              <i class="fa fa-twitter" aria-hidden="true"></i>
-            </a>
-            <a href="">
-              <i class="fa fa-linkedin" aria-hidden="true"></i>
-            </a>
-            <a href="">
-              <i class="fa fa-instagram" aria-hidden="true"></i>
-            </a>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3 info_col">
-          <div class="info_detail">
-            <h4>
-              Info
-            </h4>
-            <p>
-              necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful
-            </p>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-2 mx-auto info_col">
-          <div class="info_link_box">
-            <h4>
-              Links
-            </h4>
-            <div class="info_links">
-              <a class="active" href="index.html">
-                Home
-              </a>
-              <a class="" href="about.html">
-                About
-              </a>
-              <a class="" href="service.html">
-                Services
-              </a>
-              <a class="" href="why.html">
-                Why Us
-              </a>
-              <a class="" href="team.html">
-                Team
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3 info_col ">
-          <h4>
-            Subscribe
-          </h4>
-          <form action="#">
-            <input type="text" placeholder="Enter email" />
-            <button type="submit">
-              Subscribe
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- end info section -->
 
@@ -829,22 +856,6 @@ main {
         adjustFontSize();
 
 
-  
-
-
-
 </script>
-
-
-
-
-
-
 </body>
-
-
-
-
-
-
 </html>

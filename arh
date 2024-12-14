@@ -90,3 +90,93 @@ var map = L.map('map').setView([41.9981, 21.4254], 13);  // Latitude and Longitu
                 .addTo(map)
                 .bindPopup(point.title);
         });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>ALLinONE</title>
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <!-- Custom styles -->
+  <link href="css/style.css" rel="stylesheet" />
+
+  <style>
+    /* Ensure map has a specific size */
+    #map {
+      width: 100%;
+      height: 500px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Content -->
+  <div class="container">
+    <h1 class="text-center">Our Partners</h1>
+
+    <!-- Leaflet Map -->
+    <div id="map"></div>
+    
+    <!-- Leaflet JS Script -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+      // Create the map
+      var map = L.map('map').setView([51.505, -0.09], 13);  // Coordinates for London (or change as needed)
+
+      // Add OpenStreetMap tile layer
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(map);
+
+      // Add some markers
+      var markers = [
+        [51.505, -0.09, "Marker 1"],
+        [51.515, -0.1, "Marker 2"],
+        [51.525, -0.11, "Marker 3"]
+      ];
+
+      markers.forEach(function(marker) {
+        L.marker([marker[0], marker[1]])
+          .addTo(map)
+          .bindPopup(marker[2])
+          .openPopup();
+      });
+    </script>
+  </div>
+
+</body>
+
+</html>
