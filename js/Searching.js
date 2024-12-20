@@ -6,8 +6,8 @@
         if (searchTerm) {
             // Lista e restoranteve dhe URL-të përkatëse
             var restaurants = {
-                "restorant": "restorantet.html",
-                "restaurant": "restorantet.html",
+                "restorant": "Restorantet.html",
+                "restaurant": "Restorantet.html",
                 "bocata": "Bocata_rest.html",
                 "bocaten": "Bocata_rest.html",
                 "grand": "Grand_rest.html",
@@ -50,5 +50,6 @@
         }
     });
     
-    
+
+
     

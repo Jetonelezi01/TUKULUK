@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <link rel="shortcut icon" href="images/favicon.png" type="">
+
+  <title> ALLinONE </title>
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+  <!--owl slider stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+
+  <!-- font awesome style -->
+  <link href="css/font-awesome.min.css" rel="stylesheet" />
+
+  <!-- Custom styles for this template -->
+  <link href="css/style.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <!-- Custom styles -->
+  <link href="css/style.css" rel="stylesheet" />
+
+
+<style>
+
+
+
+
+
+
+
+
+.img1{
+    width: 50%;
+    height: 40%;
+    margin-top: 35px;
+
+}
+h5,  a{
+    font-size: 23px;
+    color:rgb(255, 255, 255)
+}
+h5:hover, a:hover {
+    transform: scale(1.3); /* Zmadhoje elementin në 10% më të madh */
+    color: #007bff;
+}
+
+
+
+main {
+            padding: 20px;
+        }
+
+        
+        #restorantet {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            padding-left: 20px;
+        }
+        .biznes {
+            border: 3px solid #ccc;
+            border-radius: 52px; /* Rrit radiusin */
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            width: 200px;
+            height: 200px;
+            transition: transform 0.2s, box-shadow 0.2s; /* Shtojmë animacion për hije */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shtojmë hije */
+            background-color:#002c5c00
+        }
+        .biznes:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgb(0, 0, 0); /* Rrit hijen kur kalon mbi të */
+            
+        }
+        .biznes img {
+            max-width: 50%;
+            border: 2px solid rgb(173, 173, 173);
+            border-radius: 40px;
+        }
+        h3{
+          margin-top:25px;
+          color: white;
+          font-family:Georgia, 'Times New Roman', Times, serif;
+          font-size: 30px;
+          
+        }
+        h3:hover{
+          font-size: 35px;
+          text-shadow: 0 24px 19px black;
+        }
+   
+
+        span{
+          font-size: 28px;
+        }
+
+
+        .box {
+          margin-left: 450px;
+    padding: 20px;
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+    background: linear-gradient(to bottom, #c87c12, #002143); /* Gradient from top to bottom */
+    width: 320px;
+    text-align: center;
+    color: white;
+}
+
+.social {
+    margin: 10px 0;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.social i {
+    margin-right: 10px; /* Space between icon and text */
+    font-size: 20px; /* Icon size */
+}
+
+.handle {
+    font-weight: bold;
+    color: #f1f1f1;
+    font-size: 18px;
+}
+blockquote {
+  font-size: 13px;
+  font-family: 'Georgia', serif;
+  font-style: italic;
+  border-left: 4px solid #00aaff; /* Vija e majtë */
+  padding-left: 8px; /* Heq çdo hapësirë brenda para tekstit */
+  margin-left: 0; /* Heq çdo margjinë të jashtme */
+  margin-right: 0; /* Heq margjinën e djathtë për të pasur një rresht të ngushtë */
+  color: #ffffff; /* Ngjyra e tekstit */
+  line-height: 1.5; /* Mund ta përshtatni sipas nevojës */
+  display: inline-block; /* Siguron që blockquote të jetë një element inline dhe të jetë më i ngushtë */
+}
+.no-overlap {
+    display: block;         /* Siguron që fotografia të trajtohet si element bllokues */
+    margin-top: 20px;       /* Krijon hapësirë mes box dhe fotos */
+    margin-bottom: 0px;     /* Heq çdo hapësirë pas fotos */
+    clear: both;            /* Siguron që fotografia të mos mbivendoset mbi ndonjë element tjetër */
+}
+@media (max-width: 440px) {
+
+  .box {
+          margin-left: 30px;
+    padding: 20px;
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+    background: linear-gradient(to bottom, #c87c12, #002143); /* Gradient from top to bottom */
+    width: 320px;
+    text-align: center;
+    color: white;
+}
+}
+
+</style>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body class="sub_page">
+
+  <div class="hero_area">
+
+    <div class="hero_bg_box">
+      <div class="bg_img_box">
+        <img src="images/hero-bg.png" alt="">
+      </div>
+    </div>
+
+    <!-- header section strats -->
+    <header class="header_section">
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg custom_nav-container ">
+          <a class="navbar-brand" href="index.html">
+            <span>
+              ALL in ONE
+            </span>
+          </a>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class=""> </span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav  ">
+              <li class="nav-item ">
+                <a class="nav-link" href="index.html">ALL-in-ONE <span class="sr-only">(current)</span> </a>
+              </li>
+              
+              <li class="nav-item active">
+                <a class="nav-link" href="rreth-nesh.html">Rreth Nesh </a>
+              </li>
+
+              <li class="nav-item ">
+                <a class="nav-link" href="Meny.html">Vendi i kerkimeve </a>
+              </li>
+             
+              <form class="form-inline">
+                <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
+                  <i class="fa fa-search" aria-hidden="true"></i>
+                </button>
+              </form>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <!-- end header section -->
+  </div>
+
+  <!-- team section -->
+   
+  <section class="team_section layout_padding">
+    <div class="container-fluid">
+      <div class="heading_container heading_center">
+        <p  id="message"></p>
+        <h2 style="margin-top: -70px; text-shadow: 4px 4px 4px rgba(11, 64, 197, 0.6);"  class="">
+  <span >RRETH NESH</span>
+          
+        </h2>
+      </div>
+    
+  
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
+  
+      
+    </div>
+    <hr style=" margin-top:20px; margin-bottom: 30px; width: 185px;">
+
+    <h2 style="font-family: monospace; font-size: 16px; margin: 26px; line-height: 24px; ">Ne ju ofrojme qasje te shpejte dhe me efektive ne ate qe ju kerkoni duke klikuar.</h2>
+    <h1 style="font-family: c; font-size: 26px;"> <i>Si Filloi Ideja?</i></h1>
+
+    <img src="images\Logo ikona\idea logo.png" alt="Foto me hije"   style="width: 150px; 
+    height: 150px; 
+    border-radius: 8px; 
+    filter:drop-shadow(0px 0px 1px rgb(32, 32, 173))">
+    
+    <h2 style="font-family: monospace; font-size: 16px; margin: 26px; line-height: 24px; ">Ideje filloi nga nje student, duke menduar dicka me te mire dhe me funksionale per qytetin tone. 
+      Nga vershtiresite per te gjetur gjera qe i duheshin ai lodhej duke kerkuar gjithandej duke humbur nje pjes te kohes nga dita. Nga studimet qe ai bente ne Shkenca Kompjuterike i shfrytezoi njohurite 
+      qe i kishte marre dhe krijoi kete platforme.</h2>
+      
+
+      <img src="images\Logo ikona\trust.png" alt="Foto me hije"   style="width: 350px; 
+      height: 350px; 
+      border-radius: 8px; 
+      filter:drop-shadow(0px 0px 3px rgb(157, 240, 69))">
+
+<hr style="margin-top: -100px;">
+<blockquote >
+  "Besoni ne ate qe beni, nese ju humbet besimi ri-krijoje."
+</blockquote>
+
+<h2 style="font-family: monospace; font-size: 16px; margin: 26px; padding-top: 15px; line-height: 24px; ">Per cdo sugjerim, kritik, verrejtje apo kerkese ju lutem mos hezitoni dhe na kontaktoni </h2>
+
+<img src="images\Logo ikona\PHONE clicking 2.png" alt="1"   style="width: 200px; 
+      height: 200px; 
+      border-radius: 8px; 
+      margin-bottom: -22px;
+      filter:drop-shadow(0px 0px 1px rgb(32, 32, 173))">
+
+
+
+    <div class="box">
+      <p class="social"><i class="fab fa-instagram"></i> Instagram :&nbsp;<span class="handle">allinone</span></p>
+      <p class="social"><i class="fab fa-facebook"></i> Facebook :&nbsp; <span class="handle">ALLinONE</span></p>
+      <p class="social"><i class="fas fa-envelope"></i> E-mail :&nbsp; <span class="handle">allinone@gmail.com</span></p>
+  </div>
+
+
+    <div class="container">
+
+
+      <!-- Leaflet Map -->
+      
+      <!-- Leaflet JS Script -->
+      <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+      <script>
+        // Create the map
+        var map = L.map('map').setView([42.009241253302484, 20.97035503293045], 13);
+
+// Harta OpenStreetMap
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: ' &copy; <a style="font-size:14px;" href="index.html">ALLinONE</a> TETOVA'
+}).addTo(map);
+
+// Pikat mbi hartë
+var markers = [
+    {lat: 42.019592937766014,  lng: 20.98196948083779, key: "SNAP-Food"},
+    {lat: 41.99565618115041, lng:  20.961138539587655, key: "Fast Food TUCI"},
+
+    {lat: 42.007224012751884,  lng:  20.972516677606574, key: "TIME OUT"},
+    {lat: 42.00497805490652, lng:  20.966568017707278, key: "Fast Food KIKI"},
+    
+];
+
+markers.forEach(function(marker) {
+    L.marker([marker.lat, marker.lng])  // Përdor marker dhe jo circleMarker
+        .addTo(map)
+        .bindPopup(marker.key);
+});
+      </script>
+    </div>
+
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- end team section -->
+
+  <!-- info section -->
+
+
+  <!-- end info section -->
+
+  <!-- footer section -->
+  <section class="footer_section">
+    <div class="container">
+      <p>
+        &copy; <span id="displayYear"></span> All Rights Reserved By
+        <a href="https://html.design/">Free Html Templates</a>
+      </p>
+    </div>
+  </section>
+  <!-- footer section -->
+
+  <!-- jQery -->
+  <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+  <!-- popper js -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+  </script>
+  <!-- bootstrap js -->
+  <script type="text/javascript" src="js/bootstrap.js"></script>
+  <!-- owl slider -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
+  </script>
+  <!-- custom js -->
+  <script type="text/javascript" src="js/custom.js"></script>
+  <!-- Google Map -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
+  </script>
+  <!-- End Google Map -->
+  <script src="js\Searching.js"></script>
+
+
+
+
+
+
+  <script>
+   
+
+
+
+    function adjustFontSize() {
+            const bizneset = document.querySelectorAll('.biznes h3');
+            bizneset.forEach(biznes => {
+                if (biznes.textContent.length <= 6) {
+                    biznes.style.fontSize = '24px'; // Madhësi më e vogël për emrat e gjatë
+                } else if(biznes.textContent.length >=8) {
+                    biznes.style.fontSize = '20px'; // Madhësi fillestare
+                }
+                else{
+                  biznes.style.fontSize = '30px';
+                }
+  
+            });
+        }
+
+        // Thirret funksioni për të rregulluar madhësinë e fontit
+        adjustFontSize();
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transportation Options</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+  
+
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #007BFF;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    margin: 0;
+}
+
+main {
+    padding: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #007BFF;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    th, td {
+        font-size: 14px;
+        padding: 6px;
+    }
+}
+    </style>
+    
+</head>
+<body>
+    <header>
+        <h1>Transportation Options</h1>
+        <p>Find the best transport services between cities</p>
+    </header>
+    
+    <main>
+        <table id="transport-table">
+            <thead>
+                <tr>
+                    <th>Company</th>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Price</th>
+                    <th>Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Rows will be inserted here by JavaScript -->
+            </tbody>
+        </table>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Transportation Services</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+
+// script.js
+document.addEventListener('DOMContentLoaded', function() {
+    const transportData = [
+        { company: 'Euro Turist', from: 'Tetov', to: 'Gostivar', price: '$50', time: '2h 30m' },
+        { company: 'Company B', from: 'Tetov', to: 'Shkup', price: '$45', time: '2h 15m' },
+        { company: 'Company C', from: 'Tetov', to: 'Struge', price: '$55', time: '2h 45m' },
+        { company: 'Company D', from: 'Tetov', to: 'Diber', price: '$40', time: '2h 10m' },
+    ];
+
+    const tableBody = document.querySelector('#transport-table tbody');
+
+    transportData.forEach(option => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${option.company}</td>
+            <td>${option.from}</td>
+            <td>${option.to}</td>
+            <td>${option.price}</td>
+            <td>${option.time}</td>
+        `;
+        tableBody.appendChild(row);
+    });
+});
+    </script>
+</body>
+</html>
