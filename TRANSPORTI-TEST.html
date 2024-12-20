@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transporti i Pollogut - Tetove</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        #container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        #map {
+            width: 100%;
+            height: 500px;
+            margin-top: 20px;
+        }
+
+        #info {
+            margin-top: 20px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        select {
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+        #bus-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #bus-list li {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+
+        .schedule {
+            margin-top: 20px;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .schedule h3 {
+            margin: 0 0 10px;
+        }
+
+        .schedule table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .schedule table, .schedule th, .schedule td {
+            border: 1px solid #ddd;
+        }
+
+        .schedule th, .schedule td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        button {
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Transporti i Pollogut - Tetove</h1>
+
+        <!-- Dropdown për të zgjedhur fshatin fillestar dhe destinacionin -->
+        <select id="start-village">
+            <option value="zhelina">Zheline</option>
+            <option value="tearce">Tearce</option>
+            <option value="trebosh">Trebosh</option>
+        </select>
+
+        <select id="end-village">
+            <option value="tearce">Tearce</option>
+            <option value="zhelina">Zheline</option>
+            <option value="trebosh">Trebosh</option>
+        </select>
+
+        <button id="show-route-btn" onclick="showRoute()">Shfaq Rrugën</button>
+        <button id="clear-selection-btn" onclick="clearSelection()" style="display: none;">Heq Selektimin</button>
+
+        <div id="map"></div>
+
+        <!-- Informacion për minibusat dhe oraret -->
+        <div id="info">
+            <h2>Minibusat</h2>
+            <ul id="bus-list">
+                <li><b>Zhelina-Transport</b> - Zheline -> Tetove</li>
+                <li><b>Tearc-Tetove</b> - Tearce -> Tetove</li>
+                <li><b>Trebosh-Tetove</b> - Trebosh -> Tetove</li>
+            </ul>
+        </div>
+
+        <!-- Orari për linjat -->
+        <div id="schedule-container" class="schedule">
+            <h3>Orari i Minibusëve</h3>
+            <div id="schedule"></div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        // Krijimi i hartës
+        var map = L.map('map', {
+            center: [42.00946976214805, 20.973000398946397],
+            zoom: 10,
+            maxZoom: 18,
+            minZoom: 9
+        });
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Stacionet dhe linjat për minibuset
+
+        // Zhelina-Tetove (koordinata dhe stacione)
+        var zhelinaRoute = [ 
+            { name: "Zheline - Shkolla", lat: 41.975157158790516, lng: 21.05533083203638, title: "Zheline - Shkolla" },
+            { name: "Zheline - Varrezat", lat: 41.98031050985894,  lng: 21.058397005915303, title: "Zheline - Varrezat" },
+            { name: "Zheline - Qender", lat: 41.98249282840889,  lng: 21.062421486018682, title: "Zheline - Qender" },
+            { name: "Tetove - Zheline", lat: 42.00641571074497,  lng: 20.979324972835894, title: "Tetove - Zheline" }
+        ];
+
+        // Tearce-Tetove (koordinata dhe stacione)
+        var tearceRoute = [
+            { name: "Tearce - Xhamia", lat: 42.08001419086728,  lng: 21.05503640355233, title: "Tearce - Xhamia" },
+            { name: "Tearce - Shkolla", lat: 42.076526448424985, lng: 21.052887433829998, title: "Tearce - Shkolla" },
+            { name: "Tetove - Tearce", lat: 42.006517481692185, lng: 20.979009796742385, title: "Tetove - Tearce" }
+        ];
+
+        // Trebosh-Tetove (koordinata dhe stacione)
+        var treboshRoute = [
+            { name: "Trebosh - RD Medica", lat: 42.014597540439716,  lng: 21.034206889586343, title: "Trebosh - RD Medica" },
+            { name: "Trebosh - Qender ", lat: 42.01196357113303,  lng: 21.027713796100095, title: "Trebosh - Qender" },
+            { name: "Tetove - Trebosh", lat:42.00624627052409,  lng: 20.97977267440197, title: "Tetove - Trebosh" }
+        ];
+
+        // Pikat fillestare për të shfaqur të gjitha pikat
+        var allStations = zhelinaRoute.concat(tearceRoute, treboshRoute);
+
+        // Strehimi i të gjitha pikave në hartë
+        var allMarkers = [];
+
+        function showAllStations() {
+            allStations.forEach(function(station) {
+                var marker = L.marker([station.lat, station.lng]).addTo(map);
+                marker.bindPopup("<b>" + station.name + "</b>");
+                allMarkers.push(marker);
+            });
+        }
+
+        // Funksioni për të shtuar rrugët dhe ngjyrat
+        var activeRoutes = [];
+
+        function addRoute(route, color) {
+            var latLngs = route.map(function(station) {
+                return [station.lat, station.lng];
+            });
+
+            var polyline = L.polyline(latLngs, { color: color }).addTo(map);
+            activeRoutes.push(polyline);
+
+            route.forEach(function(station) {
+                var marker = L.marker([station.lat, station.lng]).addTo(map);
+                marker.bindPopup("<b>" + station.name + "</b>");
+            });
+        }
+
+        // Funksioni për të hequr linjat e tjera dhe për të krijuar rrugën e kërkuar
+        function clearRoutes() {
+            activeRoutes.forEach(function(route) {
+                map.removeLayer(route);
+            });
+            activeRoutes = [];
+        }
+
+        // Funksioni që shfaq rrugën e zgjedhur
+      // Funksioni që kontrollon nëse është bërë selektimi i fshatrave
+function checkSelection() {
+    var startVillage = document.getElementById('start-village').value;
+    var endVillage = document.getElementById('end-village').value;
+
+    if (startVillage && endVillage && startVillage !== endVillage) {
+        // Shfaq butonin "Shfaq Rrugën" vetëm kur janë zgjedhur fshatrat
+        document.getElementById('show-route-btn').style.display = 'inline-block';
+    } else {
+        // Fshi butonin "Shfaq Rrugën" nëse nuk janë bërë zgjedhjet
+        document.getElementById('show-route-btn').style.display = 'none';
+    }
+}
+
+// Funksioni që shfaq rrugën
+function showRoute() {
+    var startVillage = document.getElementById('start-village').value;
+    var endVillage = document.getElementById('end-village').value;
+
+    clearRoutes();
+
+    // Fshi pikat e tjera dhe shto vetëm ato të zgjedhura
+    allMarkers.forEach(marker => map.removeLayer(marker));
+    allMarkers = [];
+
+    if (startVillage === 'zhelina' && endVillage === 'tearce') {
+        addRoute(zhelinaRoute, 'blue');
+        addRoute(tearceRoute, 'green');
+        displaySchedule('zhelina-tetove');
+    } else if (startVillage === 'zhelina' && endVillage === 'trebosh') {
+        addRoute(zhelinaRoute, 'blue');
+        addRoute(treboshRoute, 'red');
+        displaySchedule('zhelina-tetove');
+    } else if (startVillage === 'tearce' && endVillage === 'zhelina') {
+        addRoute(tearceRoute, 'green');
+        addRoute(zhelinaRoute, 'blue');
+        displaySchedule('tearce-tetove');
+    } else if (startVillage === 'tearce' && endVillage === 'trebosh') {
+        addRoute(tearceRoute, 'green');
+        addRoute(treboshRoute, 'red');
+        displaySchedule('tearce-tetove');
+    } else if (startVillage === 'trebosh' && endVillage === 'zhelina') {
+        addRoute(treboshRoute, 'red');
+        addRoute(zhelinaRoute, 'blue');
+        displaySchedule('trebosh-tetove');
+    } else if (startVillage === 'trebosh' && endVillage === 'tearce') {
+        addRoute(treboshRoute, 'red');
+        addRoute(tearceRoute, 'green');
+        displaySchedule('trebosh-tetove');
+    }
+
+    // Fshi butonin "Shfaq Rrugën" dhe shfaq butonin "Heq Selektimin"
+    document.getElementById('show-route-btn').style.display = 'none';
+    document.getElementById('clear-selection-btn').style.display = 'inline-block';
+}
+
+// Funksioni për të hequr selektimin
+function clearSelection() {
+    // Rindiz butonat dhe selektimet
+    location.reload();
+    document.getElementById('start-village').selectedIndex = 0;
+    document.getElementById('end-village').selectedIndex = 0;
+
+    // Fshi çdo rrugë të shfaqur dhe fsheh butonin "Heq Selektimin"
+    clearRoutes();
+    document.getElementById('clear-selection-btn').style.display = 'none';
+    document.getElementById('show-route-btn').style.display = 'none'; 
+}
+
+// Thirrni këtë funksion për të kontrolluar nëse janë bërë zgjedhje të fshatrave
+document.getElementById('start-village').addEventListener('change', checkSelection);
+document.getElementById('end-village').addEventListener('change', checkSelection);
+
+// Fillimisht kontrolloni nëse janë bërë zgjedhje të fshatrave
+checkSelection();
+
+        // Funksioni për të shfaqur orarin
+        function displaySchedule(route) {
+            var scheduleHtml = '';
+
+            if (route === 'zhelina-tetove') {
+                scheduleHtml = `
+                    <table>
+                        <tr><th>Linje</th><th>Ora e Nisjes</th><th>Ora e Mbërritjes</th></tr>
+                        <tr><td>Zheline - Tetove</td><td>07:00</td><td>08:00</td></tr>
+                        <tr><td>Tetove - Zheline</td><td>08:30</td><td>09:00</td></tr>
+                    </table>
+                `;
+            } else if (route === 'tearce-tetove') {
+                scheduleHtml = `
+                    <table>
+                        <tr><th>Linje</th><th>Ora e Nisjes</th><th>Ora e Mbërritjes</th></tr>
+                        <tr><td>Tearce - Tetove</td><td>07:00</td><td>08:00</td></tr>
+                        <tr><td>Tetove - Tearce</td><td>08:30</td><td>09:00</td></tr>
+                    </table>
+                `;
+            } else if (route === 'trebosh-tetove') {
+                scheduleHtml = `
+                    <table>
+                        <tr><th>Linje</th><th>Ora e Nisjes</th><th>Ora e Mbërritjes</th></tr>
+                        <tr><td>Trebosh - Tetove</td><td>07:00</td><td>08:00</td></tr>
+                        <tr><td>Tetove - Trebosh</td><td>08:30</td><td>09:00</td></tr>
+                    </table>
+                `;
+            }
+
+            document.getElementById('schedule').innerHTML = scheduleHtml;
+        }
+
+        // Shfaq të gjitha pikat në fillim
+        showAllStations();
+    </script>
+</body>
+</html>
