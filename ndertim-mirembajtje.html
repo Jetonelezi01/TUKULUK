@@ -32,7 +32,7 @@
   <!-- responsive style -->
   <link href="css/responsive.css" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-<style>
+  <style>
     body {
             font-family: sans-serif, sans-serif;
             margin: 0;
@@ -48,7 +48,7 @@
         .menu_header {
             background-color: #007BFF; /* Ngjyra e header-it */
             color: white;
-            padding: 20px 0;
+            padding: 0px 0;
         }
 
         .menu_logo {
@@ -117,9 +117,10 @@
 hr {
     border: none; /* Remove default border */
             height: 2px; /* Set the thickness */
-            background-color: #ffffff; /* Set the color */
+            background-color: black; /* Set the color */
             width: 28%; /* Set the width to 50% of the container */
-            margin: 20px auto; 
+
+            padding-bottom: 1px;
         }
 
 
@@ -283,6 +284,7 @@ hr {
 }
 
 .categories-container {
+  
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -296,12 +298,13 @@ hr {
 }
 
 .category-item img {
-  width: 100%; /* Kategoria do të ketë madhësinë e plotë të kutisë */
+  width: 25%; /* Kategoria do të ketë madhësinë e plotë të kutisë */
   height: auto;
   border-radius: 20px; /* Radius i imët për këndet */
   box-shadow: 0 4px 8px rgba(255, 10, 10, 0.2); /* Hije e lehtë për pamje më të mirë */
   transition: transform 0.3s ease-in-out; /* Animacion për efekt */
   background-color: white;
+  
 }
 
 .category-item img:hover {
@@ -313,11 +316,14 @@ hr {
   color: #000000;
   margin-top: 10px;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  
 }
 h2{
+  margin-top: 70px;
   font-size: 80px;
   text-align: center;
-  color:white;
+  color:black;
+
 }
 
 /* Për ekrane më të vogla */
@@ -333,11 +339,29 @@ h2{
   hr{
     margin-top: 5px;
     width: 70px;
+    
   }
 
   .category-description{
     font-size: 14px;
   }
+
+
+  .category-item img {
+    width: 100%; /* Kategoria do të ketë madhësinë e plotë të kutisë */
+    height: auto;
+    border-radius: 20px; /* Radius i imët për këndet */
+    box-shadow: 0 4px 8px rgba(255, 10, 10, 0.2); /* Hije e lehtë për pamje më të mirë */
+    transition: transform 0.3s ease-in-out; /* Animacion për efekt */
+    background-color: white;
+    margin-top: 50px;
+
+}
+
+hr{
+  background-color: white;
+}
+
   
 }
 
@@ -409,7 +433,7 @@ h2{
         <img src="https://th.bing.com/th?id=OIP.yC5HOVTe4JBzyP1X_wABOwHaDt&w=350&h=175&c=8&rs=1&qlt=90&o=6&dpr=1.5&pid=3.1&rm=2" alt="Maqedonisht" title="Maqedonisht" onclick="setLanguage('maqedonisht')">
     </div>
     <h2 data-translate-key="ndertim_mirmbajtje" >Ndertim & Mirembajtje</h2>
-    <hr style="background-color: white; width: 140px;">
+    <hr>
   </div>
     <section class="categories-section">
 
@@ -516,34 +540,25 @@ h2{
           </a>
           </div>
 
-          <div class="category-item">
-            <a href="Elektricist.html" class="category-link">
-            <img src="images/foto-logo/harta.jpeg" alt="Harta" class="category-image">
-            <p class="category-description" data-translate-key="harta">Harta</p>
-          </a>
-          </div>
+   
      
       </div>
     </section>
 
-
-
-
-
-
-
-  <!-- footer section -->
-  <section class="footer_section">
-    <div class="container">
-      <p>
-        &copy; <span id="displayYear"></span> All Rights Reserved By
-        <a href="https://html.design/">Free Html Templates</a>
-      </p>
-    </div>
-  </section>
-  <!-- footer section -->
-
-  <!-- jQery -->
+    <section class="footer_section" style="background-color:#002247">
+      <div class="container">
+        <p style="font-size: 14px; color : white;
+        text-shadow: 0px 0px 10px cyan,
+        0px 0px 20px cyan, 
+        0px 0px 40px cyan,
+        0px 0px 80px cyan;">
+          &copy; <span style="font-size: 14px;" id="displayYear"></span> All Rights Reserved By
+          <a href="tetovaclick.site" style="color: blue; font-size: 16px;">ALL-in-ONE</a><br>
+          <span style="font-size: 14px;" id="displayYear"></span>     Powered by
+          <a href="tetovaclick.site" style="color: blue; font-size: 16px;">ALPHA-PROGRAMMING</a>
+        </p>
+      </div>
+    </section>
   <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
   <!-- popper js -->
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">

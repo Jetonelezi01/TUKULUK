@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shto Shpallje</title>
+   <style>
+    body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f4f4f4;
+}
+
+h1 {
+    color: #333;
+}
+
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    font-weight: bold;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0 20px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+hr {
+    margin-top: 30px;
+    border: 1px solid #ddd;
+}
+
+body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        header {
+            background-color: #002c6d;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        header nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        header nav ul li {
+            display: inline;
+            margin: 0 20px;
+        }
+
+        header nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        section {
+            padding: 20px;
+        }
+
+        h2 {
+            color: #333;
+        }
+        .language-selector {
+            display: flex;
+            justify-content: flex-start;
+            gap: 10px;
+            margin: 20px;
+        }
+
+        .language-selector img {
+            cursor: pointer;
+            width: 30px; /* Gjatësia e flamurit */
+            height: 20px; /* Lartësia e flamurit */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .language-selector img:hover {
+            opacity: 0.7;
+        }
+
+        html {
+    scroll-behavior: smooth;
+}
+        
+
+   </style>
+   
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+
+<!-- fonts style -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+<!--owl slider stylesheet -->
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+
+<!-- font awesome style -->
+<link href="css/font-awesome.min.css" rel="stylesheet" />
+
+<!-- Custom styles for this template -->
+<link href="css/style.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+</head>
+<body>
+
+    <header>
+        <a class="navbar-brand" href="index.html">  
+            <span>
+              ALL in ONE
+            </span>
+          </a>
+    
+        <nav>
+            <ul>
+                <li><a href="Meny.html" data-translate-key="p1">Vendi i kerkimeve</a></li>
+                <li><a href="blej.html" data-translate-key="p2">Blej produkt</a></li>
+           
+            </ul>
+        </nav>
+        <div class="language-selector">
+          <img src="https://th.bing.com/th?id=OSK.HEROo1Hy4-nUoE3huqwGw_SjCFSLjqRVU_x_mgmpLklPuMU&w=296&h=176&c=1&rs=2&o=6&dpr=1.5&pid=SANGAM" alt="Shqip" title="Shqip" onclick="setLanguage('shqip')">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg" alt="English" title="English" onclick="setLanguage('anglisht')">
+          <img src="https://th.bing.com/th?id=OIP.yC5HOVTe4JBzyP1X_wABOwHaDt&w=350&h=175&c=8&rs=1&qlt=90&o=6&dpr=1.5&pid=3.1&rm=2" alt="Maqedonisht" title="Maqedonisht" onclick="setLanguage('maqedonisht')">
+      </div>
+    </header>
+
+    
+    <h2 style="text-align: center; margin-top: 15px;" data-translate-key="p3">Shitje</h2>
+    <div style="text-align: center; margin-left: 20px;" class="filters">
+  
+  </div>
+<hr style="background-color: black;">
+<br>  
+
+
+
+
+
+    <form action="insert.php" method="POST" enctype="multipart/form-data">
+        <label for="emri" data-translate-key="p4" >Emri i Produktit:</label>
+        <input type="text" name="emri" required><br><br>
+
+        <label for="kategoria" data-translate-key="p5" >Kategoria:</label>
+        <select name="kategoria" required>
+            <option value="veture" data-translate-key="p6">Vetura</option>
+            <option value="veshje" data-translate-key="p7">Veshje</option>
+            <option value="elektronike" data-translate-key="p8">Elektronike</option>
+            <option value="kopsht" data-translate-key="p9">Kopsht</option>
+            <option value="sport" data-translate-key="p10">Sport</option>
+        </select><br><br>
+
+        <label for="cmimi" data-translate-key="p11">Çmimi:</label>
+        <input type="number" name="cmimi" required><br><br>
+
+        <label for="info" data-translate-key="p12">Informacion më shumë:</label>
+        <textarea name="info" rows="4" required></textarea><br><br>
+
+        <label for="emri_shitesit" data-translate-key="p13">Emri i Shitësit:</label>
+        <input type="text" name="emri_shitesit" required><br><br>
+
+        <label for="kontakt_shitesit" data-translate-key="p14">Kontakti i Shitësit:</label>
+        <input type="text" name="kontakt_shitesit" required><br><br>
+
+        <label for="fotos" data-translate-key="p15">Ngarko deri në 10 foto (Më shumë se 10 nuk lejohet):</label>
+        <input type="file" name="fotos[]" multiple accept="image/*" required><br><br>
+
+        <button type="submit" data-translate-key="p16">Dërgo</button>
+    </form>
+
+
+
+<script>
+    const translations = {
+        "p1": {
+            "shqip": "Vendi i Kerkimeve",
+            "anglisht": "Search Place",
+            "maqedonisht": "MAC"
+        },
+        "p2": {
+            "shqip": "Blej Produkt",
+            "anglisht": "Buy Product",
+            "maqedonisht": "MAC"
+        },
+        "p3": {
+            "shqip": "Shitje",
+            "anglisht": "Sell",
+            "maqedonisht": "MAC"
+        },
+        "p4": {
+            "shqip": "Emri i produktit:",
+            "anglisht": "Name of Product:",
+            "maqedonisht": "MAC"
+        },
+        "p5": {
+            "shqip": "Kategoria:",
+            "anglisht": "Categorie:s",
+            "maqedonisht": "MAC"
+        },
+        "p6": {
+            "shqip": "Vetura",
+            "anglisht": "Cars",
+            "maqedonisht": "MAC"
+        },
+        "p7": {
+            "shqip": "Veshje",
+            "anglisht": "Clothes",
+            "maqedonisht": "MAC"
+        },
+        "p8": {
+            "shqip": "Elektronik",
+            "anglisht": "Electronic",
+            "maqedonisht": "MAC"
+        },
+        "p9": {
+            "shqip": "Kopsht",
+            "anglisht": "Garden",
+            "maqedonisht": "MAC"
+        },
+        "p10": {
+            "shqip": "Sport",
+            "anglisht": "Sports",
+            "maqedonisht": "MAC"
+        },
+
+        "p11": {
+            "shqip": "Cmimi:",
+            "anglisht": "Price:",
+            "maqedonisht": "MAC"
+        },
+        "p12": {
+            "shqip": "Informacon me shume:",
+            "anglisht": "More Information:",
+            "maqedonisht": "MAC"
+        },
+
+        "p13": {
+            "shqip": "Emri i shitesit",
+            "anglisht": "Name of saler",
+            "maqedonisht": "MAC"
+        },
+        "p14": {
+            "shqip": "Numri i shitesit:",
+            "anglisht": "Number :",
+            "maqedonisht": "MAC"
+        },
+        "p15": {
+            "shqip": "Ngarko deri në 10 foto (Më shumë se 10 nuk lejohet):",
+            "anglisht": "Upload up to 10 photos (more than 10 not allowed):",
+            "maqedonisht": "MAC"
+        },
+
+        "p16": {
+            "shqip": "Postoje:",
+            "anglisht": "Post:",
+            "maqedonisht": "MAC"
+        },
+    };
+
+    let currentLanguage = "shqip";  // Gjuhën e paracaktuar (Shqip)
+
+// Funksioni për të vendosur gjuhën
+function setLanguage(language) {
+    currentLanguage = language;  // Përdorimi i gjuhës së zgjedhur
+
+    // Ndrysho tekstin në të gjithë faqen që ka atributin data-translate-key
+    const elements = document.querySelectorAll("[data-translate-key]");  // Gjej të gjitha elementet që kanë atributin data-translate-key
+    elements.forEach(element => {
+        const key = element.getAttribute("data-translate-key");  // Merr çelësin përkthimi
+        const translation = translations[key];  // Merr përkthimin për çelësin
+        if (translation) {
+            element.innerText = translation[currentLanguage];  // Ndrysho tekstin në element
+        }
+    });
+  }
+</script>
+
+</body>
+</html>

@@ -145,7 +145,8 @@ hr {
        
   .containerr1 {
  grid-template-columns:1fr; /* Dy kolona të barabarta */
-       
+           /* Ndryshoni në kolona për celularë */
+
   }
   .boxx1 {
         flex-direction: column; /* Qëndron vertikalisht */
@@ -174,6 +175,70 @@ body {
 
 
 
+
+
+
+
+
+
+
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.9);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+  border: solid white;
+  border-radius: 62px;
+}
+
+.price {
+  color: grey;
+  font-size: 22px;
+}
+
+.card button {
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    border-radius: 30px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: 0.5s;
+    overflow: hidden;
+    backdrop-filter: blur(15px);
+}
+
+.card button:hover {
+  opacity: 0.7;
+}
+
+
+
+.product-button {
+    background-color: black;
+    color: teal;
+  border-color: teal;
+  box-shadow: 0 0 5px teal, 0 0 10px teal, 0 0 20px teal;
+}
+
+/* Efekti hover për butonin */
+.product-button:hover {
+    background-color: black;
+}
+
+/* Përshkrimi i mëtejshëm është i fshehur fillimisht */
+.more-info {
+    
+    color: #444;
+    display: none;
+    margin-top: 15px;
+    line-height: 1.5;
+}
+
+
     </style>
 
 
@@ -198,69 +263,53 @@ body {
       <div class="container-fluid">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
           <a class="navbar-brand" href="index.html">
-            
             <span>
               ALL in One
             </span>
           </a>
-
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class=""> </span>
-          </button>
-
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav  ">
-              <li class="nav-item ">
-                <a class="nav-link" href="index.html">Ballina</a>
-              </li>
-              <li class="nav-item active">
-                <a class="nav-link" href="Fast_Food.html">Fast Food<span class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="Meny.html">Vendi i kerkimeve</a>
-              </li>
-        
-              <form class="form-inline">
-                <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
-                  <i class="fa fa-search" aria-hidden="true"></i>
-                </button>
-              </form>
-            </ul>
-          </div>
-        </nav>
-      </div>
+          <a style="color: rgb(216, 216, 216);" href ="Agjension.html">Kthehu te Agjensionet</a>
     </header>
    
     
 
 
-    <h1 style="color: rgb(244, 159, 32); text-align: center; margin-top: 20px; font-size: 40px; "> TIME OUT</h1>
+
+
+
+
+
+
+
+
+
+
+
+    <h1 style="color: rgb(244, 159, 32); text-align: center; margin-top: 20px; font-size: 40px; ">AMIR TOURS</h1>
     <hr style="width: 250px;">
-    <h3 style="text-align: center; color: white;">Menyn e keni me poshte</h3>
+    <h3 style="text-align: center; color: white;">Ofertat i keni me poshte</h3>
 
 <div class="containerr1">
   
 <div class="boxx1">
 
-    
  <h3 style="color: wheat; text-align: left; margin-left: 25px;">Ketu e keni lokacionin</h3>
- <iframe  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d18066.002652216237!2d20.9470039860206!3d42.00719940000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1353f18ae9e35103%3A0xcbf962468d0188a!2sFast%20Food%20Time%20Out!5e1!3m2!1sen!2smk!4v1730054454507!5m2!1sen!2smk" width="350" height="200" style="border: 5px solid #000 ; "   allowfullscreen=""  referrerpolicy="no-referrer-when-downgrade"></iframe>
+ <iframe  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d185.28987917881992!2d20.96982002177165!3d42.008042526113435!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1353f1a3b61d3dc7%3A0xaafdb4e05c50329f!2sAmirturs!5e0!3m2!1sen!2smk!4v1738866047453!5m2!1sen!2sm" width="350" height="200" style="border: 5px solid #000 ; "   allowfullscreen=""  referrerpolicy="no-referrer-when-downgrade"></iframe>
 </div>
 
 <div class="boxx1" style="display: flex; flex-direction: column; align-items: center;">
-    <p style=" color: white; font-size: 30px;">info</p>
+    <p style="text-align: center; color: white; font-size: 30px;">info</p>
     <hr>
     <div style="display: flex; justify-content: center; margin-top: 10px;">
-    <a href="https://www.facebook.com/timeoutjusteat/" target="_blank">
+    <a href="https://www.facebook.com/amir.turs/" target="_blank">
         <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" style="width: 24px; height: 24px; margin: 0 10px;">
     </a>
-    <a href="https://www.instagram.com/explore/locations/200074460347505/fast-food-tuci/" target="_blank">
+    <a href="https://www.instagram.com/explore/locations/113461450530486/amir-tours/" target="_blank">
         <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" style="width: 24px; height: 24px; margin: 0 10px;">
     </a>
-    <a href="mailto:youremail@example.com">
+    <a href="mailto:amirturs@hotmail.com">
         <i class="fas fa-envelope" style="font-size: 24px; margin: 0 10px;"></i>
     </a>
-    <a href="tel:+044 352 200    ">
+    <a href="tel:+38971 371 296">
         <i class="fas fa-phone" style="font-size: 24px; margin: 0 10px;"></i>
     </a>
 </div>
@@ -269,13 +318,25 @@ body {
 
 
 
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 
+
+
+
+
+
+
+
+
+
+
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 </div>
 <!-- KETu GJENDET MENYJA E Mengjesit     -->
 
@@ -286,115 +347,108 @@ body {
 <section class="menu" id="menu">
     <div class="heading">
         <h1 style="margin-top: -200px;"></h1>
-       <span>Ushqimet qe i posedon Fast Food</span>
-       <h3>TIME OUT</h3>
+       <span>Ofertat qe posedon agjensioni</span>
+       <h3>AMIR TOURS</h3>
     </div>
-    <div class="swiper menu-slider">
-       <div class="swiper-wrapper">
-          <div class="swiper-slide slide">
-             <h3 class="title">Tost paster</h3>
-             <div class="box-container">
-                <div class="box">
-                   <div class="info">
-                      <h3>Soxhuk</h3>
-                      <p></p>
-                   </div>
-                   <div class="price">100 den</div>
-                </div>
-                <div class="box">
-                   <div class="info">
-                      <h3>Sallam</h3>
-                      <p></p>
-                   </div>
-                   <div class="price">100 den</div>
-                </div>
-                <div class="box">
-                   <div class="info">
-                      <h3>kachkavall</h3>
-                      <p></p>
-                   </div>
-                   <div class="price">100 den</div>
-                </div>
-                <div class="box">
-                   <div class="info">
-                      <h3>Mix</h3>
-                      <p>Sallam, Soxhuk, Kachkavall</p>
-                   </div>
-                   <div class="price">120 den</div>
-                </div>
-            
+   
 
-          </div>
 
-          <div class="swiper menu-slider">
-            <div class="swiper-wrapper">
-               <div class="swiper-slide slide">
-                  <h3 class="title">Tost me Pomfrit</h3>
-                  <div class="box-container">
-                     <div class="box">
-                        <div class="info">
-                           <h3>Soxhuk</h3>
-                           <p></p>
-                        </div>
-                        <div class="price">100 den</div>
-                     </div>
-                     <div class="box">
-                        <div class="info">
-                           <h3>Sallam</h3>
-                           <p></p>
-                        </div>
-                        <div class="price">100 den</div>
-                     </div>
-                     <div class="box">
-                        <div class="info">
-                           <h3>Kachkavall</h3>
-                           <p></p>
-                        </div>
-                        <div class="price">100 den</div>
-                     </div>
-                     <div class="box">
-                        <div class="info">
-                           <h3>Karbonara</h3>
-                           <p>Sallam, Soxhuk, Kachkavall</p>
-                        </div>
-                        <div class="price">120 den</div>
-                     </div>
-                  
 
-                  
-          <div class="swiper menu-slider">
-            <div class="swiper-wrapper">
-               <div class="swiper-slide slide">
-                  <h3 class="title">HotDog</h3>
-                  <div class="box-container">
-                     <div class="box">
-                        <div class="info">
-                           <h3>HotDog</h3>
-                           <p></p>
-                        </div>
-                        <div class="price">80 den</div>
-                     </div>
-                  <a href="Fast_Food.html"  class="btn">Kthehu te Fast Food</a>
+
+    <div class="card">
+        <img src="images\agjension\amir-turs\oferta1.jpg" alt="Denim Jeans" style="width:100%; border-radius: 61px; border: double black; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);">
+        <br>
+        <h1 style="font-size:26px ;">ISTANBUL</h1>
+        <p class="price">110 € / p</p>
+        <p>3 dite / 2 nete</p>
+
+        <button class="product-button" style="width: 70%; text-align: center; margin-left: 50px; margin-bottom: 10px; margin-top: 10px;"   onclick="toggleDescription(this)">Lexo me shume</button>
+            <p class="more-info" > Oferta Perfshine <br>
+                Nisja : Cdo te enjte ora : 16:00<br>
+                Kthimi : E diel ora : 16:00<br>
+                -----------------------------------<br>
+                ◦ Akomodim ne Hotel ne 📍Laleli📍<br>
+                ◦ Mengjesi i pergatitur ne Hotel <br>
+                ------------------<br>
+                Vizitat ne <br>
+                ◦ Xhamia Suleymanye<br>
+                ◦ Xhamia Sultan Ahmed<br>
+                ◦ Aya Sofia <br>
+                ◦ Outleti 212 <br>
+                ◦ Venezia Mega Outlet <br>
+                ◦ Ortakoy <br>
+                ◦ Taksim <br>
+                ◦ Shetitje ne Bosfor <br>
+                ◦ Eminonu <br>
+                ◦ Pierre Loti  <br>
+                ------------------<br>
+                🗣 Shoqerues profesional gjate udhetimit <br>
+                🚌 Udhetimi behet me autobus komod <br>
+                🛜 Wifi ne autobus <br>
+                ⛔ Passaporta duhet te kete me shume se 6 muaj afat! <br>
+                🔴 Per rezervime duhet te lini kapar <br>
+                👶 0-2 Vjec -> gratis ( nese doni ulese 50 € ) <br>
+                🧒 3 - 10 Vjec -> 70 € <br>
+
+                </p>
+
+
+
+      </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+                          
+                       </div>
+                  <a style="margin-top: 20px ;" href="Agjension.html"  class="btn">Kthehu te Agjensionet</a>
  </section>
+
+ <section class="footer_section" style="background-color:#002247">
+    <div class="container">
+      <p style="font-size: 14px; color : white;
+      text-shadow: 0px 0px 10px cyan,
+      0px 0px 20px cyan, 
+      0px 0px 40px cyan,
+      0px 0px 80px cyan;">
+        &copy; <span style="font-size: 14px;" id="displayYear"></span> All Rights Reserved By
+        <a href="tetovaclick.site" style="color: blue; font-size: 16px;">ALL-in-ONE</a><br>
+        <span style="font-size: 14px;" id="displayYear"></span>     Powered by
+        <a href="tetovaclick.site" style="color: blue; font-size: 16px;">ALPHA-PROGRAMMING</a>
+      </p>
+    </div>
+  </section>
 </body>
 <script src="js/script.js"></script>
+
+<script>
+    lightGallery(document.querySelector('.gallery .gallery-container'));
+    function toggleDescription(button) {
+     // Gjejmë elementin me klasën 'more-info' që është pas butonit
+     var moreInfo = button.nextElementSibling;
+ 
+     // Nëse përshkrimi është i fshehur, e shfaqim, në të kundërt e fshehim
+     if (moreInfo.style.display === "none" || moreInfo.style.display === "") {
+         moreInfo.style.display = "block";
+         button.textContent = "Mbylle";  // Ndryshon teksti i butonit
+     } else {
+         moreInfo.style.display = "none";
+         button.textContent = "Lexo me shume";  // Ndryshon teksti i butonit
+     }
+ }
+ </script>
+
 <script>
    lightGallery(document.querySelector('.gallery .gallery-container'));
 </script>
-<section class="footer_section" style="background-color:#002247">
-  <div class="container">
-    <p style="font-size: 14px; color : white;
-    text-shadow: 0px 0px 10px cyan,
-    0px 0px 20px cyan, 
-    0px 0px 40px cyan,
-    0px 0px 80px cyan;">
-      &copy; <span style="font-size: 14px;" id="displayYear"></span> All Rights Reserved By
-      <a href="tetovaclick.site" style="color: blue; font-size: 16px;">ALL-in-ONE</a><br>
-      <span style="font-size: 14px;" id="displayYear"></span>     Powered by
-      <a href="tetovaclick.site" style="color: blue; font-size: 16px;">ALPHA-PROGRAMMING</a>
-    </p>
-  </div>
-</section>
 </body>
 </html>
 
@@ -408,22 +462,21 @@ body {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   </div>
+  <!-- footer section -->
+  <section class="footer_section">
+   <div class="container">
+     <p style="font-size: 14px;">
+       &copy; <span style="font-size: 14px;" id="displayYear"></span> All Rights Reserved By
+       <a href="tetovaclick.site" style="color: blue; font-size: 16px;">ALL-in-ONE</a><br>
+       <span style="font-size: 14px;" id="displayYear"></span>     Powered by
+       <a href="tetovaclick.site" style="color: blue; font-size: 16px;">ALPHA-PROGRAMMING</a>
+     </p>
+   </div>
+ </section>
+  <!-- footer section -->
 
+  <!-- jQery -->
   <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
   <!-- popper js -->
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
@@ -439,7 +492,7 @@ body {
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
   </script>
   <!-- End Google Map -->
-  <script src="\js\Searching.js"></script>
+  <script src="js\Searching.js"></script>
    
 
 </body>

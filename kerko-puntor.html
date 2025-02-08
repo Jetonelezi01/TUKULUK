@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kërko Puntor</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        /* Stilizimi për container */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        header {
+            background-color: #002c6d;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        header nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        header nav ul li {
+            display: inline;
+            margin: 0 20px;
+        }
+
+        header nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        section {
+            padding: 20px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+   
+
+        .language-selector {
+            display: flex;
+            justify-content: flex-start;
+            gap: 10px;
+            margin: 20px;
+        }
+
+        .language-selector img {
+            cursor: pointer;
+            width: 30px; /* Gjatësia e flamurit */
+            height: 20px; /* Lartësia e flamurit */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .language-selector img:hover {
+            opacity: 0.7;
+        }
+
+        html {
+    scroll-behavior: smooth;
+}
+
+
+
+
+.container {
+            width: 50%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Titulli */
+        h1 {
+            text-align: center;
+            font-size: 2em;
+            color: #007bff;
+            margin-bottom: 30px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Stilizimi i etiketave dhe inputeve */
+        label {
+            display: block;
+            font-size: 1.1em;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="number"],
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* Efekti për inputet dhe butonat */
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="number"]:focus,
+        button:hover {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        /* Stilizimi për butonin */
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2em;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Container për formën e formularit */
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Kuti për çdo input */
+        .form-group {
+            
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Titulli i formularit */
+        .form-group h2 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #007bff;
+        }
+
+    </style>
+       <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+       <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+       <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+
+       <!-- fonts style -->
+       <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+     
+       <!--owl slider stylesheet -->
+       <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+     
+       <!-- font awesome style -->
+       <link href="css/font-awesome.min.css" rel="stylesheet" />
+     
+       <!-- Custom styles for this template -->
+       <link href="css/style.css" rel="stylesheet" />
+         <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+         <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+</head>
+<body>
+    <header>
+        <a class="navbar-brand" href="index.html">  
+            <span>
+              ALL in ONE
+            </span>
+          </a>
+    
+        <nav>
+            <ul>
+                <li><a href="Meny.html" data-translate-key="p1">Vendi i kerkimeve</a></li>
+           
+            </ul>
+        </nav>
+        <div class="language-selector">
+          <img src="https://th.bing.com/th?id=OSK.HEROo1Hy4-nUoE3huqwGw_SjCFSLjqRVU_x_mgmpLklPuMU&w=296&h=176&c=1&rs=2&o=6&dpr=1.5&pid=SANGAM" alt="Shqip" title="Shqip" onclick="setLanguage('shqip')">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg" alt="English" title="English" onclick="setLanguage('anglisht')">
+          <img src="https://th.bing.com/th?id=OIP.yC5HOVTe4JBzyP1X_wABOwHaDt&w=350&h=175&c=8&rs=1&qlt=90&o=6&dpr=1.5&pid=3.1&rm=2" alt="Maqedonisht" title="Maqedonisht" onclick="setLanguage('maqedonisht')">
+      </div>
+    </header>
+
+    
+    <h2 style="text-align: center; margin-top: 15px;" data-translate-key="p2">Shpallje për Kërkimin e Puntorëve</h2>
+    <div style="text-align: center; margin-left: 20px;" class="filters">
+  
+  </div>
+<hr style="background-color: black;">
+<br>  
+    <div class="container">
+
+        <form action="shpallje.php" method="POST">
+            <div class="form-group">
+                <h2 data-translate-key="p3">Informacioni i Biznesit</h2>
+                <label for="emri_biznesit" data-translate-key="p4">Emri i Biznesit:</label>
+                <input type="text" id="emri_biznesit" name="emri_biznesit" required>
+
+                <label for="emri_shpalljes" data-translate-key="p5">Emri i Shpallesit:</label>
+                <input type="text" id="emri_shpalljes" name="emri_shpalljes" required>
+
+                <label for="lloji_biznesit" data-translate-key="p6">Lloji i Biznesit:</label>
+                <input type="text" id="lloji_biznesit" name="lloji_biznesit" required>
+            </div>
+
+            <div class="form-group">
+                <h2 data-translate-key="p7">Informacioni i Punës</h2>
+                <label for="pozicioni_punes" data-translate-key="p8">Pozicioni i Punes:</label>
+                <input type="text" id="pozicioni_punes" name="pozicioni_punes" required>
+
+                <label for="numri_puntoreve" data-translate-key="p9">Numri i Puntorëve që kërkoni:</label>
+                <input type="number" id="numri_puntoreve" name="numri_puntoreve" required>
+
+                <label for="ore_pune" data-translate-key="p14">Sa orë pune në ditë:</label>
+                <input type="number" id="ore_pune" name="ore_pune" required>
+
+                <label for="pagesa_ore" data-translate-key="p10">Pagesa e Ores në Denar (opsionale):</label>
+                <input type="number" id="pagesa_ore" name="pagesa_ore">
+
+                <label for="email_biznesit"data-translate-key="p11">Email i Biznesit:</label>
+                <input type="email" id="email_biznesit" name="email_biznesit" required>
+
+                <label for="numri_biznesit"data-translate-key="p12">Numri i Biznesit:</label>
+                <input type="text" id="numri_biznesit" name="numri_biznesit" required>
+            </div>
+
+            <button type="submit" data-translate-key="p13">Dërgo Shpalljen</button>
+        </form>
+    </div>
+
+    <script>
+         const translations = {
+        "p1": {
+            "shqip": "Vendi i kerkimeve",
+            "anglisht": "Search place",
+            "maqedonisht": "MAC"
+        },
+        "p2": {
+            "shqip": "Shpallje për Kërkimin e Puntorëve",
+            "anglisht": "Search for workers",
+            "maqedonisht": "MAC"
+        },
+        "p3": {
+            "shqip": "Informacioni i Biznesit",
+            "anglisht": "Business Information",
+            "maqedonisht": "MAC"
+        },
+        "p4": {
+            "shqip": "Emri i Biznesit:",
+            "anglisht": "Business Name:",
+            "maqedonisht": "MAC"
+        },
+        "p5": {
+            "shqip": "Emri i Shpallesit",
+            "anglisht": "Name of the Advertiser",
+            "maqedonisht": "MAC"
+        },
+        "p6": {
+            "shqip": "Lloji i Biznesit:",
+            "anglisht": "Type of business:",
+            "maqedonisht": "MAC"
+        },
+
+        "p7": {
+            "shqip": "nformacioni i Punës:",
+            "anglisht": "Work Information:",
+            "maqedonisht": "MAC"
+        },
+
+        "p8": {
+            "shqip": "Pozicioni i Punes:",
+            "anglisht": "Work Position:",
+            "maqedonisht": "MAC"
+        },
+
+        "p9": {
+            "shqip": "Numri i Puntorëve që kërkoni:",
+            "anglisht": "Numbers of workers you are looking for:",
+            "maqedonisht": "MAC"
+        },
+        "p10": {
+            "shqip": "Pagesa e Ores në Denar (opsionale):",
+            "anglisht": "Payment of Hours in Denar:",
+            "maqedonisht": "MAC"
+        },
+        "p11": {
+            "shqip": "E-mail i Biznesit:",
+            "anglisht": "Business E-mail:",
+            "maqedonisht": "MAC"
+        },
+        "p12": {
+            "shqip": "Numri i Biznesit:",
+            "anglisht": "Business Number:",
+            "maqedonisht": "MAC"
+        },
+        "p13": {
+            "shqip": "Dërgo Shpalljen:",
+            "anglisht": "Send the Announcement:",
+            "maqedonisht": "MAC"
+        },
+        "p14": {
+            "shqip": "Sa orë pune në ditë:",
+            "anglisht": "How many hours of work per day:",
+            "maqedonisht": "MAC"
+        },
+    };
+
+    let currentLanguage = "shqip";  // Gjuhën e paracaktuar (Shqip)
+
+// Funksioni për të vendosur gjuhën
+function setLanguage(language) {
+    currentLanguage = language;  // Përdorimi i gjuhës së zgjedhur
+
+    // Ndrysho tekstin në të gjithë faqen që ka atributin data-translate-key
+    const elements = document.querySelectorAll("[data-translate-key]");  // Gjej të gjitha elementet që kanë atributin data-translate-key
+    elements.forEach(element => {
+        const key = element.getAttribute("data-translate-key");  // Merr çelësin përkthimi
+        const translation = translations[key];  // Merr përkthimin për çelësin
+        if (translation) {
+            element.innerText = translation[currentLanguage];  // Ndrysho tekstin në element
+        }
+    });
+  }
+    </script>
+</body>
+</html>
